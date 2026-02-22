@@ -1,0 +1,29 @@
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ .Site.Title }}</title>
+    <link>{{ .Site.Home.Permalink }}</link>
+    <description>{{ .Site.Params.description }}</description>
+    <language>{{ .Site.Language.Lang }}</language>
+    <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
+    {{- range .Site.RegularPages }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
+      <guid>{{ .Permalink }}</guid>
+      {{- $cover := "" }}
+      {{- with .Params.image }}
+        {{- $src := strings.TrimLeft "/" . }}
+        {{- $img := resources.Get $src }}
+        {{- if $img }}
+          {{- $large := $img.Resize "1280x webp q80" }}
+      <enclosure url="{{ $large.Permalink }}" type="{{ $large.MediaType.Type }}" length="{{ $large.Content | len }}" />
+          {{- $cover = printf `<img src="%s" alt="%s">` $large.Permalink $.Title }}
+        {{- end }}
+      {{- end }}
+      <description>{{ printf "<![CDATA[%s%s]]>" $cover .Content | safeHTML }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>
