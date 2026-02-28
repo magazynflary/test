@@ -1,6 +1,6 @@
 baseURL = 'https://drlzin.github.io/test/'
 languageCode = 'pl'
-title = 'DLR Zin'
+title = 'Flary'
 
 [permalinks]
   posts = '/:year/:month/:day/:slug/'

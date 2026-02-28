@@ -104,7 +104,7 @@ fi
 
 # Test 1: Strona główna
 test_http_status "Strona główna zwraca 200" "http://localhost:$PORT/" "200"
-test_http "Strona główna zawiera tytuł" "http://localhost:$PORT/" "DLR Zin"
+test_http "Strona główna zawiera tytuł" "http://localhost:$PORT/" "Flary"
 test_http "Strona główna zawiera Najnowsze" "http://localhost:$PORT/" "Najnowsze"
 
 # Test 2: CSS
