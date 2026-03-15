@@ -5,3 +5,5 @@ resources/
 *~
 *.swp
 *.orig
+node_modules/
+backstop_data/

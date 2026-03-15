@@ -1,4 +1,4 @@
-.PHONY: help test test-phase1 test-server test-cms test-production validate-ready hugo hugo-cms cms build clean
+.PHONY: help test test-phase1 test-server test-cms test-production validate-ready hugo hugo-cms cms build clean backstop-ref backstop-test backstop-approve
 
 help:
 	@echo "Dostępne komendy:"
@@ -12,6 +12,9 @@ help:
 	@echo "  make test-cms         - Uruchom testy Decap CMS"
 	@echo "  make test-production  - Test buildu produkcyjnego"
 	@echo "  make validate-ready   - Sprawdź czy projekt gotowy do GitHub Pages"
+	@echo "  make backstop-ref     - Zrzuty referencyjne (przed zmianami)"
+	@echo "  make backstop-test    - Porównaj z referencją (po zmianach)"
+	@echo "  make backstop-approve - Zatwierdź nowe zrzuty jako referencję"
 	@echo "  make clean            - Wyczyść wygenerowane pliki"
 
 hugo:
@@ -43,6 +46,15 @@ test-production:
 
 validate-ready:
 	@./scripts/validate-github-ready.sh
+
+backstop-ref:
+	npx backstop reference
+
+backstop-test:
+	npx backstop test
+
+backstop-approve:
+	npx backstop approve
 
 clean:
 	rm -rf public/ resources/ .hugo_build.lock
