@@ -11,6 +11,12 @@
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
 
+    <script>
+        (function() {
+            var t = localStorage.getItem('theme');
+            if (t) document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
     <script src="https://cdn.counter.dev/script.js" data-id="a164b8b2-6f07-48a8-8cd4-91107b2e2ac9" data-utcoffset="1"></script>
 </head>
 <body>
@@ -39,6 +45,10 @@
                     <span>RSS</span>
                 </a>
             </nav>
+            <button class="theme-toggle" aria-label="Przełącz motyw">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M14,2 C2,4 2,20 14,22 C10,17 10,7 14,2 Z"/><rect x="17" y="3" width="5" height="5" opacity="0.5"/></svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="5"/><polygon points="12,0 8,6 16,6"/><polygon points="12,24 16,18 8,18"/><polygon points="0,12 6,16 6,8"/><polygon points="24,12 18,8 18,16"/><polygon points="3,3 5,8 8,5" opacity="0.6"/><polygon points="21,3 19,8 16,5" opacity="0.6"/><polygon points="3,21 8,19 5,16" opacity="0.6"/><polygon points="21,21 16,19 19,16" opacity="0.6"/><circle cx="12" cy="12" r="2" fill="white" opacity="0.3"/></svg>
+            </button>
         </div>
     </header>
 
@@ -52,5 +62,16 @@
             <span class="footer-quote">{{ .Site.Params.description }}</span>
         </div>
     </footer>
+    <script>
+        document.querySelector('.theme-toggle').addEventListener('click', function() {
+            var html = document.documentElement;
+            var current = html.getAttribute('data-theme');
+            var isDark = current === 'dark' ||
+                (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            var next = isDark ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+    </script>
 </body>
 </html>
