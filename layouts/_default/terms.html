@@ -4,7 +4,7 @@
 {{ if .Data.Terms }}
 <div class="tags-list">
     {{ range .Data.Terms.ByCount }}
-    <a href="{{ .Page.Permalink }}" class="tag tag--lg">{{ .Page.Title }} ({{ .Count }})</a>
+    <a href="{{ .Page.Permalink }}" class="tag tag--link tag--lg">{{ .Page.Title }} ({{ .Count }})</a>
     {{ end }}
 </div>
 {{ else }}
