@@ -4,17 +4,24 @@
 {{ if .Pages }}
 <div class="posts-grid">
     {{ range .Pages }}
-    <article class="post-card"><a href="{{ .Permalink }}">
-        {{ $post := . }}
-        {{ with .Params.image }}
-        {{ partial "image.html" (dict "src" . "alt" $post.Title "class" "post-card__image" "style" (printf "object-position: %s" ($post.Params.image_focus | default "50% 50%")) "sizes" "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw") }}
+    <article class="post-card">
+        <a href="{{ .Permalink }}" class="post-card__link">
+            {{ $post := . }}
+            {{ with .Params.image }}
+            {{ partial "image.html" (dict "src" . "alt" $post.Title "class" "post-card__image" "style" (printf "object-position: %s" ($post.Params.image_focus | default "50% 50%")) "sizes" "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw") }}
+            {{ end }}
+            <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">
+                {{ .Date.Format "2006-01-02" }}
+            </time>
+            <h3 class="post-card__title">{{ .Title }}</h3>
+            <p class="post-card__excerpt">{{ .Summary | plainify | truncate 150 }}</p>
+        </a>
+        {{ with .GetTerms "tags" }}
+        <div class="post-card__tags">
+            {{ range . }}<a href="{{ .Permalink }}" class="tag tag--link">{{ .LinkTitle }}</a>{{ end }}
+        </div>
         {{ end }}
-        <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ .Date.Format "2006-01-02" }}
-        </time>
-        <h3 class="post-card__title">{{ .Title }}</h3>
-        <p class="post-card__excerpt">{{ .Summary | plainify | truncate 150 }}</p>
-    </a></article>
+    </article>
     {{ end }}
 </div>
 {{ else }}

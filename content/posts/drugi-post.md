@@ -2,6 +2,7 @@
 title: "Drugi Artykuł Testowy"
 date: 2026-02-08
 draft: false
+tags: ["polityka", "teoria"]
 ---
 
 To jest drugi przykładowy artykuł dla naszej testowej gazety.

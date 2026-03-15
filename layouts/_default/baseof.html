@@ -21,6 +21,7 @@
                 <a href="{{ .Site.Home.Permalink }}">Start</a>
                 <a href="{{ "posts" | relref . }}">Artykuły</a>
                 <a href="{{ "editions" | relref . }}">Wydania</a>
+                {{ with site.GetPage "tags" }}<a href="{{ .Permalink }}">Tagi</a>{{ end }}
                 <a href="{{ "index.xml" | absURL }}">RSS</a>
             </nav>
         </div>

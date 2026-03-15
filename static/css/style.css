@@ -322,20 +322,28 @@ main {
     border: 1px solid var(--gray-light);
     position: relative;
     transition: box-shadow var(--transition);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
 }
 
-.post-card > a {
+.post-card__link {
     display: block;
-    padding: var(--space-6);
-    position: relative;
-    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.post-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
 }
 
 .post-card:hover {
     box-shadow: var(--shadow-lg);
 }
 
-.post-card > a::before {
+.post-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -348,14 +356,14 @@ main {
     transition: transform 0.3s ease;
 }
 
-.post-card:hover > a::before {
+.post-card:hover::before {
     transform: scaleY(1);
 }
 
 .post-card__image {
     max-width: none;
-    width: calc(100% + 3rem);
-    margin: -1.5rem -1.5rem var(--space-4) -1.5rem;
+    width: calc(100% + 2 * var(--space-6));
+    margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-4) calc(-1 * var(--space-6));
     aspect-ratio: 16/9;
     object-fit: cover;
 }
@@ -375,19 +383,59 @@ main {
     line-height: 1.1;
 }
 
-.post-card__title a {
-    color: var(--black);
-    text-decoration: none;
-}
-
-.post-card__title a:hover {
-    color: var(--red);
-}
-
 .post-card__excerpt {
     font-size: var(--text-base);
     color: var(--gray-dark);
     line-height: 1.6;
+}
+
+.post-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-top: var(--space-3);
+    position: relative;
+    z-index: 1;
+    background-color: var(--bg);
+}
+
+.tag {
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--black);
+    color: var(--white);
+    padding: var(--space-1) var(--space-2);
+    display: inline-block;
+}
+
+.tag--link {
+    text-decoration: none;
+    transition: background var(--transition);
+}
+
+.tag--link:hover {
+    background: var(--red);
+    color: var(--white);
+}
+
+.tag--lg {
+    font-size: var(--text-sm);
+    padding: var(--space-2) var(--space-4);
+}
+
+.article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
 }
 
 /* Featured Post - First post larger */

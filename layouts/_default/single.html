@@ -6,6 +6,13 @@
             {{ with .Params.author }}{{ . }}{{ end }}
         </div>
         <h1 class="article-title">{{ .Title }}</h1>
+        {{ with .GetTerms "tags" }}
+        <div class="article-tags">
+            {{ range . }}
+            <a href="{{ .Permalink }}" class="tag tag--link">{{ .LinkTitle }}</a>
+            {{ end }}
+        </div>
+        {{ end }}
     </header>
 
     {{ with $.Params.image }}

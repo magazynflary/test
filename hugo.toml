@@ -2,6 +2,9 @@ baseURL = 'https://drlzin.github.io/test/'
 languageCode = 'pl'
 title = 'Flary'
 
+[taxonomies]
+tag = 'tags'
+
 [permalinks]
   posts = '/:year/:month/:day/:slug/'
   editions = '/wydania/:slug/'
