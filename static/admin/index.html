@@ -6,6 +6,53 @@
   <meta name="robots" content="noindex" />
   <base href="/test/">
   <title>Flary content management</title>
+  <style>
+    .sources-editor > div {
+        margin-bottom: 16px;
+        border: 2px solid #dfe2e5;
+        border-radius: 8px;
+        padding: 14px;
+        background: #f8f9fa;
+    }
+    .sources-editor > div > div:first-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .sources-editor > div > div:not(:first-child) { margin-bottom: 6px; }
+    .sources-editor > div > div:not(:first-child):has(> div) { display: flex; gap: 8px; }
+    .sources-editor > div > div:not(:first-child) > div { flex: 1; }
+
+    .sources-editor input,
+    .sources-editor select,
+    .citekey-widget select {
+        width: 100%;
+        padding: 7px 10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    .sources-editor > div > div:first-child > button {
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 5px 12px;
+        cursor: pointer;
+    }
+    .sources-editor > div > div:first-child > button:last-child      { background: #c0392b; }
+    .sources-editor > div > div:first-child > button:not(:last-child) { background: #27ae60; margin-right: 6px; }
+
+    .sources-editor > button {
+        background: #2980b9;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 9px 20px;
+        cursor: pointer;
+    }
+
+  </style>
 </head>
 <body>
   <script>
@@ -175,5 +222,268 @@
     });
 
     CMS.registerWidget('focal-point', FocalPointControl);
+
+    var SOURCE_FIELDS = {
+      book:    ['key', 'author', 'year', 'title', 'publisher'],
+      article: ['key', 'author', 'year', 'title', 'journal', 'volume', 'issue', 'pages', 'url'],
+      web:     ['key', 'author', 'year', 'title', 'site', 'url']
+    };
+    var FIELD_LABELS = {
+      key: 'Klucz', author: 'Autor', year: 'Rok', title: 'Tytuł',
+      publisher: 'Wydawnictwo', journal: 'Czasopismo', volume: 'Tom',
+      issue: 'Numer', pages: 'Strony', site: 'Nazwa strony', url: 'URL'
+    };
+    var FIELD_HINTS = {
+      key: 'Unikalny identyfikator, np. kowalski2023',
+      author: 'Nazwisko, I. (np. Kowalski, J.)'
+    };
+
+    var SourcesControl = createClass({
+      getSources: function() {
+        var v = this.props.value;
+        if (!v) return [];
+        if (typeof v.toJS === 'function') return v.toJS();
+        if (Array.isArray(v)) return v.map(function(s) { return Object.assign({}, s); });
+        return [];
+      },
+
+      syncSources: function() {
+        window.__currentSources = this.getSources();
+        window.dispatchEvent(new CustomEvent('sources-updated'));
+      },
+      componentDidMount:  function() { this.syncSources(); },
+      componentDidUpdate: function() { this.syncSources(); },
+
+      addSource: function() {
+        var sources = this.getSources();
+        sources.push({ key: '', type: 'book', author: '', year: '', title: '', publisher: '' });
+        this.props.onChange(sources);
+      },
+
+      removeSource: function(idx) {
+        var sources = this.getSources();
+        sources.splice(idx, 1);
+        this.props.onChange(sources);
+      },
+
+      handleField: function(idx, field, e) {
+        var sources = this.getSources();
+        sources[idx][field] = e.target.value;
+        this.props.onChange(sources);
+      },
+
+      handleType: function(idx, e) {
+        var sources = this.getSources();
+        sources[idx].type = e.target.value;
+        this.props.onChange(sources);
+      },
+
+      render: function() {
+        var self = this;
+        var sources = this.getSources();
+
+        return h('div', { className: 'sources-editor' },
+          sources.map(function(src, i) {
+            var type = src.type || 'book';
+            var fields = SOURCE_FIELDS[type] || SOURCE_FIELDS.book;
+
+            return h('div', { key: i },
+              h('div', {},
+                h('strong', {},
+                  (src.key || 'Nowe źródło') + ' (' + type + ')'),
+                src.key ? h('button', {
+                  type: 'button',
+                  onClick: function(e) {
+                    var btn = e.target;
+                    navigator.clipboard.writeText('{{< cite "' + src.key + '" >}}');
+                    btn.textContent = 'Skopiowano!';
+                    setTimeout(function() { btn.textContent = 'Kopiuj cytowanie'; }, 1500);
+                  }
+                }, 'Kopiuj cytowanie') : null,
+                h('button', { type: 'button', onClick: function() { self.removeSource(i); } }, 'Usuń')
+              ),
+              h('div', {},
+                h('label', {}, 'Typ'),
+                h('select', { value: type, onChange: function(e) { self.handleType(i, e); } },
+                  h('option', { value: 'book' }, 'Książka'),
+                  h('option', { value: 'article' }, 'Artykuł'),
+                  h('option', { value: 'web' }, 'Strona www')
+                )
+              ),
+              fields.map(function(f) {
+                if (f === 'volume') {
+                  return h('div', { key: 'vol-group' },
+                    ['volume', 'issue', 'pages'].map(function(sf) {
+                      return h('div', { key: sf },
+                        h('label', {}, FIELD_LABELS[sf]),
+                        h('input', { type: 'text', value: src[sf] || '', onChange: function(e) { self.handleField(i, sf, e); } })
+                      );
+                    })
+                  );
+                }
+                if (f === 'issue' || f === 'pages') return null;
+                return h('div', { key: f },
+                  h('label', {}, FIELD_LABELS[f]),
+                  h('input', { type: 'text', value: src[f] || '', onChange: function(e) { self.handleField(i, f, e); } }),
+                  FIELD_HINTS[f] ? h('small', {}, FIELD_HINTS[f]) : null
+                );
+              })
+            );
+          }),
+          h('button', { type: 'button', onClick: function() { self.addSource(); } }, '+ Dodaj źródło')
+        );
+      }
+    });
+
+    CMS.registerWidget('sources-editor', SourcesControl);
+
+    var CiteKeyControl = createClass({
+      componentDidMount: function() {
+        this.buildSelect();
+        var self = this;
+        this._onUpdate = function() { self.buildSelect(); };
+        window.addEventListener('sources-updated', this._onUpdate);
+      },
+      componentWillUnmount: function() {
+        window.removeEventListener('sources-updated', this._onUpdate);
+      },
+      buildSelect: function() {
+        var el = this._container;
+        if (!el) return;
+        var sources = window.__currentSources || [];
+        var val = this.props.value || '';
+        var self = this;
+
+        el.innerHTML = '';
+        var select = document.createElement('select');
+
+        var empty = document.createElement('option');
+        empty.value = '';
+        empty.textContent = sources.length === 0 ? 'Brak źródeł — dodaj powyżej' : '-- wybierz źródło --';
+        select.appendChild(empty);
+
+        sources.forEach(function(s) {
+          var opt = document.createElement('option');
+          opt.value = s.key || '';
+          opt.textContent = (s.author || '?') + ' (' + (s.year || '?') + ')  [' + s.key + ']';
+          select.appendChild(opt);
+        });
+
+        select.value = val;
+        select.addEventListener('change', function() {
+          self.props.onChange(select.value);
+        });
+        el.appendChild(select);
+      },
+      render: function() {
+        var self = this;
+        return h('div', { className: 'citekey-widget', ref: function(el) { self._container = el; } });
+      }
+    });
+    var CiteKeyPreview = createClass({
+      render: function() { return h('span', {}, this.props.value || ''); }
+    });
+    CMS.registerWidget('citekey', CiteKeyControl, CiteKeyPreview);
+
+    CMS.registerEditorComponent({
+      id: 'cite',
+      label: 'Cytowanie (APA)',
+      fields: [
+        { name: 'key', label: 'Źródło', widget: 'citekey' }
+      ],
+      pattern: /{{< cite "([^"]+)" >}}/,
+      fromBlock: function(match) { return { key: match[1] }; },
+      toBlock: function(data) { return '{{< cite "' + data.key + '" >}}'; },
+      toPreview: function(data) { return '<span data-cite-key="' + data.key + '">(' + data.key + ')</span>'; }
+    });
+
+    CMS.registerEditorComponent({
+      id: 'bibliography',
+      label: 'Bibliografia (APA)',
+      fields: [],
+      pattern: /{{< bibliography >}}/,
+      fromBlock: function() { return {}; },
+      toBlock: function() { return '{{< bibliography >}}'; },
+      toPreview: function() { return '<div data-bibliography="1"></div>'; }
+    });
+
+    function formatAPA(s) {
+      var type = s.type || 'book';
+      var r = (s.author || '') + ' (' + (s.year || '') + '). ';
+      if (type === 'article') {
+        r += (s.title || '') + '. ';
+        if (s.journal) r += s.journal;
+        if (s.volume) r += ', ' + s.volume;
+        if (s.issue) r += '(' + s.issue + ')';
+        if (s.pages) r += ', ' + s.pages;
+        r += '.';
+      } else if (type === 'web') {
+        r += (s.title || '') + '.';
+        if (s.site) r += ' ' + s.site + '.';
+        if (s.url) r += ' ' + s.url;
+      } else {
+        r += (s.title || '') + '. ' + (s.publisher || '') + '.';
+      }
+      return r;
+    }
+
+    function getSourcesList(entry) {
+      var sources = entry.getIn(['data', 'sources']);
+      if (!sources) return [];
+      var list = typeof sources.toJS === 'function' ? sources.toJS() : sources;
+      return Array.isArray(list) ? list : [];
+    }
+
+    var PostPreview = createClass({
+      componentDidMount: function() { this.fillCitations(); },
+      componentDidUpdate: function() { this.fillCitations(); },
+
+      fillCitations: function() {
+        var el = this._container;
+        if (!el) return;
+        var list = getSourcesList(this.props.entry);
+
+        el.querySelectorAll('[data-cite-key]').forEach(function(cite) {
+          var src = list.find(function(s) { return s.key === cite.getAttribute('data-cite-key'); });
+          if (src) cite.textContent = '(' + src.author + ', ' + src.year + ')';
+        });
+
+        // Show bibliography source in the preview, even if the {{<cite>}}
+        // widget is not at the line beginning.
+        var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        var textNodes = [];
+        var node;
+        while (node = walker.nextNode()) textNodes.push(node);
+        textNodes.forEach(function(node) {
+          if (node.textContent.indexOf('{{< cite') === -1) return;
+          var span = document.createElement('span');
+          span.innerHTML = node.textContent.replace(
+            /\{\{< cite "([^"]+)" >\}\}/g,
+            function(_, key) {
+              var src = list.find(function(s) { return s.key === key; });
+              return src ? '(' + src.author + ', ' + src.year + ')' : '(' + key + ')';
+            }
+          );
+          node.parentNode.replaceChild(span, node);
+        });
+
+        var sorted = list.slice().sort(function(a, b) {
+          return (a.author || '').localeCompare(b.author || '');
+        });
+        el.querySelectorAll('[data-bibliography]').forEach(function(bib) {
+          bib.innerHTML = sorted.map(function(s) {
+            return '<p style="padding-left:2em;text-indent:-2em">' + formatAPA(s) + '</p>';
+          }).join('');
+        });
+      },
+
+      render: function() {
+        var self = this;
+        return h('div', { ref: function(el) { self._container = el; } },
+          this.props.widgetFor('body')
+        );
+      }
+    });
+    CMS.registerPreviewTemplate('posts', PostPreview);
   </script></body>
 </html>
