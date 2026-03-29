@@ -9,7 +9,8 @@
 <img src="{{ $src }}" alt="{{ $alt }}"
   {{- with $class }} class="{{ . }}"{{ end }}
   {{- with $style }} style="{{ . }}"{{ end }}
-  {{- with $title }} title="{{ . }}"{{ end }}>
+  {{- with $title }} title="{{ . }}"{{ end }}
+  loading="lazy">
 {{- else -}}
   {{- $img := resources.Get $src -}}
   {{- if $img -}}
@@ -22,11 +23,13 @@
   alt="{{ $alt }}"
   {{- with $class }} class="{{ . }}"{{ end }}
   {{- with $style }} style="{{ . }}"{{ end }}
-  {{- with $title }} title="{{ . }}"{{ end }}>
+  {{- with $title }} title="{{ . }}"{{ end }}
+  loading="lazy">
   {{- else -}}
 <img src="{{ $src | relURL }}" alt="{{ $alt }}"
   {{- with $class }} class="{{ . }}"{{ end }}
   {{- with $style }} style="{{ . }}"{{ end }}
-  {{- with $title }} title="{{ . }}"{{ end }}>
+  {{- with $title }} title="{{ . }}"{{ end }}
+  loading="lazy">
   {{- end -}}
 {{- end -}}

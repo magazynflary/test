@@ -1,4 +1,5 @@
 baseURL = 'https://drlzin.github.io/test/'
+enableRobotsTXT = true
 languageCode = 'pl'
 title = 'Flary'
 

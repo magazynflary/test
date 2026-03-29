@@ -61,7 +61,7 @@ collections:
       - {label: "Tagi", name: "tags", widget: "list", required: false}
       - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
       - {label: "Kadrowanie obrazka wyróżniającego", name: "image_focus", widget: "focal-point", default: "50% 50%", required: false}
-      - {label: "Opis (excerpt)", name: "description", widget: "text", required: false}
+      - {label: "Opis dla wyszukiwarek", name: "description", widget: "text", required: false}
       - {label: "Wydanie", name: "edition", widget: "relation", collection: "editions", value_field: "{{slug}}", search_fields: ["title"], display_fields: ["date", "title"], required: false}
       - {label: "Źródła (APA)", name: "sources", widget: "sources-editor", required: false}
       - {label: "Treść", name: "body", widget: "markdown"}

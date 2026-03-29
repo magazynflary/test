@@ -4,6 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <link rel="canonical" href="{{ .Permalink }}">
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:site_name" content="{{ .Site.Title }}">
+    <meta property="og:locale" content="pl_PL">
+    {{ if .IsPage -}}
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+    {{ range .GetTerms "tags" -}}
+    <meta property="article:tag" content="{{ .LinkTitle }}">
+    {{ end -}}
+    {{ else -}}
+    <meta property="og:type" content="website">
+    {{ end -}}
+    {{- $ogImageSrc := "" -}}
+    {{- with .Params.image -}}
+      {{- $ogImageSrc = . -}}
+    {{- else -}}
+      {{- with .Params.edition -}}
+        {{- $edition := site.GetPage (printf "/editions/%s" .) -}}
+        {{- with $edition -}}
+          {{- with .Params.image -}}
+            {{- $ogImageSrc = . -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- with $ogImageSrc -}}
+    {{- $src := strings.TrimLeft "/" . -}}
+    {{- $isExternal := or (hasPrefix $src "http://") (hasPrefix $src "https://") -}}
+    {{- if $isExternal -}}
+    <meta property="og:image" content="{{ $src }}">
+    {{- else -}}
+    {{- $img := resources.Get $src -}}
+    {{- if $img -}}
+    {{- $ogImg := $img.Resize "1200x webp q80" -}}
+    <meta property="og:image" content="{{ $ogImg.Permalink }}">
+    <meta property="og:image:width" content="{{ $ogImg.Width }}">
+    <meta property="og:image:height" content="{{ $ogImg.Height }}">
+    {{- end -}}
+    {{- end -}}
+    {{- end }}
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
     <link rel="icon" type="image/png" href="{{ "images/favicon.png" | relURL }}">
