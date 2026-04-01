@@ -11,7 +11,7 @@ backend:
   auth_token_endpoint: /sites/32054268-d9b6-40e8-94cf-38dba49564d4/token
   gateway_url: https://gateway.decapbridge.com
 
-  # See who did what (optional)
+  # See who did what (beware of potential email leak if changed).
   commit_messages:
     create: Create {{collection}} “{{slug}}” - {{author-name}} <> via DecapBridge
     update: Update {{collection}} “{{slug}}” - {{author-name}} <> via DecapBridge
@@ -55,10 +55,10 @@ collections:
     fields:
       - {label: "Tytuł", name: "title", widget: "string"}
       - {label: "Data publikacji", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Wersja robocza", name: "draft", widget: "boolean", default: false}
       - {label: "Autor", name: "author", widget: "relation", collection: "authors", search_fields: ["name"], value_field: "name", display_fields: ["name"], required: false}
       - {label: "Kategorie", name: "categories", widget: "list", required: false}
-      - {label: "Tagi", name: "tags", widget: "list", required: false}
+      - {label: "Tagi", name: "tags", widget: "list", required: false, hint: "rozdzielone przecinkiem, np.: 'historia, polityka'"}
       - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
       - {label: "Kadrowanie obrazka wyróżniającego", name: "image_focus", widget: "focal-point", default: "50% 50%", required: false}
       - {label: "Opis dla wyszukiwarek", name: "description", widget: "text", required: false}
@@ -77,7 +77,7 @@ collections:
     editor:
       preview: false
     fields:
-      - {label: "Tytuł (np. 2026/wiosna)", name: "title", widget: "string"}
+      - {label: "Tytuł", name: "title", widget: "string", hint: "np.: 2026/wiosna"}
       - {label: "Data wydania", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
       - {label: "Obrazek", name: "image", widget: "image", required: false}
       - label: "Artykuł główny wydania"
@@ -112,8 +112,8 @@ collections:
     fields:
       - {label: "Tytuł", name: "title", widget: "string"}
       - {label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Menu", name: "menu", widget: "string", required: false, hint: "np. 'main' aby dodać do menu głównego"}
+      - {label: "Wersja robocza", name: "draft", widget: "boolean", default: false}
+      - {label: "Menu", name: "menu", widget: "string", required: false, hint: "np.: 'main' aby dodać do menu głównego"}
       - {label: "Treść", name: "body", widget: "markdown"}
 
   # Authors (profiles)
@@ -127,12 +127,12 @@ collections:
       preview: false
     fields:
       - {label: "Imię i nazwisko", name: "name", widget: "string"}
-      - {label: "Rola w redakcji", name: "role", widget: "string", required: false, hint: "np. Redaktor naczelna, Publicysta"}
-      - {label: "Rok urodzenia", name: "birth_year", widget: "number", value_type: "int", required: false}
       - {label: "Aktywny/-a", name: "is_active", widget: "boolean", default: true, hint: "Odznacz dla byłych współpracowników"}
+      - {label: "Rola w redakcji", name: "role", widget: "string", required: false, hint: "np.: Redaktor naczelna, Publicysta"}
       - {label: "Kolejność", name: "weight", widget: "number", value_type: "int", default: 1, hint: "Niższy numer = wyżej na liście"}
-      - {label: "Zdjęcie", name: "photo", widget: "image", required: false}
+      - {label: "Rok urodzenia", name: "birth_year", widget: "number", value_type: "int", required: false}
       - {label: "Bio", name: "bio", widget: "text", required: false}
+      - {label: "Zdjęcie", name: "photo", widget: "image", required: false}
       - {label: "Email", name: "email", widget: "string", required: false}
       - {label: "Social media", name: "social", widget: "object", required: false, fields: [
           {label: "Twitter", name: "twitter", widget: "string", required: false},
