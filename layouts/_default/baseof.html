@@ -83,6 +83,10 @@
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="2,2 14,2 22,12 14,22 2,14"/><rect x="5" y="5" width="4" height="4" fill="white" opacity="0.4"/></svg>
                     <span>Tagi</span>
                 </a>{{ end }}
+                {{ with site.GetPage "/pages/about" }}<a href="{{ .Permalink }}">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="2" y="2" width="5" height="5"/><rect x="9" y="2" width="6" height="6"/><rect x="17" y="2" width="5" height="5" opacity="0.6"/><rect x="2" y="11" width="20" height="11"/><rect x="8" y="11" width="8" height="11" opacity="0.3"/></svg>
+                    <span>O nas</span>
+                </a>{{ end }}
                 <a href="{{ "index.xml" | absURL }}">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M2,16 A5,5 0 0,1 7,21 L10,21 A8,8 0 0,0 2,13 Z" opacity="0.5"/><path d="M2,9 A12,12 0 0,1 14,21 L18,21 A16,16 0 0,0 2,5 Z"/><rect x="1" y="19" width="4" height="4"/></svg>
                     <span>RSS</span>

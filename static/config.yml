@@ -127,9 +127,13 @@ collections:
       preview: false
     fields:
       - {label: "Imię i nazwisko", name: "name", widget: "string"}
-      - {label: "Email", name: "email", widget: "string", required: false}
-      - {label: "Zdjęcie", name: "image", widget: "image", required: false}
+      - {label: "Rola w redakcji", name: "role", widget: "string", required: false, hint: "np. Redaktor naczelna, Publicysta"}
+      - {label: "Rok urodzenia", name: "birth_year", widget: "number", value_type: "int", required: false}
+      - {label: "Aktywny/-a", name: "is_active", widget: "boolean", default: true, hint: "Odznacz dla byłych współpracowników"}
+      - {label: "Kolejność", name: "weight", widget: "number", value_type: "int", default: 1, hint: "Niższy numer = wyżej na liście"}
+      - {label: "Zdjęcie", name: "photo", widget: "image", required: false}
       - {label: "Bio", name: "bio", widget: "text", required: false}
+      - {label: "Email", name: "email", widget: "string", required: false}
       - {label: "Social media", name: "social", widget: "object", required: false, fields: [
           {label: "Twitter", name: "twitter", widget: "string", required: false},
           {label: "GitHub", name: "github", widget: "string", required: false},

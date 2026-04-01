@@ -523,6 +523,15 @@ main {
     text-underline-offset: 3px;
 }
 
+.article-license {
+    margin-top: var(--space-12);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--gray-light);
+    font-size: var(--text-sm);
+    color: var(--gray);
+    font-style: italic;
+}
+
 /* ============================================================
    LIST PAGE
    ============================================================ */
@@ -741,6 +750,74 @@ main {
     padding-left: 2em;
     text-indent: -2em;
     margin-bottom: 0.5rem;
+}
+
+/* ============================================================
+   ABOUT PAGE / TEAM CARDS
+   ============================================================ */
+.about-page {
+    max-width: var(--content-width);
+    margin: 0 auto;
+}
+
+.about-intro {
+    margin-bottom: var(--space-12);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.team-section {
+    margin-bottom: var(--space-12);
+}
+
+.team-grid {
+    display: grid;
+    gap: var(--space-8);
+}
+
+.team-card {
+    display: flex;
+    gap: var(--space-6);
+    align-items: flex-start;
+}
+
+.team-card__photo {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 3px solid var(--red);
+}
+
+.team-card__name {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-1);
+}
+
+.team-card__role {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: var(--space-1);
+}
+
+.team-card__year {
+    font-size: var(--text-sm);
+    color: var(--gray);
+    margin-bottom: var(--space-3);
+}
+
+.team-card__bio {
+    font-size: var(--text-base);
+    color: var(--gray-dark);
+    line-height: 1.6;
+    margin-bottom: 0;
 }
 
 /* ============================================================
