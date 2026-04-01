@@ -22,5 +22,9 @@
     <div class="article-content">
         {{ .Content | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}
     </div>
+
+    <footer class="article-license">
+        Ten utwór jest dostępny na licencji <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pl" rel="license">Creative Commons Uznanie autorstwa-Użycie niekomercyjne-Bez utworów zależnych 4.0 Międzynarodowe (CC BY-NC-ND 4.0)</a>.
+    </footer>
 </article>
 {{ end }}
