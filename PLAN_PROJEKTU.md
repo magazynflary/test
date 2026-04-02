@@ -1,6 +1,6 @@
 # Plan Projektu: Testowa Strona Gazety/Bloga
 
-## Data utworzenia: 2026-02-07
+## Data utworzenia: 2026-02-07 | Ostatnia aktualizacja: 2026-04-02
 
 ---
 
@@ -11,12 +11,12 @@ Stworzenie testowej instancji strony internetowej dla lewackiej gazety.
 
 ### Cele szczegółowe
 - [x] Utworzenie planu działania
-- [ ] Wybór generatora statycznego (Jekyll vs Hugo)
-- [ ] Konfiguracja GitHub Pages
-- [ ] Integracja Decap CMS
-- [ ] Implementacja uwierzytelniania przez DecapBridge
-- [ ] Przygotowanie architektury umożliwiającej łatwą zmianę metody uwierzytelniania
-- [ ] Stworzenie przykładowej struktury treści
+- [x] Wybór generatora statycznego (Jekyll vs Hugo)
+- [x] Konfiguracja GitHub Pages
+- [x] Integracja Decap CMS
+- [x] Implementacja uwierzytelniania przez DecapBridge
+- [x] Przygotowanie architektury umożliwiającej łatwą zmianę metody uwierzytelniania
+- [x] Stworzenie przykładowej struktury treści
 - [ ] Testowanie z wieloma użytkownikami
 
 ---
@@ -138,41 +138,51 @@ medium-test/
 ## 5. PLAN IMPLEMENTACJI
 
 ### Faza 1: Inicjalizacja projektu (Priorytet: WYSOKI)
-- [ ] Inicjalizacja Hugo w katalogu
-- [ ] Utworzenie struktury folderów
-- [ ] Konfiguracja podstawowa config.toml
-- [ ] Wybór/stworzenie motywu dla gazety
+- [x] Inicjalizacja Hugo w katalogu
+- [x] Utworzenie struktury folderów
+- [x] Konfiguracja podstawowa hugo.toml
+- [x] Wybór/stworzenie motywu dla gazety (własny motyw w layouts/)
 
 ### Faza 2: GitHub Pages Setup (Priorytet: WYSOKI)
-- [ ] Utworzenie GitHub repository
-- [ ] Konfiguracja GitHub Actions dla Hugo
-- [ ] Setup GitHub Pages (branch: gh-pages)
-- [ ] Test deployment
+- [x] Utworzenie GitHub repository
+- [x] Konfiguracja GitHub Actions dla Hugo (.github/workflows/deploy.yml)
+- [x] Setup GitHub Pages (deploy-pages action)
+- [x] Test deployment
 
 ### Faza 3: Decap CMS Integration (Priorytet: ŚREDNI)
-- [ ] Instalacja Decap CMS
-- [ ] Konfiguracja admin/config.yml
-- [ ] Definicja kolekcji (posts, pages, authors)
-- [ ] Konfiguracja widgetów i pól
-- [ ] Setup editorial workflow
+- [x] Instalacja Decap CMS
+- [x] Konfiguracja static/config.yml
+- [x] Definicja kolekcji (posts, pages, authors, editions)
+- [x] Konfiguracja widgetów i pól (focal-point, sources-editor, relation)
+- [x] Setup editorial workflow
+- [ ] Naprawić model danych wydań: `content/editions/_index.md` jest stroną-indeksem sekcji, a każde wydanie powinno być osobnym plikiem (np. `content/editions/wiosna-2026.md`) dostępnym pod `/wydania/wiosna-2026/`
 
 ### Faza 4: Uwierzytelnianie (Priorytet: ŚREDNI)
-- [ ] Konfiguracja DecapBridge jako domyślny backend
+- [x] Konfiguracja DecapBridge jako domyślny backend
 - [ ] Przygotowanie dokumentacji zamiany providera
 - [ ] Utworzenie plików konfiguracyjnych dla alternatywnych metod
-- [ ] Testowanie przepływu logowania
+- [x] Testowanie przepływu logowania (wielokrotne PR-y przez CMS)
 
 ### Faza 5: Content & Design (Priorytet: NISKI)
-- [ ] Stworzenie przykładowych artykułów
-- [ ] Konfiguracja ról i uprawnień (poprzez CMS)
-- [ ] Dostosowanie motywu wizualnego
-- [ ] Dodanie nawigacji i menu
+- [x] Stworzenie przykładowych artykułów
+- [ ] Konfiguracja ról i uprawnień (obecnie tylko editorial workflow, bez ról per-user)
+- [x] Dostosowanie motywu wizualnego (typografia, ciemny motyw, responsywność, nawigacja)
+- [x] Dodanie nawigacji i menu
+- [ ] Strona kontakt (`content/pages/kontakt.md`)
+- [ ] `layouts/editions/list.html` — lista wszystkich wydań (strona `/wydania/`)
+- [ ] `layouts/editions/single.html` — strona wydania: okładka, artykuł główny, pozostałe artykuły
+- [ ] W layoucie artykułu pokazać przynależność do wydania (z linkiem)
+- [ ] Zdecydować i zaimplementować strategię strony głównej: najnowsze wydanie vs. lista artykułów
+- [ ] Autorzy: link z artykułu do profilu autora (teraz plain text), zdecydować między taksonomią Hugo a ręcznym dopasowaniem
+- [ ] Autorzy: strona autora z bio i listą jego artykułów
 
 ### Faza 6: Testing & Documentation (Priorytet: NISKI)
-- [ ] Testowanie workflow redakcyjnego
+- [x] Testowanie workflow redakcyjnego (wielokrotne PR-y przez CMS)
+- [ ] Testowanie z wieloma użytkownikami jednocześnie
 - [ ] Dokumentacja dla redaktorów
-- [ ] Dokumentacja techniczna
+- [x] Dokumentacja techniczna (Makefile, DECAP_CMS.md, DEPLOY_GITHUB.md)
 - [ ] Utworzenie przewodnika po zmianie auth providera
+- [ ] BackstopJS w CI (dodać krok w `.github/workflows/deploy.yml`)
 
 ---
 
@@ -232,13 +242,13 @@ backend:
 
 ## 9. METRYKI SUKCESU
 
-- [ ] Strona dostępna publicznie na GitHub Pages
-- [ ] Decap CMS funkcjonalny z panelem administracyjnym
-- [ ] Udane logowanie przez DecapBridge
-- [ ] Możliwość dodania/edycji/usunięcia artykułu przez CMS
-- [ ] Responsywny design działa na mobile/tablet/desktop
+- [x] Strona dostępna publicznie na GitHub Pages
+- [x] Decap CMS funkcjonalny z panelem administracyjnym
+- [x] Udane logowanie przez DecapBridge
+- [x] Możliwość dodania/edycji/usunięcia artykułu przez CMS
+- [x] Responsywny design działa na mobile/tablet/desktop
 - [ ] Dokumentacja umożliwia zamianę auth w <30 minut
-- [ ] Build time <30 sekund dla 100 artykułów
+- [ ] Build time <30 sekund dla 100 artykułów (nie testowane przy dużej liczbie postów)
 
 ---
 

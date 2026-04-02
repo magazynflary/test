@@ -7,3 +7,4 @@ resources/
 *.orig
 node_modules/
 backstop_data/
+tmp/
