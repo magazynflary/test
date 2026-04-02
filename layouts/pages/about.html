@@ -1,0 +1,31 @@
+{{ define "main" }}
+{{ $authors := where site.RegularPages "Section" "authors" }}
+{{ $active := (where $authors ".Params.is_active" true).ByWeight }}
+{{ $past := (where $authors ".Params.is_active" false).ByWeight }}
+
+<div class="about-page">
+    <h1 class="page-title">{{ .Title }}</h1>
+
+    <div class="about-intro article-content">
+        {{ .Content | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}
+    </div>
+
+    {{ if $active }}
+    <section class="team-section">
+        <h2 class="section-title">Redakcja</h2>
+        <div class="team-grid">
+            {{ range $active }}{{ partial "team-card.html" . }}{{ end }}
+        </div>
+    </section>
+    {{ end }}
+
+    {{ if $past }}
+    <section class="team-section">
+        <h2 class="section-title">Współpracowali z nami</h2>
+        <div class="team-grid">
+            {{ range $past }}{{ partial "team-card.html" . }}{{ end }}
+        </div>
+    </section>
+    {{ end }}
+</div>
+{{ end }}
