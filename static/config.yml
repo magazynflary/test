@@ -44,7 +44,7 @@ collections:
   # Blog Posts
   - name: "posts"
     label: "Artykuły"
-    folder: "content/posts"
+    folder: "content/artykuly"
     create: true
     slug: "{{slug}}"
     sortable_fields: ["date", "title", "edition"]
@@ -69,7 +69,7 @@ collections:
   # Editions - groups of posts
   - name: "editions"
     label: "Wydania"
-    folder: "content/editions"
+    folder: "content/wydania"
     create: true
     slug: "{{slug}}"
     summary: "{{date}} — {{title}}"

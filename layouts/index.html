@@ -6,7 +6,7 @@
 <section>
     <h2 class="section-title">Najnowsze</h2>
 
-    {{ $posts := where .Site.RegularPages "Type" "posts" }}
+    {{ $posts := where .Site.RegularPages "Type" "artykuly" }}
     {{ if $posts }}
     <div class="posts-grid">
         {{ range first 7 $posts }}

@@ -1,3 +1,5 @@
+{{- $displayTitle := .Title -}}
+{{- if .IsSection -}}{{- with index .Site.Params.sectionTitles .Section -}}{{- $displayTitle = . -}}{{- end -}}{{- end -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}">
 <head>
@@ -5,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     <link rel="canonical" href="{{ .Permalink }}">
-    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:title" content="{{ $displayTitle }}">
     <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:site_name" content="{{ .Site.Title }}">
@@ -24,7 +26,7 @@
       {{- $ogImageSrc = . -}}
     {{- else -}}
       {{- with .Params.edition -}}
-        {{- $edition := site.GetPage (printf "/editions/%s" .) -}}
+        {{- $edition := site.GetPage (printf "/wydania/%s" .) -}}
         {{- with $edition -}}
           {{- with .Params.image -}}
             {{- $ogImageSrc = . -}}
@@ -47,7 +49,7 @@
     {{- end -}}
     {{- end -}}
     {{- end }}
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ $displayTitle }} | {{ .Site.Title }}{{ end }}</title>
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
     <link rel="icon" type="image/png" href="{{ "images/favicon.png" | relURL }}">
     {{ range .AlternativeOutputFormats -}}
@@ -71,11 +73,11 @@
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12,2 3,10 5,10 5,22 10,22 10,15 14,15 14,22 19,22 19,10 21,10"/><rect x="10" y="10" width="4" height="2" fill="white" opacity="0.3"/></svg>
                     <span>Start</span>
                 </a>
-                <a href="{{ "posts" | relref . }}">
+                <a href="{{ with site.GetPage "/artykuly" }}{{ .RelPermalink }}{{ end }}">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="4" y="2" width="16" height="20"/><rect x="7" y="6" width="10" height="2" fill="white" opacity="0.4"/><rect x="7" y="10" width="10" height="1" fill="white" opacity="0.3"/><rect x="7" y="13" width="10" height="1" fill="white" opacity="0.3"/><rect x="7" y="16" width="6" height="1" fill="white" opacity="0.3"/></svg>
                     <span>Artykuły</span>
                 </a>
-                <a href="{{ "editions" | relref . }}">
+                <a href="{{ with site.GetPage "/wydania" }}{{ .RelPermalink }}{{ end }}">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9" opacity="0.6"/><rect x="2" y="13" width="9" height="9" opacity="0.6"/><rect x="13" y="13" width="9" height="9"/></svg>
                     <span>Wydania</span>
                 </a>

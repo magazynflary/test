@@ -7,8 +7,8 @@ title = 'Flary'
 tag = 'tags'
 
 [permalinks]
-  posts = '/:year/:month/:day/:slug/'
-  editions = '/wydania/:slug/'
+  artykuly = '/:year/:month/:day/:slug/'
+  wydania = '/wydania/:slug/'
 
 [markup.goldmark.extensions.typographer]
 leftDoubleQuote = '&bdquo;'
@@ -22,4 +22,8 @@ section = ['html', 'rss']
 
 [params]
 description = 'Rewolucja nie jest jabłkiem, które spada, kiedy jest dojrzałe. Trzeba sprawić, by spadło.'
+
+[params.sectionTitles]
+artykuly = "Artykuły"
+wydania = "Wydania"
 

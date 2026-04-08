@@ -46,7 +46,6 @@ test_assert "Katalog archetypes/ istnieje" "[ -d archetypes ]"
 test_assert "Katalog content/ istnieje" "[ -d content ]"
 test_assert "Katalog layouts/ istnieje" "[ -d layouts ]"
 test_assert "Katalog static/ istnieje" "[ -d static ]"
-test_assert "Katalog themes/ istnieje" "[ -d themes ]"
 test_assert "Plik hugo.toml istnieje" "[ -f hugo.toml ]"
 test_assert "Plik .gitignore istnieje" "[ -f .gitignore ]"
 
@@ -66,8 +65,8 @@ test_assert "CSS style.css istnieje" "[ -f static/css/style.css ]"
 test_assert "baseof.html linkuje CSS" "grep -q 'style.css' layouts/_default/baseof.html"
 
 # Test 1.6: Przykładowa treść
-test_assert "Katalog content/posts/ istnieje" "[ -d content/posts ]"
-test_assert "Przykładowy post istnieje" "[ -f content/posts/pierwszy-post.md ]"
+test_assert "Katalog content/artykuly/ istnieje" "[ -d content/artykuly ]"
+test_assert "Przykładowy post istnieje" "[ -f content/artykuly/pierwszy-post.md ]"
 
 # Test 1.7: Git zainicjalizowany
 test_assert "Git repo zainicjalizowane" "[ -d .git ]"

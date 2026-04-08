@@ -6,7 +6,7 @@
     <description>{{ .Site.Params.description }}</description>
     <language>{{ .Site.Language.Lang }}</language>
     <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
-    {{- range where .Site.RegularPages "Section" "posts" }}
+    {{- range where .Site.RegularPages "Section" "artykuly" }}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>

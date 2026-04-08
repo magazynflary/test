@@ -54,7 +54,7 @@ FILES=(
     ".github/workflows/deploy.yml"
     "hugo.toml"
     "layouts/_default/baseof.html"
-    "content/posts/pierwszy-post.md"
+    "content/artykuly/pierwszy-post.md"
 )
 
 for file in "${FILES[@]}"; do

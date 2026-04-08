@@ -113,8 +113,8 @@ test_http "CSS zawiera font-family" "http://localhost:$PORT/css/style.css" "font
 test_http "CSS zawiera max-width" "http://localhost:$PORT/css/style.css" "max-width"
 
 # Test 3: Strona z postami
-test_http_status "Lista postów zwraca 200" "http://localhost:$PORT/posts/" "200"
-test_http "Lista postów zawiera Artykuły" "http://localhost:$PORT/posts/" "Artykuły"
+test_http_status "Lista postów zwraca 200" "http://localhost:$PORT/artykuly/" "200"
+test_http "Lista postów zawiera Artykuły" "http://localhost:$PORT/artykuly/" "Artykuły"
 
 # Test 4: Przykładowy post
 test_http_status "Pierwszy post zwraca 200" "http://localhost:$PORT/2026/02/07/pierwszy-post/" "200"
@@ -139,8 +139,10 @@ test_http "Strona ma viewport" "http://localhost:$PORT/" "viewport"
 test_http "Strona ma link do CSS" "http://localhost:$PORT/" "/css/style.css"
 
 # Test 8: Nawigacja
-test_http "Nawigacja zawiera link Start" "http://localhost:$PORT/" "<a href=\"http://localhost:$PORT/\">Start</a>"
-test_http "Nawigacja zawiera link Artykuły" "http://localhost:$PORT/" '<a href="/posts/">Artykuły</a>'
+test_http "Nawigacja zawiera link Start" "http://localhost:$PORT/" "href=\"http://localhost:$PORT/\""
+test_http "Nawigacja zawiera tekst Start w nav" "http://localhost:$PORT/" "<span>Start</span>"
+test_http "Nawigacja zawiera link Artykuły" "http://localhost:$PORT/" 'href="/artykuly/"'
+test_http "Nawigacja zawiera tekst Artykuły w nav" "http://localhost:$PORT/" '<span>Artykuły</span>'
 
 # Test 9: Content type headers
 echo -n "Test: HTML ma prawidłowy Content-Type... "

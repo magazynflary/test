@@ -38,24 +38,27 @@ test_assert() {
 
 # Test 1: Pliki CMS istnieją
 test_assert "Admin index.html istnieje" "[ -f static/admin/index.html ]"
-test_assert "Admin config.yml istnieje" "[ -f static/admin/config.yml ]"
+test_assert "Admin config.yml istnieje" "[ -f static/config.yml ]"
 
 # Test 2: Zawartość index.html
 test_assert "index.html zawiera Decap CMS" "grep -q 'decap-cms' static/admin/index.html"
 
 # Test 3: Konfiguracja config.yml
-test_assert "config.yml zawiera backend" "grep -q 'backend:' static/admin/config.yml"
-test_assert "config.yml zawiera collections" "grep -q 'collections:' static/admin/config.yml"
-test_assert "config.yml zawiera publish_mode" "grep -q 'publish_mode:' static/admin/config.yml"
+test_assert "config.yml zawiera backend" "grep -q 'backend:' static/config.yml"
+test_assert "config.yml zawiera collections" "grep -q 'collections:' static/config.yml"
+test_assert "config.yml zawiera publish_mode" "grep -q 'publish_mode:' static/config.yml"
 
 # Test 4: Kolekcje
-test_assert "Kolekcja 'posts' istnieje" "grep -q 'name: \"posts\"' static/admin/config.yml"
-test_assert "Kolekcja 'pages' istnieje" "grep -q 'name: \"pages\"' static/admin/config.yml"
-test_assert "Kolekcja 'authors' istnieje" "grep -q 'name: \"authors\"' static/admin/config.yml"
+test_assert "Kolekcja 'posts' istnieje" "grep -q 'name: \"posts\"' static/config.yml"
+test_assert "Kolekcja 'pages' istnieje" "grep -q 'name: \"pages\"' static/config.yml"
+test_assert "Kolekcja 'authors' istnieje" "grep -q 'name: \"authors\"' static/config.yml"
+test_assert "Kolekcja 'editions' istnieje" "grep -q 'name: \"editions\"' static/config.yml"
+test_assert "Kolekcja 'editions' wskazuje na content/wydania" "grep -q 'folder: \"content/wydania\"' static/config.yml"
+test_assert "_index.md nie jest widoczny w CMS (brak editions w config)" "! grep -q 'content/editions' static/config.yml"
 
 # Test 5: Media folder
-test_assert "media_folder skonfigurowany" "grep -q 'media_folder:' static/admin/config.yml"
-test_assert "Katalog uploads istnieje" "[ -d static/images/uploads ]"
+test_assert "media_folder skonfigurowany" "grep -q 'media_folder:' static/config.yml"
+test_assert "Katalog uploads istnieje" "[ -d assets/images/uploads ]"
 
 # Test 6: Struktury katalogów
 test_assert "Katalog content/authors istnieje" "[ -d content/authors ]"
@@ -68,7 +71,7 @@ test_assert "Strona About istnieje" "[ -f content/pages/about.md ]"
 # Test 8: YAML syntax validation (podstawowa)
 echo -n "Test: config.yml poprawny YAML... "
 if python3 -c "import yaml" 2>/dev/null; then
-    if python3 -c "import yaml; yaml.safe_load(open('static/admin/config.yml'))" 2>/dev/null; then
+    if python3 -c "import yaml; yaml.safe_load(open('static/config.yml'))" 2>/dev/null; then
         echo -e "${GREEN}PASS${NC}"
         ((PASSED++))
     else
