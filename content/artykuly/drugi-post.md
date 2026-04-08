@@ -1,8 +1,11 @@
 ---
-title: "Drugi Artykuł Testowy"
+title: Drugi Artykuł Testowy
 date: 2026-02-08
 draft: false
-tags: ["polityka", "teoria"]
+tags:
+  - polityka
+  - teoria
+image: images/uploads/festiwal-piosenki-dzieciecej-w-koninie.jpg
 edition: wydanie1
 ---
 

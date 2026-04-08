@@ -88,18 +88,6 @@ collections:
         search_fields: ["title"]
         display_fields: ["title"]
         required: false
-      - label: "Artykuły"
-        name: "artykuly"
-        widget: "list"
-        required: false
-        field:
-          label: "Artykuł"
-          name: "artykul"
-          widget: "relation"
-          collection: "posts"
-          value_field: "{{slug}}"
-          search_fields: ["title"]
-          display_fields: ["title", "date"]
 
   # Pages (static pages like About, Contact)
   - name: "pages"

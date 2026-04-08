@@ -2,9 +2,10 @@
 title: trzecie repo i obrazki
 date: 2026-02-11T22:54:00
 draft: false
+tags:
+  - historia
 image: images/uploads/po-wojnie.jpg
-tags: ["historia"]
-edition: wydanie1
+edition: wydanie2
 ---
 może tym razem emaile nie wyciekają.
 
