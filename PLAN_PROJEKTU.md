@@ -1,6 +1,6 @@
 # Plan Projektu: Testowa Strona Gazety/Bloga
 
-## Data utworzenia: 2026-02-07 | Ostatnia aktualizacja: 2026-04-02
+## Data utworzenia: 2026-02-07 | Ostatnia aktualizacja: 2026-04-09
 
 ---
 
@@ -91,22 +91,27 @@ Stworzenie testowej instancji strony internetowej dla lewackiej gazety.
 ### Struktura katalogów (Hugo)
 ```
 medium-test/
-├── config.toml                 # Główna konfiguracja Hugo
+├── hugo.toml                   # Główna konfiguracja Hugo
 ├── content/
-│   ├── posts/                  # Artykuły
+│   ├── artykuly/               # Artykuły
+│   ├── wydania/                # Wydania (grupy artykułów)
+│   ├── authors/                # Profile autorów
 │   ├── pages/                  # Strony statyczne
-│   └── authors/                # Profile autorów
-├── themes/
-│   └── newspaper-theme/        # Dedykowany motyw
+│   └── tags/                   # Tagi
 ├── static/
-│   ├── admin/                  # Decap CMS
-│   │   ├── config.yml
-│   │   └── index.html
-│   └── images/
+│   ├── admin/
+│   │   └── index.html          # Decap CMS + custom widgety
+│   ├── config.yml              # Konfiguracja Decap CMS
+│   └── css/
+│       └── style.css
+├── assets/
+│   └── images/uploads/         # Obrazki uploadowane przez CMS
 ├── layouts/
-│   ├── _default/
-│   ├── posts/
-│   └── partials/
+│   ├── _default/               # Bazowe layouty (baseof, list, single)
+│   ├── wydania/                # Layout wydania
+│   ├── pages/                  # Layout stron (about)
+│   ├── partials/               # Fragmenty (image, team-card)
+│   └── index.html              # Strona główna
 └── .github/
     └── workflows/
         └── deploy.yml          # GitHub Actions dla Hugo
@@ -153,9 +158,10 @@ medium-test/
 - [x] Instalacja Decap CMS
 - [x] Konfiguracja static/config.yml
 - [x] Definicja kolekcji (posts, pages, authors, editions)
-- [x] Konfiguracja widgetów i pól (focal-point, sources-editor, relation)
+- [x] Konfiguracja widgetów i pól (focal-point, sources-editor, citekey, relation)
 - [x] Setup editorial workflow
-- [ ] Naprawić model danych wydań: `content/editions/_index.md` jest stroną-indeksem sekcji, a każde wydanie powinno być osobnym plikiem (np. `content/editions/wiosna-2026.md`) dostępnym pod `/wydania/wiosna-2026/`
+- [x] Fix: focal-point widget — aktualizacja obrazka bez przeładowania strony (DOM polling zamiast stale props)
+- [ ] Naprawić model danych wydań: `content/wydania/_index.md` jest stroną-indeksem sekcji, a każde wydanie powinno być osobnym plikiem (np. `content/wydania/wiosna-2026.md`) dostępnym pod `/wydania/wiosna-2026/`
 
 ### Faza 4: Uwierzytelnianie (Priorytet: ŚREDNI)
 - [x] Konfiguracja DecapBridge jako domyślny backend
@@ -169,8 +175,8 @@ medium-test/
 - [x] Dostosowanie motywu wizualnego (typografia, ciemny motyw, responsywność, nawigacja)
 - [x] Dodanie nawigacji i menu
 - [ ] Strona kontakt (`content/pages/kontakt.md`)
-- [ ] `layouts/editions/list.html` — lista wszystkich wydań (strona `/wydania/`)
-- [ ] `layouts/editions/single.html` — strona wydania: okładka, artykuł główny, pozostałe artykuły
+- [ ] `layouts/wydania/list.html` — lista wszystkich wydań (strona `/wydania/`)
+- [x] `layouts/wydania/single.html` — strona wydania: okładka, artykuł główny, pozostałe artykuły
 - [ ] W layoucie artykułu pokazać przynależność do wydania (z linkiem)
 - [ ] Zdecydować i zaimplementować strategię strony głównej: najnowsze wydanie vs. lista artykułów
 - [ ] Autorzy: link z artykułu do profilu autora (teraz plain text), zdecydować między taksonomią Hugo a ręcznym dopasowaniem
