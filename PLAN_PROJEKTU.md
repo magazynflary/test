@@ -161,8 +161,9 @@ medium-test/
 - [x] Definicja kolekcji (posts, pages, authors, editions)
 - [x] Konfiguracja widgetów i pól (focal-point, sources-editor, citekey, relation)
 - [x] Setup editorial workflow
-- [x] Fix: focal-point widget — aktualizacja obrazka bez przeładowania strony (DOM polling zamiast stale props)
+- [x] Fix: focal-point widget — aktualizacja obrazka bez przeładowania strony (DOM polling zamiast stale props); działa dla artykułów i wydań
 - [x] Model danych wydań: każde wydanie jest osobnym plikiem (np. `content/wydania/wiosna-2026.md`) dostępnym pod `/wydania/wiosna-2026/`, bez `_index.md`
+- [x] Kompresja obrazków w przeglądarce przed uploadem do repozytorium (browser-image-compression, max 0.5 MB / 2000 px, przechwycenie `<input type="file">` w fazie capture przed DecapCMS)
 
 ### Faza 4: Uwierzytelnianie (Priorytet: ŚREDNI)
 - [x] Konfiguracja DecapBridge jako domyślny backend
@@ -182,6 +183,7 @@ medium-test/
 - [ ] Zdecydować i zaimplementować strategię strony głównej: najnowsze wydanie vs. lista artykułów
 - [x] Autorzy: link z artykułu do profilu autora — pole `author` w frontmatter artykułu zawiera nazwę pliku autora, szablon szuka strony przez `site.GetPage "/autorzy/:slug"` (zamiast taksonomii Hugo)
 - [x] Autorzy: strona autora z bio i listą jego artykułów — `layouts/autorzy/single.html`
+- [x] Autorzy: zdjęcie w karcie redakcji (`team-card.html`) i na stronie profilu
 
 ### Faza 6: Testing & Documentation (Priorytet: NISKI)
 - [x] Testowanie workflow redakcyjnego (wielokrotne PR-y przez CMS)
@@ -241,7 +243,7 @@ backend:
 | Ryzyko | Prawdopodobieństwo | Wpływ | Mitygacja |
 |--------|-------------------|-------|-----------|
 | DecapBridge przestanie być darmowy | Średnie | Wysoki | Architektura modularna - łatwa zamiana na inny provider |
-| Przekroczenie limitów GitHub Pages | Niskie | Średni | Monitoring użycia, optymalizacja obrazków |
+| Przekroczenie limitów GitHub Pages | Niskie | Średni | Monitoring użycia; kompresja obrazków zaimplementowana w CMS (max 0.5 MB/plik) |
 | Konflikty przy jednoczesnej edycji | Średnie | Średni | Editorial workflow w Decap CMS |
 | Zbyt wolne buildowanie | Niskie | Niski | Hugo jest bardzo szybki |
 
