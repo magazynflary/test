@@ -1,6 +1,6 @@
 <div class="team-card">
     {{ with .Params.photo }}
-    <img class="team-card__photo" src="{{ . }}" alt="{{ $.Params.name | default $.Title }}">
+    {{ partial "image.html" (dict "src" . "alt" ($.Params.name | default $.Title) "class" "team-card__photo") }}
     {{ end }}
     <div class="team-card__body">
         <p class="team-card__name">{{ .Params.name | default .Title }}</p>

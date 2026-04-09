@@ -846,6 +846,15 @@ main {
     border-bottom: 1px solid var(--gray-light);
 }
 
+.author-photo {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--red);
+    margin-bottom: var(--space-4);
+}
+
 .author-bio {
     font-size: var(--text-lg);
     color: var(--gray-dark);

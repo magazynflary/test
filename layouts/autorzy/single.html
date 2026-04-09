@@ -4,6 +4,9 @@
 
 <div class="author-profile">
     <header class="author-header">
+        {{ with .Params.photo }}
+        {{ partial "image.html" (dict "src" . "alt" ($.Params.name | default $.Title) "class" "author-photo") }}
+        {{ end }}
         {{ with .Params.role }}
         <div class="article-meta">{{ . }}</div>
         {{ end }}
