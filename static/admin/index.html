@@ -6,6 +6,36 @@
   <meta name="robots" content="noindex" />
   <base href="/test/">
   <title>Flary content management</title>
+  <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+  <script>
+    // Compress images before upload. Capture phase runs before DecapCMS.
+    // e.isTrusted distinguishes real user input from our re-dispatched event.
+    // "Browse Media Library" does not use <input type="file"> — unaffected.
+    var TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+
+    document.addEventListener('change', async function(e) {
+      if (!e.isTrusted || !window.imageCompression) return;
+      var input = e.target;
+      if (input.tagName !== 'INPUT' || input.type !== 'file') return;
+
+      var files = Array.from(input.files || []);
+      if (!files.some(function(f) { return TYPES.includes(f.type); })) return;
+
+      e.stopImmediatePropagation();
+
+      var result = await Promise.all(files.map(async function(file) {
+        try {
+          var out = await imageCompression(file, { maxSizeMB: 0.5, maxWidthOrHeight: 2000, initialQuality: 0.85, useWebWorker: true });
+          return new File([out], file.name, { type: out.type });
+        } catch(err) { return file; }
+      }));
+
+      var dt = new DataTransfer();
+      result.forEach(function(f) { dt.items.add(f); });
+      input.files = dt.files;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    }, true);
+  </script>
   <style>
     .sources-editor > div {
         margin-bottom: 16px;
