@@ -3,6 +3,7 @@ title: Pierwszy Post
 date: 2026-02-07
 draft: false
 edition: wydanie1
+author: karol-marks
 ---
 
 To jest przykładowy artykuł testowy dla naszej gazety.

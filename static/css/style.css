@@ -838,6 +838,32 @@ main {
 }
 
 /* ============================================================
+   AUTHOR PROFILE
+   ============================================================ */
+.author-header {
+    margin-bottom: var(--space-12);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.author-bio {
+    font-size: var(--text-lg);
+    color: var(--gray-dark);
+    line-height: 1.7;
+    max-width: 65ch;
+    margin-top: var(--space-6);
+}
+
+.article-author-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.article-author-link:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================
    PRINT STYLES
    ============================================================ */
 @media print {

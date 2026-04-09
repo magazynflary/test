@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{ $authorSlug := .File.ContentBaseName }}
+{{ $articles := where site.RegularPages ".Params.author" $authorSlug }}
+
+<div class="author-profile">
+    <header class="author-header">
+        {{ with .Params.role }}
+        <div class="article-meta">{{ . }}</div>
+        {{ end }}
+        <h1 class="page-title">{{ .Params.name | default .Title }}</h1>
+        {{ with .Params.bio }}
+        <p class="author-bio">{{ . }}</p>
+        {{ end }}
+    </header>
+
+    {{ if $articles }}
+    <div class="posts-grid">
+        {{ range $articles }}
+        <article class="post-card">
+            <a href="{{ .Permalink }}" class="post-card__link">
+                {{ $post := . }}
+                {{ with .Params.image }}
+                {{ partial "image.html" (dict "src" . "alt" $post.Title "class" "post-card__image" "style" (printf "object-position: %s" ($post.Params.image_focus | default "50% 50%")) "sizes" "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw") }}
+                {{ end }}
+                <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">
+                    {{ .Date.Format "2006-01-02" }}
+                </time>
+                <h3 class="post-card__title">{{ .Title }}</h3>
+                <p class="post-card__excerpt">{{ .Summary | plainify | truncate 150 | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}</p>
+            </a>
+            {{ with .GetTerms "tags" }}
+            <div class="post-card__tags">
+                {{ range . }}<a href="{{ .Permalink }}" class="tag tag--link">{{ .LinkTitle }}</a>{{ end }}
+            </div>
+            {{ end }}
+        </article>
+        {{ end }}
+    </div>
+    {{ else }}
+    <p class="no-posts">Brak artykułów tego autora.</p>
+    {{ end }}
+</div>
+{{ end }}
