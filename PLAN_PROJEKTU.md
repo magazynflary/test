@@ -153,6 +153,7 @@ medium-test/
 - [x] Konfiguracja GitHub Actions dla Hugo (.github/workflows/deploy.yml)
 - [x] Setup GitHub Pages (deploy-pages action)
 - [x] Test deployment
+- [ ] Dodać długookresowy klucz do testowego i do produkcyjnego CMS-a
 
 ### Faza 3: Decap CMS Integration (Priorytet: ŚREDNI)
 - [x] Instalacja Decap CMS
