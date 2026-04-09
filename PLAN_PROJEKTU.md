@@ -153,7 +153,7 @@ medium-test/
 - [x] Konfiguracja GitHub Actions dla Hugo (.github/workflows/deploy.yml)
 - [x] Setup GitHub Pages (deploy-pages action)
 - [x] Test deployment
-- [ ] Dodać długookresowy klucz do testowego i do produkcyjnego CMS-a
+- [ ] Dodać długookresowy klucz do testowego i do produkcyjnego CMS-a: https://github.com/settings/personal-access-tokens
 
 ### Faza 3: Decap CMS Integration (Priorytet: ŚREDNI)
 - [x] Instalacja Decap CMS
@@ -162,7 +162,7 @@ medium-test/
 - [x] Konfiguracja widgetów i pól (focal-point, sources-editor, citekey, relation)
 - [x] Setup editorial workflow
 - [x] Fix: focal-point widget — aktualizacja obrazka bez przeładowania strony (DOM polling zamiast stale props)
-- [ ] Naprawić model danych wydań: `content/wydania/_index.md` jest stroną-indeksem sekcji, a każde wydanie powinno być osobnym plikiem (np. `content/wydania/wiosna-2026.md`) dostępnym pod `/wydania/wiosna-2026/`
+- [x] Model danych wydań: każde wydanie jest osobnym plikiem (np. `content/wydania/wiosna-2026.md`) dostępnym pod `/wydania/wiosna-2026/`, bez `_index.md`
 
 ### Faza 4: Uwierzytelnianie (Priorytet: ŚREDNI)
 - [x] Konfiguracja DecapBridge jako domyślny backend
@@ -176,9 +176,9 @@ medium-test/
 - [x] Dostosowanie motywu wizualnego (typografia, ciemny motyw, responsywność, nawigacja)
 - [x] Dodanie nawigacji i menu
 - [ ] Strona kontakt (`content/pages/kontakt.md`)
-- [ ] `layouts/wydania/list.html` — lista wszystkich wydań (strona `/wydania/`)
+- [x] Lista wszystkich wydań (strona `/wydania/`) — obsługiwana przez `layouts/_default/list.html`
 - [x] `layouts/wydania/single.html` — strona wydania: okładka, artykuł główny, pozostałe artykuły
-- [ ] W layoucie artykułu pokazać przynależność do wydania (z linkiem)
+- [x] W layoucie artykułu pokazać przynależność do wydania (z linkiem) — link w `article-meta` via `site.GetPage`
 - [ ] Zdecydować i zaimplementować strategię strony głównej: najnowsze wydanie vs. lista artykułów
 - [ ] Autorzy: link z artykułu do profilu autora (teraz plain text), zdecydować między taksonomią Hugo a ręcznym dopasowaniem
 - [ ] Autorzy: strona autora z bio i listą jego artykułów

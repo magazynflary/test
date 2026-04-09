@@ -2,6 +2,11 @@
 <article class="article">
     <header class="article-header">
         <div class="article-meta">
+            {{ with .Params.edition }}
+                {{ with site.GetPage (printf "wydania/%s" .) }}
+                <a href="{{ .Permalink }}" class="article-edition-link">{{ .Title }}</a>
+                {{ end }}
+            {{ end }}
             <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
             {{ with .Params.author }}{{ . }}{{ end }}
         </div>
