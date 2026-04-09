@@ -19,7 +19,7 @@
 <h1 class="page-title">{{ .Title }}</h1>
 
 {{ with .Params.image }}
-{{ partial "image.html" (dict "src" . "alt" $.Title "class" "edition-image" "sizes" "100vw") }}
+{{ partial "image.html" (dict "src" . "alt" $.Title "class" "edition-image" "style" (printf "object-position: %s" ($.Params.image_focus | default "50% 50%")) "sizes" "100vw") }}
 {{ end }}
 
 {{ if $pages }}

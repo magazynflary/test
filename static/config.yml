@@ -79,7 +79,8 @@ collections:
     fields:
       - {label: "Tytuł", name: "title", widget: "string", hint: "np.: 2026/wiosna"}
       - {label: "Data wydania", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
-      - {label: "Obrazek", name: "image", widget: "image", required: false}
+      - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
+      - {label: "Kadrowanie obrazka wyróżniającego", name: "image_focus", widget: "focal-point", default: "50% 50%", required: false}
       - label: "Artykuł główny wydania"
         name: "artykul_glowny"
         widget: "relation"
