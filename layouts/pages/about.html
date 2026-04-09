@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $authors := where site.RegularPages "Section" "authors" }}
+{{ $authors := where site.RegularPages "Section" "autorzy" }}
 {{ $active := (where $authors ".Params.is_active" true).ByWeight }}
 {{ $past := (where $authors ".Params.is_active" false).ByWeight }}
 

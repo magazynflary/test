@@ -172,16 +172,16 @@ medium-test/
 
 ### Faza 5: Content & Design (Priorytet: NISKI)
 - [x] Stworzenie przykładowych artykułów
-- [ ] Konfiguracja ról i uprawnień (obecnie tylko editorial workflow, bez ról per-user)
+- [-] Konfiguracja ról i uprawnień (obecnie tylko editorial workflow, bez ról per-user). Niemożliwe w DecapBridge, wymaga kont na GitHubie, więc odkładamy na zaś.
 - [x] Dostosowanie motywu wizualnego (typografia, ciemny motyw, responsywność, nawigacja)
 - [x] Dodanie nawigacji i menu
-- [ ] Strona kontakt (`content/pages/kontakt.md`)
+- [x] Strona kontakt (dodana do `content/pages/about.md`)
 - [x] Lista wszystkich wydań (strona `/wydania/`) — obsługiwana przez `layouts/_default/list.html`
 - [x] `layouts/wydania/single.html` — strona wydania: okładka, artykuł główny, pozostałe artykuły
 - [x] W layoucie artykułu pokazać przynależność do wydania (z linkiem) — link w `article-meta` via `site.GetPage`
 - [ ] Zdecydować i zaimplementować strategię strony głównej: najnowsze wydanie vs. lista artykułów
-- [ ] Autorzy: link z artykułu do profilu autora (teraz plain text), zdecydować między taksonomią Hugo a ręcznym dopasowaniem
-- [ ] Autorzy: strona autora z bio i listą jego artykułów
+- [x] Autorzy: link z artykułu do profilu autora — pole `author` w frontmatter artykułu zawiera nazwę pliku autora, szablon szuka strony przez `site.GetPage "/autorzy/:slug"` (zamiast taksonomii Hugo)
+- [x] Autorzy: strona autora z bio i listą jego artykułów — `layouts/autorzy/single.html`
 
 ### Faza 6: Testing & Documentation (Priorytet: NISKI)
 - [x] Testowanie workflow redakcyjnego (wielokrotne PR-y przez CMS)

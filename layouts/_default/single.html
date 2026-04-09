@@ -9,7 +9,7 @@
             {{ end }}
             <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
             {{ with .Params.author }}
-                {{ $authorPage := site.GetPage (printf "authors/%s" .) }}
+                {{ $authorPage := site.GetPage (printf "/autorzy/%s" .) }}
                 {{ with $authorPage }}
                 <a href="{{ .Permalink }}" class="article-author-link">{{ .Params.name | default .Title }}</a>
                 {{ else }}

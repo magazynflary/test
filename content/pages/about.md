@@ -6,6 +6,10 @@ menu: "main"
 layout: about
 ---
 
+Piszcie do nas: [redakcja@magazynflary.pl](mailto:redakcja@magazynflary.pl)
+
+---
+
 Jesteśmy niezależnym pismem internetowym poświęconym publicystyce politycznej
 i kulturalnej z perspektywy lewicowej. Publikujemy artykuły, eseje i recenzje
  — o pracy, prawach człowieka i kulturze oporu.

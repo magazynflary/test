@@ -56,7 +56,7 @@ collections:
       - {label: "Tytuł", name: "title", widget: "string"}
       - {label: "Data publikacji", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
       - {label: "Wersja robocza", name: "draft", widget: "boolean", default: false}
-      - {label: "Autor", name: "author", widget: "relation", collection: "authors", search_fields: ["name"], value_field: "name", display_fields: ["name"], required: false}
+      - {label: "Autor", name: "author", widget: "relation", collection: "authors", search_fields: ["name"], value_field: "{{slug}}", display_fields: ["name"], required: false}
       - {label: "Kategorie", name: "categories", widget: "list", required: false}
       - {label: "Tagi", name: "tags", widget: "list", required: false, hint: "rozdzielone przecinkiem, np.: 'historia, polityka'"}
       - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
@@ -107,7 +107,7 @@ collections:
   # Authors (profiles)
   - name: "authors"
     label: "Autorzy"
-    folder: "content/authors"
+    folder: "content/autorzy"
     create: true
     slug: "{{slug}}"
     identifier_field: name
