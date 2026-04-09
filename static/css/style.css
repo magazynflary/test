@@ -730,9 +730,7 @@ main {
         grid-row: 1 / 3;
     }
 
-    .posts-grid .post-card:first-child .post-card__image {
-        aspect-ratio: 4/3;
-    }
+
 }
 
 /* ============================================================

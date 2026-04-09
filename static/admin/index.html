@@ -95,10 +95,33 @@
   <script>
     var FocalPointControl = createClass({
       getInitialState: function() {
-        return { naturalWidth: 0, naturalHeight: 0, dragging: false };
+        return { naturalWidth: 0, naturalHeight: 0, dragging: false, _imageUrl: null };
+      },
+
+      componentDidMount: function() {
+        // Find the image field container (previous sibling in the editor).
+        var el = this._el;
+        while (el && el.parentElement) {
+          el = el.parentElement;
+          if (el.previousElementSibling) {
+            this._imageField = el.previousElementSibling;
+            break;
+          }
+        }
+        var self = this;
+        var check = function() {
+          var img = self._imageField && self._imageField.querySelector('img');
+          var src = img ? img.src : null;
+          if (src !== self.state._imageUrl) {
+            self.setState({ _imageUrl: src });
+          }
+        };
+        check();
+        this._pollTimer = setInterval(check, 500);
       },
 
       componentWillUnmount: function() {
+        clearInterval(this._pollTimer);
         document.removeEventListener('mousemove', this.handleMouseMove);
         document.removeEventListener('mouseup', this.handleMouseUp);
       },
@@ -125,8 +148,8 @@
       // object-position "X% Y%" → rectangle top-left as fraction of image.
       valueToPosXY: function(value, rf) {
         var parts = (value || '50% 50%').split(/\s+/);
-        var xp = parseFloat(parts[0]) || 50;
-        var yp = parseFloat(parts[1]) || 50;
+        var xp = isNaN(parseFloat(parts[0])) ? 50 : parseFloat(parts[0]);
+        var yp = isNaN(parseFloat(parts[1])) ? 50 : parseFloat(parts[1]);
         return {
           x: (1 - rf.w) > 0.0001 ? (xp / 100) * (1 - rf.w) : 0,
           y: (1 - rf.h) > 0.0001 ? (yp / 100) * (1 - rf.h) : 0
@@ -173,12 +196,14 @@
       },
 
       render: function() {
-        var value = this.props.value || '50% 50%';
-        var image = this.props.entry.getIn(['data', 'image']);
-        if (!image) {
-          return h('p', {}, 'Najpierw dodaj obrazek wyróżniający.');
+        var self = this;
+        if (!this.state._imageUrl) {
+          return h('div', { ref: function(el) { self._el = el; } },
+            h('p', {}, 'Najpierw dodaj obrazek wyróżniający.')
+          );
         }
 
+        var value = this.props.value || '50% 50%';
         var rf = this.getRectFractions();
         var pos = rf ? this.valueToPosXY(value, rf) : null;
 
@@ -196,7 +221,7 @@
             onMouseDown: this.handleMouseDown
           },
             h('img', {
-              src: image,
+              src: this.state._imageUrl,
               onLoad: this.handleImageLoad,
               style: { maxWidth: '100%', display: 'block', pointerEvents: 'none' },
               draggable: false
