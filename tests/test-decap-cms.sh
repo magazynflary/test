@@ -61,11 +61,11 @@ test_assert "media_folder skonfigurowany" "grep -q 'media_folder:' static/config
 test_assert "Katalog uploads istnieje" "[ -d assets/images/uploads ]"
 
 # Test 6: Struktury katalogów
-test_assert "Katalog content/authors istnieje" "[ -d content/authors ]"
+test_assert "Katalog content/autorzy istnieje" "[ -d content/autorzy ]"
 test_assert "Katalog content/pages istnieje" "[ -d content/pages ]"
 
 # Test 7: Przykładowa zawartość
-test_assert "Przykładowy autor istnieje" "[ -f content/authors/redaktor-testowy.md ]"
+test_assert "Przykładowy autor istnieje" "[ -f content/autorzy/anna-mrozek.md ]"
 test_assert "Strona About istnieje" "[ -f content/pages/about.md ]"
 
 # Test 8: YAML syntax validation (podstawowa)
@@ -94,7 +94,7 @@ fi
 
 # Test 10: Panel admin dostępny po buildzie
 test_assert "public/admin/index.html wygenerowany" "[ -f public/admin/index.html ]"
-test_assert "public/admin/config.yml wygenerowany" "[ -f public/admin/config.yml ]"
+test_assert "public/config.yml wygenerowany" "[ -f public/config.yml ]"
 
 # Podsumowanie
 echo ""

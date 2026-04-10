@@ -66,7 +66,7 @@ test_assert "baseof.html linkuje CSS" "grep -q 'style.css' layouts/_default/base
 
 # Test 1.6: Przykładowa treść
 test_assert "Katalog content/artykuly/ istnieje" "[ -d content/artykuly ]"
-test_assert "Przykładowy post istnieje" "[ -f content/artykuly/pierwszy-post.md ]"
+test_assert "Przykładowy post istnieje" "[ -f content/artykuly/czy-poganin-moze-miec-prawa.md ]"
 
 # Test 1.7: Git zainicjalizowany
 test_assert "Git repo zainicjalizowane" "[ -d .git ]"

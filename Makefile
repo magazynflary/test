@@ -1,4 +1,4 @@
-.PHONY: help test test-phase1 test-server test-cms test-production validate-ready hugo hugo-cms cms build clean backstop-ref backstop-test backstop-approve
+.PHONY: help test test-phase1 test-server test-cms test-links test-production validate-ready hugo hugo-cms cms build clean backstop-ref backstop-test backstop-approve
 
 help:
 	@echo "Dostępne komendy:"
@@ -10,6 +10,7 @@ help:
 	@echo "  make test-phase1      - Uruchom testy Fazy 1"
 	@echo "  make test-server      - Uruchom testy lokalnego serwera"
 	@echo "  make test-cms         - Uruchom testy Decap CMS"
+	@echo "  make test-links       - Uruchom testy integralności odnośników"
 	@echo "  make test-production  - Test buildu produkcyjnego"
 	@echo "  make validate-ready   - Sprawdź czy projekt gotowy do GitHub Pages"
 	@echo "  make backstop-ref     - Zrzuty referencyjne (przed zmianami)"
@@ -30,7 +31,7 @@ cms:
 build:
 	hugo --minify --buildFuture
 
-test: test-phase1 test-server test-cms
+test: test-phase1 test-server test-cms test-links
 
 test-phase1:
 	@./tests/test-phase1.sh
@@ -40,6 +41,10 @@ test-server:
 
 test-cms:
 	@./tests/test-decap-cms.sh
+
+test-links:
+	hugo --buildDrafts --buildFuture --quiet
+	cd tests/reference-integrity && go test -count=1 -v .
 
 test-production:
 	@./scripts/test-production-build.sh
@@ -58,3 +63,4 @@ backstop-approve:
 
 clean:
 	rm -rf public/ resources/ .hugo_build.lock
+	go clean -testcache

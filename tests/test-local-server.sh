@@ -117,9 +117,9 @@ test_http_status "Lista postów zwraca 200" "http://localhost:$PORT/artykuly/" "
 test_http "Lista postów zawiera Artykuły" "http://localhost:$PORT/artykuly/" "Artykuły"
 
 # Test 4: Przykładowy post
-test_http_status "Pierwszy post zwraca 200" "http://localhost:$PORT/2026/02/07/pierwszy-post/" "200"
-test_http "Post zawiera tytuł" "http://localhost:$PORT/2026/02/07/pierwszy-post/" "Pierwszy Post"
-test_http "Post zawiera treść" "http://localhost:$PORT/2026/02/07/pierwszy-post/" "Testowy nagłówek"
+test_http_status "Artykuł zwraca 200" "http://localhost:$PORT/2026/03/20/reforma-czy-rewolucja-z-przypisami-redakcji/" "200"
+test_http "Artykuł zawiera tytuł" "http://localhost:$PORT/2026/03/20/reforma-czy-rewolucja-z-przypisami-redakcji/" "Reforma"
+test_http "Artykuł zawiera treść" "http://localhost:$PORT/2026/03/20/reforma-czy-rewolucja-z-przypisami-redakcji/" "article-content"
 
 # Test 5: Lista wydań
 test_http_status "Lista wydań zwraca 200" "http://localhost:$PORT/wydania/" "200"
@@ -128,9 +128,9 @@ test_http "Lista wydań zawiera siatkę" "http://localhost:$PORT/wydania/" "post
 test_http "Lista wydań zawiera kartę wydania" "http://localhost:$PORT/wydania/" "post-card"
 
 # Test 6: Pojedyncze wydanie
-test_http_status "Wydanie 2026-4 zwraca 200" "http://localhost:$PORT/wydania/2026-4/" "200"
-test_http "Wydanie zawiera tytuł" "http://localhost:$PORT/wydania/2026-4/" "2026-4"
-test_http "Wydanie zawiera artykuł główny" "http://localhost:$PORT/wydania/2026-4/" "post-card--featured"
+test_http_status "Wydanie zwraca 200" "http://localhost:$PORT/wydania/nieczytane-traktaty/" "200"
+test_http "Wydanie zawiera tytuł" "http://localhost:$PORT/wydania/nieczytane-traktaty/" "Nieczytane traktaty"
+test_http "Wydanie zawiera artykuł główny" "http://localhost:$PORT/wydania/nieczytane-traktaty/" "post-card--featured"
 
 # Test 7: HTML structure (strona główna)
 test_http "Strona ma DOCTYPE" "http://localhost:$PORT/" "<!DOCTYPE html>"
