@@ -1,12 +1,12 @@
 ---
+edition: 2026-2
+author: anna-mrozek
 title: "Związki zawodowe dla redaktorów: praktyczny poradnik"
 date: 2026-03-07
 draft: false
 tags:
   - praca
   - teoria
-author: anna-mrozek
-edition: wydanie2
 ---
 
 W Polsce działa kilka organizacji związkowych zrzeszających dziennikarzy i pracowników mediów. Gdyby redakcja *Flar* miała etat, miałaby też prawo do ich członkostwa. Na razie sprawdzamy, czy CMS poprawnie wyświetla listy numerowane i punktorowane.

@@ -2,7 +2,6 @@
 title: "O nas"
 date: 2026-02-07T10:00:00
 draft: false
-menu: "main"
 layout: about
 ---
 

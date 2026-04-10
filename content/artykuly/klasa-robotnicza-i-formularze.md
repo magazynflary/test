@@ -1,12 +1,12 @@
 ---
-title: "Klasa robotnicza ma problem z formularzami"
+edition: 2026-3
+author: piotr-zukowski
+title: Klasa robotnicza ma problem z formularzami
 date: 2026-04-02
 draft: false
 tags:
   - praca
   - humor
-author: piotr-zukowski
-edition: wydanie3
 ---
 
 Kiedy robotnicy Stoczni Gdańskiej w 1980 roku sformułowali 21 postulatów, wywiesili je na bramie. Nie wysyłali formularzy. Nie wypełniali pól „opisz swój problem w 500 znakach lub mniej". Pisali na kartonie markerem i wieszali w miejscu, gdzie wszyscy mogli przeczytać.

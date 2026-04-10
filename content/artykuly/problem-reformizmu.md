@@ -1,12 +1,12 @@
 ---
-title: "Problem reformizmu, wyjaśniony na przykładzie edycji artykułów"
+edition: 2026-3
+author: anna-mrozek
+title: Problem reformizmu, wyjaśniony na przykładzie edycji artykułów
 date: 2026-03-25
 draft: false
 tags:
   - teoria
   - polityka
-author: anna-mrozek
-edition: wydanie3
 ---
 
 Wyobraź sobie, że artykuł ma błąd. Możesz go poprawić — jeden błąd, jeden klik. Albo możesz przepisać artykuł od początku. Albo możesz przepisać cały CMS.

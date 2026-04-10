@@ -1,12 +1,12 @@
 ---
-title: "Wałęsa, wąsy i walka klas"
+edition: 2026-2
+author: anna-mrozek
+title: Wałęsa, wąsy i walka klas
 date: 2026-02-25
 draft: false
 tags:
   - Solidarność
   - polityka
-author: anna-mrozek
-edition: wydanie2
 ---
 
 Lech Wałęsa jest postacią, przy której trudno zachować spokój — zarówno zwolennikom, jak krytykom. Elektryk ze Stoczni Gdańskiej, przewodniczący NSZZ „Solidarność", laureat Pokojowej Nagrody Nobla z 1983 roku, prezydent RP w latach 1990–1995.

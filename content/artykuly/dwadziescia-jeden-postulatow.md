@@ -1,12 +1,12 @@
 ---
-title: "Dwadzieścia jeden postulatów i jeden formularz kontaktowy"
+edition: 2026-2
+author: piotr-zukowski
+title: Dwadzieścia jeden postulatów i jeden formularz kontaktowy
 date: 2026-03-02
 draft: false
 tags:
   - Solidarność
   - historia
-author: piotr-zukowski
-edition: wydanie2
 ---
 
 W sierpniu 1980 roku robotnicy Stoczni Gdańskiej sformułowali 21 postulatów. Były konkretne, numerowane i publiczne — wywieszone na bramie stoczni. Redakcja *Flar* przeczytała je uważnie i chciałaby zaproponować postulat dwudziesty drugi.

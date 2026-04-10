@@ -376,6 +376,14 @@ main {
     margin-bottom: var(--space-2);
 }
 
+.post-card__issue {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
+}
+
 .post-card__title {
     font-size: var(--text-2xl);
     margin-bottom: var(--space-3);
@@ -745,6 +753,24 @@ main {
 /* ============================================================
    EDITION PAGE
    ============================================================ */
+.edition-date {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: var(--space-6);
+}
+
+.edition-issue {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
 .edition-image {
     width: 100%;
     margin-bottom: var(--space-12);

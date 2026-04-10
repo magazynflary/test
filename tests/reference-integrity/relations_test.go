@@ -33,11 +33,11 @@ func TestEditionsPageLinksAreValid(t *testing.T) {
 // --- Single edition ---
 
 func TestEditionHasFeaturedArticle(t *testing.T) {
-	assertHasHTMLElement(t, "public/wydania/nieczytane-traktaty/index.html", ".post-card--featured")
+	assertHasHTMLElement(t, "public/wydania/2026-1/index.html", ".post-card--featured")
 }
 
 func TestEditionArticleLinksAreValid(t *testing.T) {
-	assertSelectorLinksToValidFile(t, "public/wydania/nieczytane-traktaty/index.html", "a.post-card__link")
+	assertSelectorLinksToValidFile(t, "public/wydania/2026-1/index.html", "a.post-card__link")
 }
 
 // --- All editions ---

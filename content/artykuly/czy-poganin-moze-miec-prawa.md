@@ -1,12 +1,12 @@
 ---
-title: "Czy poganin może mieć prawa? Pytamy redakcję"
+edition: 2026-1
+author: karol-marks
+title: Czy poganin może mieć prawa? Pytamy redakcję
 date: 2026-02-10
 draft: false
 tags:
   - filozofia
   - prawa człowieka
-author: karol-marks
-edition: wydanie1
 ---
 
 *Nota redakcji: Poniższy tekst jest fikcyjny. Karol Marks nie znał Włodkowica osobiście, choć to zastanawiające — bo obaj w zasadzie mówili to samo, tylko o sześćset lat po sobie i z innych pozycji klasowych.*

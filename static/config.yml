@@ -3,7 +3,7 @@
 
 backend:
   name: git-gateway
-  repo: drlzin/test
+  repo: magazynflary/test
   branch: master
   auth_type: pkce
   base_url: https://auth.decapbridge.com
@@ -28,7 +28,7 @@ auth:
 
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
-site_url: https://drlzin.github.io/test
+site_url: https://magazynflary.github.io/test
 
 # run: `make hugo-cms`
 local_backend: true
@@ -53,16 +53,15 @@ collections:
     editor:
       preview: true
     fields:
+      - {label: "Wydanie", name: "edition", widget: "relation", collection: "editions", value_field: "{{slug}}", search_fields: ["issue", "title"], display_fields: ["issue", "title"], required: false}
+      - {label: "Autor", name: "author", widget: "relation", collection: "authors", search_fields: ["name"], value_field: "{{slug}}", display_fields: ["name"], required: false}
       - {label: "Tytuł", name: "title", widget: "string"}
       - {label: "Data publikacji", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
       - {label: "Wersja robocza", name: "draft", widget: "boolean", default: false}
-      - {label: "Autor", name: "author", widget: "relation", collection: "authors", search_fields: ["name"], value_field: "{{slug}}", display_fields: ["name"], required: false}
-      - {label: "Kategorie", name: "categories", widget: "list", required: false}
       - {label: "Tagi", name: "tags", widget: "list", required: false, hint: "rozdzielone przecinkiem, np.: 'historia, polityka'"}
       - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
       - {label: "Kadrowanie obrazka wyróżniającego", name: "image_focus", widget: "focal-point", default: "50% 50%", required: false}
       - {label: "Opis dla wyszukiwarek", name: "description", widget: "text", required: false}
-      - {label: "Wydanie", name: "edition", widget: "relation", collection: "editions", value_field: "{{slug}}", search_fields: ["title"], display_fields: ["date", "title"], required: false}
       - {label: "Źródła (APA)", name: "sources", widget: "sources-editor", required: false}
       - {label: "Treść", name: "body", widget: "markdown"}
 
@@ -71,24 +70,18 @@ collections:
     label: "Wydania"
     folder: "content/wydania"
     create: true
-    slug: "{{slug}}"
-    summary: "{{date}} — {{title}}"
+    slug: "{{issue}}"
+    summary: "{{issue}} — {{title}}"
     sortable_fields: ["date", "title"]
     editor:
       preview: false
     fields:
-      - {label: "Tytuł", name: "title", widget: "string", hint: "np.: 2026/wiosna"}
+      - {label: "Numer", name: "issue", widget: "string", hint: "np.: 2026/1"}
+      - {label: "Tytuł", name: "title", widget: "string"}
       - {label: "Data wydania", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
+      - {label: "Artykuł główny wydania", name: "artykul_glowny", widget: "relation", collection: "posts", value_field: "{{slug}}", search_fields: ["title"], display_fields: ["title"], required: false}
       - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
       - {label: "Kadrowanie obrazka wyróżniającego", name: "image_focus", widget: "focal-point", default: "50% 50%", required: false}
-      - label: "Artykuł główny wydania"
-        name: "artykul_glowny"
-        widget: "relation"
-        collection: "posts"
-        value_field: "{{slug}}"
-        search_fields: ["title"]
-        display_fields: ["title"]
-        required: false
 
   # Pages (static pages like About, Contact)
   - name: "pages"
@@ -102,7 +95,6 @@ collections:
       - {label: "Tytuł", name: "title", widget: "string"}
       - {label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
       - {label: "Wersja robocza", name: "draft", widget: "boolean", default: false}
-      - {label: "Menu", name: "menu", widget: "string", required: false, hint: "np.: 'main' aby dodać do menu głównego"}
       - {label: "Treść", name: "body", widget: "markdown"}
 
   # Authors (profiles)

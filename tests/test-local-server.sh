@@ -128,9 +128,9 @@ test_http "Lista wydań zawiera siatkę" "http://localhost:$PORT/wydania/" "post
 test_http "Lista wydań zawiera kartę wydania" "http://localhost:$PORT/wydania/" "post-card"
 
 # Test 6: Pojedyncze wydanie
-test_http_status "Wydanie zwraca 200" "http://localhost:$PORT/wydania/nieczytane-traktaty/" "200"
-test_http "Wydanie zawiera tytuł" "http://localhost:$PORT/wydania/nieczytane-traktaty/" "Nieczytane traktaty"
-test_http "Wydanie zawiera artykuł główny" "http://localhost:$PORT/wydania/nieczytane-traktaty/" "post-card--featured"
+test_http_status "Wydanie zwraca 200" "http://localhost:$PORT/wydania/2026-1/" "200"
+test_http "Wydanie zawiera tytuł" "http://localhost:$PORT/wydania/2026-1/" "Nieczytane traktaty"
+test_http "Wydanie zawiera artykuł główny" "http://localhost:$PORT/wydania/2026-1/" "post-card--featured"
 
 # Test 7: HTML structure (strona główna)
 test_http "Strona ma DOCTYPE" "http://localhost:$PORT/" "<!DOCTYPE html>"

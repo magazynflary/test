@@ -1,12 +1,12 @@
 ---
+edition: 2026-1
+author: piotr-zukowski
 title: "Krótka historia wypowiadania się: od pergaminu do CMS-a"
 date: 2026-02-03
 draft: false
 tags:
   - media
   - historia
-author: piotr-zukowski
-edition: wydanie1
 ---
 
 Paweł Włodkowic pisał traktaty ręcznie, po łacinie, i osobiście dostarczał je do sekretariatu Soboru w Konstancji. Bartolomé de las Casas miał już nieco łatwiej — działała prasa Gutenberga. Karol Marks pisał w bibliotece British Museum i wysyłał rękopisy do drukarni, gdzie składano je ołowianymi czcionkami. Rosa Luksemburg pisała z więzienia i przemycała teksty przez zaufanych kurierów.

@@ -8,7 +8,7 @@ tag = 'tags'
 
 [permalinks]
   artykuly = '/:year/:month/:day/:slug/'
-  wydania = '/wydania/:slug/'
+  wydania = '/wydania/:contentbasename/'
 
 [markup.goldmark.extensions.typographer]
 leftDoubleQuote = '&bdquo;'
