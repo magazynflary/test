@@ -124,6 +124,14 @@
             html.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
         });
+
+        var layoutToggle = document.querySelector('.layout-toggle');
+        if (layoutToggle) {
+            layoutToggle.addEventListener('click', function() {
+                var isMagazine = document.documentElement.classList.toggle('view-magazine');
+                localStorage.setItem('layout', isMagazine ? 'magazine' : 'standard');
+            });
+        }
     </script>
 </body>
 </html>
