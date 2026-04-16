@@ -52,6 +52,7 @@
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ $displayTitle }} | {{ .Site.Title }}{{ end }}</title>
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
     <link rel="icon" type="image/png" href="{{ "images/favicon.png" | relURL }}">
+    {{ if .IsPage }}<link rel="stylesheet" href="{{ "css/style-magazine.css" | relURL }}">{{ end }}
     {{ range .AlternativeOutputFormats -}}
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
@@ -60,6 +61,8 @@
         (function() {
             var t = localStorage.getItem('theme');
             if (t) document.documentElement.setAttribute('data-theme', t);
+            var savedLayout = localStorage.getItem('layout');
+            if (savedLayout === 'magazine') document.documentElement.classList.add('view-magazine');
         })();
     </script>
     <script src="https://cdn.counter.dev/script.js" data-id="a164b8b2-6f07-48a8-8cd4-91107b2e2ac9" data-utcoffset="1"></script>
