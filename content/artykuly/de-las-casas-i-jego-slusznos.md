@@ -1,14 +1,16 @@
 ---
-edition: 2026-1
 author: anna-mrozek
 title: Bartolomé de las Casas i jego nieznośna słuszność
 date: 2026-01-28
 draft: false
+image_focus: 50% 16%
+edition: 2026-1
 tags:
   - historia
   - kolonializm
 image: images/uploads/de-las-casas.jpg
-image_focus: 50% 16%
+image_focus_banner: 50% 68%
+image_focus_card: 0% 84% 2.10
 ---
 
 Bartolomé de las Casas (1484–1566) był dominikaninem, pierwszym biskupem Chiapas i człowiekiem, który miał odwagę powiedzieć Hiszpańskiej Koronie to, czego Korona nie chciała słyszeć: że to, co robi w Ameryce, jest zbrodnią.

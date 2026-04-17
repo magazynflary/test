@@ -1,14 +1,16 @@
 ---
-edition: 2026-2
 author: piotr-zukowski
 title: "Jak strajkować, kiedy CMS nie działa: lekcje z Gdańska 1980"
 date: 2026-02-20
 draft: false
+image_focus: 50% 86%
+edition: 2026-2
 tags:
   - Solidarność
   - historia
 image: images/uploads/solidarnosc.jpg
-image_focus: 50% 86%
+image_focus_banner: 50% 44%
+image_focus_card: 56% 52% 1.95
 ---
 
 14 sierpnia 1980 roku robotnicy Stoczni Gdańskiej im. Lenina zastrajkowali. Nie mieli CMS-a. Mieli zadrukowane kartki, szeptem przekazywane informacje i bramę numer dwa, przy której zbierały się tłumy solidaryzujących się gdańszczan.

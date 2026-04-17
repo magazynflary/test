@@ -1,14 +1,16 @@
 ---
-edition: 2026-1
 author: anna-mrozek
 title: Włodkowic miał rację, ale nikt go nie słuchał przez sześćset lat
 date: 2026-01-20
 draft: false
+image_focus: 50% 16%
+edition: 2026-1
 tags:
   - historia
   - prawa człowieka
 image: images/uploads/de-las-casas.jpg
-image_focus: 50% 16%
+image_focus_banner: 50% 23%
+image_focus_card: 68% 12% 1.65
 ---
 
 Paweł Włodkowic (ok. 1370–1435) był rektorem Akademii Krakowskiej i teoretykiem prawa, który miał czelność twierdzić na Soborze w Konstancji, że poganie mają prawa. W roku 1415 — kiedy Europę w ogóle nie interesowały prawa pogan — Włodkowic napisał i przedstawił traktaty, w których argumentował, że władcy pogańscy sprawują władzę legalnie i nie można ich podbijać tylko dlatego, że nie przyjęli chrztu.

@@ -1,14 +1,16 @@
 ---
-edition: 2026-3
 author: rosa-luksemburg
 title: Reforma czy rewolucja? (z przypisami redakcji)
 date: 2026-03-20
 draft: false
+image_focus: 50% 11%
+edition: 2026-3
 tags:
   - teoria
   - rewolucja
 image: images/uploads/rosa-luksemburg.jpg
-image_focus: 50% 11%
+image_focus_banner: 50% 29%
+image_focus_card: 51% 6% 1.20
 ---
 
 *Nota redakcji: Niniejszy tekst jest fikcyjny — Rosa Luksemburg nie pisała dla „Flar". Pisała dla „Neue Zeit", „Rote Fahne" i wielu innych tytułów; nie dożyła epoki CMS-ów. Poniższy artykuł nawiązuje do jej argumentacji z 1899 roku i jest treścią testową. Portret autorki pochodzi ze zbiorów publicznych.*
