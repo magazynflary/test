@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>Kompresja obrazków</title>
+  <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <style>
+    body { font-family: sans-serif; max-width: 640px; margin: 60px auto; padding: 0 16px; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+    th { text-align: left; border-bottom: 2px solid #ccc; padding: 6px 8px; }
+    td { padding: 6px 8px; border-bottom: 1px solid #eee; vertical-align: middle; }
+    .ok   { color: green; }
+    .skip { color: #999; }
+    button { padding: 10px 24px; font-size: 16px; cursor: pointer; margin-top: 8px; }
+    #download-all { display: none; }
+    progress { width: 100%; margin: 12px 0; display: none; }
+  </style>
+</head>
+<body>
+  <h2>Kompresja obrazków</h2>
+  <p>Wybierz pliki (możesz zaznaczyć wiele):</p>
+  <input type="file" id="files" accept="image/*" multiple>
+  <progress id="progress" max="100" value="0"></progress>
+  <table id="results" style="display:none">
+    <thead><tr><th>Plik</th><th>Przed</th><th>Po</th><th>Zmiana</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <button id="download-all">Pobierz ZIP</button>
+
+  <script>
+    var MAX_MB  = 0.5;
+    var MAX_PX  = 2000;
+    var QUALITY = 0.85;
+
+    var compressed = {};
+
+    document.getElementById('files').addEventListener('change', async function() {
+      var files = Array.from(this.files);
+      if (!files.length) return;
+
+      var tbody = document.querySelector('#results tbody');
+      tbody.innerHTML = '';
+      compressed = {};
+      document.getElementById('results').style.display = 'table';
+      document.getElementById('download-all').style.display = 'none';
+
+      var progress = document.getElementById('progress');
+      progress.style.display = 'block';
+      progress.value = 0;
+
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var out, note;
+
+        if (file.size / 1024 / 1024 > MAX_MB) {
+          out = await imageCompression(file, {
+            maxSizeMB: MAX_MB,
+            maxWidthOrHeight: MAX_PX,
+            initialQuality: QUALITY,
+            useWebWorker: true,
+          });
+          note = '<span class="ok">−' + (100 - Math.round(out.size / file.size * 100)) + '%</span>';
+        } else {
+          out = file;
+          note = '<span class="skip">pominięto</span>';
+        }
+
+        compressed[file.name] = out;
+
+        var row = document.createElement('tr');
+        row.innerHTML =
+          '<td>' + file.name + '</td>' +
+          '<td>' + kb(file.size) + '</td>' +
+          '<td>' + kb(out.size) + '</td>' +
+          '<td>' + note + '</td>';
+        tbody.appendChild(row);
+
+        progress.value = Math.round((i + 1) / files.length * 100);
+      }
+
+      progress.style.display = 'none';
+      document.getElementById('download-all').style.display = 'inline-block';
+    });
+
+    document.getElementById('download-all').addEventListener('click', async function() {
+      var zip = new JSZip();
+      for (var name in compressed) {
+        zip.file(name, await compressed[name].arrayBuffer());
+      }
+      var blob = await zip.generateAsync({ type: 'blob' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'compressed.zip';
+      a.click();
+    });
+
+    function kb(bytes) { return (bytes / 1024).toFixed(0) + ' KB'; }
+  </script>
+</body>
+</html>
