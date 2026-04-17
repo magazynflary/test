@@ -163,19 +163,49 @@
         });
       },
 
-      // Rectangle size as fraction of image (0–1), fitting 16:9 inside the image.
-      getRectFractions: function() {
+      isZoomable: function() {
+        return !!(this.props.field && this.props.field.get('zoomable'));
+      },
+
+      // Parse aspect_ratio from field config, e.g. "1200:350" → 1200/350. Defaults to 16/9.
+      getTargetRatio: function() {
+        var aspectRatio = this.props.field && this.props.field.get('aspect_ratio');
+        if (aspectRatio) {
+          var parts = String(aspectRatio).split(':');
+          var w = parseFloat(parts[0]);
+          var h = parseFloat(parts[1]);
+          if (w > 0 && h > 0) return w / h;
+        }
+        return 16 / 9;
+      },
+
+      // Parse zoom level from stored value (3rd token). Defaults to 1.
+      getCurrentZoom: function() {
+        var parts = ((this.props.value || '').split(/\s+/));
+        var zoom = parseFloat(parts[2]);
+        return (zoom > 0) ? Math.max(1, zoom) : 1;
+      },
+
+      // Base rectangle fractions at zoom=1, fitting target ratio inside the image.
+      getBaseRectFractions: function() {
         var nw = this.state.naturalWidth;
         var nh = this.state.naturalHeight;
         if (!nw || !nh) return null;
         var imgRatio = nw / nh;
-        var target = 16 / 9;
+        var target = this.getTargetRatio();
         return imgRatio > target
           ? { w: target / imgRatio, h: 1 }
           : { w: 1, h: imgRatio / target };
       },
 
-      // object-position "X% Y%" → rectangle top-left as fraction of image.
+      // Rectangle fractions at a given zoom level (smaller rect = more zoom).
+      getRectFractionsAt: function(zoom) {
+        var base = this.getBaseRectFractions();
+        if (!base) return null;
+        return { w: base.w / zoom, h: base.h / zoom };
+      },
+
+      // object-position "X% Y% Z" → rectangle top-left as fraction of image.
       valueToPosXY: function(value, rf) {
         var parts = (value || '50% 50%').split(/\s+/);
         var xp = isNaN(parseFloat(parts[0])) ? 50 : parseFloat(parts[0]);
@@ -186,22 +216,25 @@
         };
       },
 
-      // Rectangle top-left as fraction → object-position "X% Y%".
-      posXYToValue: function(px, py, rf) {
+      // Rectangle top-left as fraction + zoom → stored value string.
+      posXYToValue: function(px, py, rf, zoom) {
         var xp = (1 - rf.w) > 0.0001 ? Math.round(px / (1 - rf.w) * 100) : 50;
         var yp = (1 - rf.h) > 0.0001 ? Math.round(py / (1 - rf.h) * 100) : 50;
-        return Math.max(0, Math.min(100, xp)) + '% ' + Math.max(0, Math.min(100, yp)) + '%';
+        var focusPosition = Math.max(0, Math.min(100, xp)) + '% ' + Math.max(0, Math.min(100, yp)) + '%';
+        if (zoom && zoom !== 1) focusPosition += ' ' + zoom.toFixed(2);
+        return focusPosition;
       },
 
       updateFromMouse: function(clientX, clientY) {
-        var rf = this.getRectFractions();
+        var zoom = this.isZoomable() ? this.getCurrentZoom() : 1;
+        var rf = this.getRectFractionsAt(zoom);
         if (!rf || !this._containerRect) return;
         var cr = this._containerRect;
         var fx = (clientX - cr.left) / cr.width;
         var fy = (clientY - cr.top) / cr.height;
         var px = Math.max(0, Math.min(1 - rf.w, fx - rf.w / 2));
         var py = Math.max(0, Math.min(1 - rf.h, fy - rf.h / 2));
-        this.props.onChange(this.posXYToValue(px, py, rf));
+        this.props.onChange(this.posXYToValue(px, py, rf, zoom));
       },
 
       handleMouseDown: function(e) {
@@ -225,6 +258,17 @@
         document.removeEventListener('mouseup', this.handleMouseUp);
       },
 
+      handleZoomChange: function(e) {
+        var newZoom = parseFloat(e.target.value);
+        var oldZoom = this.getCurrentZoom();
+        var oldRf = this.getRectFractionsAt(oldZoom);
+        var newRf = this.getRectFractionsAt(newZoom);
+        var pos = oldRf ? this.valueToPosXY(this.props.value, oldRf) : { x: 0, y: 0 };
+        var px = Math.max(0, Math.min(1 - newRf.w, pos.x));
+        var py = Math.max(0, Math.min(1 - newRf.h, pos.y));
+        this.props.onChange(this.posXYToValue(px, py, newRf, newZoom));
+      },
+
       render: function() {
         var self = this;
         if (!this.state._imageUrl) {
@@ -233,8 +277,10 @@
           );
         }
 
+        var isZoomable = this.isZoomable();
+        var zoom = isZoomable ? this.getCurrentZoom() : 1;
         var value = this.props.value || '50% 50%';
-        var rf = this.getRectFractions();
+        var rf = this.getRectFractionsAt(zoom);
         var pos = rf ? this.valueToPosXY(value, rf) : null;
 
         return h('div', {},
@@ -270,8 +316,25 @@
               }
             }) : null
           ),
+          isZoomable ? h('div', { style: { marginTop: '8px' } },
+            h('label', {
+              style: { display: 'flex', alignItems: 'center', gap: '8px', color: '#666', fontSize: '0.85em' }
+            },
+              'Powiększenie:',
+              h('input', {
+                type: 'range',
+                min: 1,
+                max: 3,
+                step: 0.05,
+                value: zoom,
+                style: { flex: 1 },
+                onChange: this.handleZoomChange
+              }),
+              zoom.toFixed(2) + '\u00d7'
+            )
+          ) : null,
           h('small', { style: { color: '#666' } },
-            rf ? 'Widoczny obszar (16:9): ' + value : 'Ładowanie...')
+            rf ? 'Widoczny obszar (' + (this.props.field && this.props.field.get('aspect_ratio') || '16:9') + '): ' + value : 'Ładowanie...')
         );
       }
     });

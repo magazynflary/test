@@ -60,7 +60,8 @@ collections:
       - {label: "Wersja robocza", name: "draft", widget: "boolean", default: false}
       - {label: "Tagi", name: "tags", widget: "list", required: false, hint: "rozdzielone przecinkiem, np.: 'historia, polityka'"}
       - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
-      - {label: "Kadrowanie obrazka wyróżniającego", name: "image_focus", widget: "focal-point", default: "50% 50%", required: false}
+      - {label: "Kadrowanie: baner (1200×350)", name: "image_focus_banner", widget: "focal-point", aspect_ratio: "1200:350", zoomable: true, default: "50% 50%", required: false}
+      - {label: "Kadrowanie: karta (390×290)", name: "image_focus_card", widget: "focal-point", aspect_ratio: "390:290", zoomable: true, default: "50% 50%", required: false}
       - {label: "Opis dla wyszukiwarek", name: "description", widget: "text", required: false}
       - {label: "Źródła (APA)", name: "sources", widget: "sources-editor", required: false}
       - {label: "Treść", name: "body", widget: "markdown"}
@@ -81,7 +82,8 @@ collections:
       - {label: "Data wydania", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
       - {label: "Artykuł główny wydania", name: "artykul_glowny", widget: "relation", collection: "posts", value_field: "{{slug}}", search_fields: ["title"], display_fields: ["title"], required: false}
       - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
-      - {label: "Kadrowanie obrazka wyróżniającego", name: "image_focus", widget: "focal-point", default: "50% 50%", required: false}
+      - {label: "Kadrowanie: baner (1200×350)", name: "image_focus_banner", widget: "focal-point", aspect_ratio: "1200:350", zoomable: true, default: "50% 50%", required: false}
+      - {label: "Kadrowanie: karta (390×290)", name: "image_focus_card", widget: "focal-point", aspect_ratio: "390:290", zoomable: true, default: "50% 50%", required: false}
 
   # Pages (static pages like About, Contact)
   - name: "pages"
