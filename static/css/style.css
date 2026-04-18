@@ -320,6 +320,7 @@ main {
     background: var(--surface);
     border: 1px solid var(--gray-light);
     position: relative;
+    overflow: hidden;
     transition: box-shadow var(--transition);
     padding: var(--space-6);
     display: flex;
@@ -359,12 +360,22 @@ main {
     transform: scaleY(1);
 }
 
-.post-card__image {
+.post-card__image-wrapper {
     max-width: none;
     width: calc(100% + 2 * var(--space-6));
     margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-4) calc(-1 * var(--space-6));
-    aspect-ratio: 16/9;
+    aspect-ratio: 390/290;
+    overflow: hidden;
+    transform: translateZ(0);
+}
+
+.post-card__image {
+    width: 100%;
+    aspect-ratio: 390/290;
     object-fit: cover;
+    object-position: var(--focal-pos, 50% 50%);
+    transform: scale(var(--focal-zoom, 1));
+    transform-origin: var(--focal-pos, 50% 50%);
 }
 
 .post-card__meta {
@@ -495,8 +506,9 @@ main {
 .article-image {
     width: 100%;
     margin-bottom: var(--space-8);
-    aspect-ratio: 16/9;
+    aspect-ratio: 1200/350;
     object-fit: cover;
+    object-position: var(--focal-pos, 50% 50%);
 }
 
 /* Article Content Typography */

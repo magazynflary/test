@@ -1,0 +1,6 @@
+{{- $page := .page -}}
+{{- with $page.Params.image -}}
+{{- $focus := $page.Params.image_focus_card | default $page.Params.image_focus | default "50% 50%" -}}
+{{- $style := partial "focal-vars.html" (dict "focus" $focus) -}}
+<div class="post-card__image-wrapper">{{ partial "image.html" (dict "src" . "alt" $page.Title "class" "post-card__image" "style" $style "sizes" "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw") }}</div>
+{{- end -}}

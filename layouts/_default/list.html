@@ -7,9 +7,7 @@
     <article class="post-card">
         <a href="{{ .Permalink }}" class="post-card__link">
             {{ $post := . }}
-            {{ with .Params.image }}
-            {{ partial "image.html" (dict "src" . "alt" $post.Title "class" "post-card__image" "style" (printf "object-position: %s" ($post.Params.image_focus | default "50% 50%")) "sizes" "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw") }}
-            {{ end }}
+            {{ partial "card-image.html" (dict "page" $post) }}
             <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">
                 {{ .Date.Format "2006-01-02" }}
             </time>

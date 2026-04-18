@@ -8,7 +8,7 @@
 {{- if $isExternal -}}
 <img src="{{ $src }}" alt="{{ $alt }}"
   {{- with $class }} class="{{ . }}"{{ end }}
-  {{- with $style }} style="{{ . }}"{{ end }}
+  {{- with $style }} style="{{ . | safeCSS }}"{{ end }}
   {{- with $title }} title="{{ . }}"{{ end }}
   loading="lazy">
 {{- else -}}
@@ -22,13 +22,13 @@
   sizes="{{ $sizes }}"
   alt="{{ $alt }}"
   {{- with $class }} class="{{ . }}"{{ end }}
-  {{- with $style }} style="{{ . }}"{{ end }}
+  {{- with $style }} style="{{ . | safeCSS }}"{{ end }}
   {{- with $title }} title="{{ . }}"{{ end }}
   loading="lazy">
   {{- else -}}
 <img src="{{ $src | relURL }}" alt="{{ $alt }}"
   {{- with $class }} class="{{ . }}"{{ end }}
-  {{- with $style }} style="{{ . }}"{{ end }}
+  {{- with $style }} style="{{ . | safeCSS }}"{{ end }}
   {{- with $title }} title="{{ . }}"{{ end }}
   loading="lazy">
   {{- end -}}

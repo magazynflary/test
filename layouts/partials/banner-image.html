@@ -1,0 +1,8 @@
+{{- $page := .page -}}
+{{- $class := .class | default "article-image" -}}
+{{- $sizes := .sizes | default "(max-width: 640px) 100vw, 720px" -}}
+{{- with $page.Params.image -}}
+{{- $focus := $page.Params.image_focus_banner | default $page.Params.image_focus | default "50% 50%" -}}
+{{- $style := partial "focal-vars.html" (dict "focus" $focus) -}}
+{{ partial "image.html" (dict "src" . "alt" $page.Title "class" $class "style" $style "sizes" $sizes) }}
+{{- end -}}

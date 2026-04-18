@@ -16,19 +16,14 @@
 {{ with .Params.issue }}<p class="edition-issue">{{ . }}</p>{{ end }}
 <h1 class="page-title">{{ .Title }}</h1>
 
-{{ with .Params.image }}
-{{ partial "image.html" (dict "src" . "alt" $.Title "class" "edition-image" "style" (printf "object-position: %s" ($.Params.image_focus | default "50% 50%")) "sizes" "100vw") }}
-{{ end }}
+{{ partial "banner-image.html" (dict "page" . "class" "edition-image" "sizes" "100vw") }}
 
 {{ if or $mainPages $otherPages }}
 <div class="posts-grid">
     {{ range $mainPages }}
     <article class="post-card post-card--featured">
         <a href="{{ .Permalink }}" class="post-card__link">
-            {{ $post := . }}
-            {{ with .Params.image }}
-            {{ partial "image.html" (dict "src" . "alt" $post.Title "class" "post-card__image" "style" (printf "object-position: %s" ($post.Params.image_focus | default "50% 50%")) "sizes" "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw") }}
-            {{ end }}
+            {{ partial "card-image.html" (dict "page" .) }}
             <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">
                 {{ .Date.Format "2006-01-02" }}
             </time>
@@ -45,10 +40,7 @@
     {{ range $otherPages }}
     <article class="post-card">
         <a href="{{ .Permalink }}" class="post-card__link">
-            {{ $post := . }}
-            {{ with .Params.image }}
-            {{ partial "image.html" (dict "src" . "alt" $post.Title "class" "post-card__image" "style" (printf "object-position: %s" ($post.Params.image_focus | default "50% 50%")) "sizes" "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw") }}
-            {{ end }}
+            {{ partial "card-image.html" (dict "page" .) }}
             <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">
                 {{ .Date.Format "2006-01-02" }}
             </time>

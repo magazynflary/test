@@ -35,9 +35,7 @@
         {{ end }}
     </header>
 
-    {{ with $.Params.image }}
-    {{ partial "image.html" (dict "src" . "alt" $.Title "class" "article-image" "style" (printf "object-position: %s" ($.Params.image_focus | default "50% 50%")) "sizes" "(max-width: 640px) 100vw, 720px") }}
-    {{ end }}
+    {{ partial "banner-image.html" (dict "page" .) }}
 
     <div class="article-content">
         {{ .Content | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}
