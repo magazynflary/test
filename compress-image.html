@@ -73,8 +73,8 @@
         nameCell.textContent = file.name;
         resultRow.appendChild(nameCell);
         resultRow.insertAdjacentHTML('beforeend',
-          '<td>' + kb(file.size) + '</td>' +
-          '<td>' + kb(compressedFile.size) + '</td>' +
+          '<td>' + formatKilobytes(file.size) + '</td>' +
+          '<td>' + formatKilobytes(compressedFile.size) + '</td>' +
           '<td>' + savingsMarkup + '</td>');
         resultsBody.appendChild(resultRow);
 
@@ -97,7 +97,7 @@
       downloadLink.click();
     });
 
-    function kb(bytes) { return (bytes / 1024).toFixed(0) + ' KB'; }
+    function formatKilobytes(bytes) { return (bytes / 1024).toFixed(0) + ' KB'; }
   </script>
 </body>
 </html>
