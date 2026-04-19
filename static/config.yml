@@ -3,12 +3,12 @@
 
 backend:
   name: git-gateway
-  repo: magazynflary/test
+  repo: magazynflary/prod
   branch: master
   auth_type: pkce
   base_url: https://auth.decapbridge.com
-  auth_endpoint: /sites/32054268-d9b6-40e8-94cf-38dba49564d4/pkce
-  auth_token_endpoint: /sites/32054268-d9b6-40e8-94cf-38dba49564d4/token
+  auth_endpoint: /sites/8b3c8614-d54a-4114-aeba-972f2f7a5383/pkce
+  auth_token_endpoint: /sites/8b3c8614-d54a-4114-aeba-972f2f7a5383/token
   gateway_url: https://gateway.decapbridge.com
 
   # See who did what (beware of potential email leak if changed).
@@ -28,7 +28,7 @@ auth:
 
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
-site_url: https://magazynflary.github.io/test
+site_url: https://magazynflary.pl
 
 # run: `make hugo-cms`
 local_backend: true
@@ -60,10 +60,13 @@ collections:
       - {label: "Wersja robocza", name: "draft", widget: "boolean", default: false}
       - {label: "Tagi", name: "tags", widget: "list", required: false, hint: "rozdzielone przecinkiem, np.: 'historia, polityka'"}
       - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
-      - {label: "Kadrowanie: baner (1200×350)", name: "image_focus_banner", widget: "focal-point", aspect_ratio: "1200:350", zoomable: true, default: "50% 50%", required: false}
-      - {label: "Kadrowanie: karta (390×290)", name: "image_focus_card", widget: "focal-point", aspect_ratio: "390:290", zoomable: true, default: "50% 50%", required: false}
+      - {label: "Kadrowanie obrazka wyróżniającego", name: "image_focus", widget: "focal-point", default: "50% 50%", required: false}
       - {label: "Opis dla wyszukiwarek", name: "description", widget: "text", required: false}
       - {label: "Źródła (APA)", name: "sources", widget: "sources-editor", required: false}
+      - {label: "Treść", name: "body", widget: "markdown"}
+      - {label: "Opis alternatywny obrazka", name: "image_alt", widget: "string", required: false}
+      - {label: "Tagi", name: "tags", widget: "list"}
+      - {label: "Wydanie", name: "edition", widget: "relation", collection: "editions", search_fields: ["title"], value_field: "contentbasename", display_fields: ["title"]}
       - {label: "Treść", name: "body", widget: "markdown"}
 
   # Editions - groups of posts
@@ -82,8 +85,7 @@ collections:
       - {label: "Data wydania", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
       - {label: "Artykuł główny wydania", name: "artykul_glowny", widget: "relation", collection: "posts", value_field: "{{slug}}", search_fields: ["title"], display_fields: ["title"], required: false}
       - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
-      - {label: "Kadrowanie: baner (1200×350)", name: "image_focus_banner", widget: "focal-point", aspect_ratio: "1200:350", zoomable: true, default: "50% 50%", required: false}
-      - {label: "Kadrowanie: karta (390×290)", name: "image_focus_card", widget: "focal-point", aspect_ratio: "390:290", zoomable: true, default: "50% 50%", required: false}
+      - {label: "Kadrowanie obrazka wyróżniającego", name: "image_focus", widget: "focal-point", default: "50% 50%", required: false}
 
   # Pages (static pages like About, Contact)
   - name: "pages"

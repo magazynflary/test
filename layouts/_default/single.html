@@ -1,12 +1,4 @@
 {{ define "main" }}
-<div class="layout-toggle-wrapper">
-    <button class="layout-toggle-btn layout-toggle" aria-label="Przełącz układ">
-        <svg class="layout-toggle-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-            <rect x="2" y="2" width="6" height="20"/><rect x="10" y="2" width="14" height="9"/><rect x="10" y="13" width="14" height="9"/>
-        </svg>
-        <span>Układ</span>
-    </button>
-</div>
 <article class="article">
     <header class="article-header">
         <div class="article-meta">
@@ -35,7 +27,9 @@
         {{ end }}
     </header>
 
-    {{ partial "banner-image.html" (dict "page" .) }}
+    {{ with $.Params.image }}
+    {{ partial "image.html" (dict "src" . "alt" $.Title "class" "article-image" "style" (printf "object-position: %s" ($.Params.image_focus | default "50% 50%")) "sizes" "(max-width: 640px) 100vw, 720px") }}
+    {{ end }}
 
     <div class="article-content">
         {{ .Content | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}

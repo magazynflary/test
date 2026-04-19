@@ -17,8 +17,13 @@ leftSingleQuote = '&raquo;'
 rightSingleQuote = '&laquo;'
 
 [outputs]
-home = ['html', 'rss']
+home = ['html', 'rss', "Sitemap"]
 section = ['html', 'rss']
+
+[sitemap]
+changefreq = "weekly"
+priority = 0.5
+filename = "sitemap.xml"
 
 [params]
 description = 'Rewolucja nie jest jabłkiem, które spada, kiedy jest dojrzałe. Trzeba sprawić, by spadło.'
