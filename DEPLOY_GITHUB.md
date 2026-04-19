@@ -100,7 +100,7 @@ make test
 
 ### CSS się nie ładuje
 - Sprawdź baseURL - musi być poprawny
-- Sprawdź czy `/css/style.css` istnieje w buildie
+- Sprawdź czy `/css/style.css` i `/css/style-magazine.css` istnieją w wyniku
 - Sprawdź DevTools > Network w przeglądarce
 
 ### Workflow fail

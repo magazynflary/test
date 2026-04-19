@@ -4,6 +4,16 @@
 
 Decap CMS (dawniej Netlify CMS) to open-source'owy system zarządzania treścią dla stron statycznych. Działa bezpośrednio z plikami w repozytorium Git.
 
+## Pliki CMS
+
+| Plik | Rola |
+|------|------|
+| `static/admin/index.html` | Interfejs Decap CMS + logika JS (kadr obrazka, kompresja) |
+| `static/config.yml` | Konfiguracja: backend, kolekcje, pola |
+| `assets/images/uploads/` | Nadesłane obrazki |
+
+Widgety i pola: `static/admin/index.html`. Kolekcje i backend: `static/config.yml`.
+
 ## Tryby pracy
 
 ### 1. Tryb lokalny (testowy)
@@ -41,8 +51,10 @@ Draft → In Review → Ready → Publish
 
 ## Media (obrazki)
 
-**Lokalizacja:** `static/images/uploads/`
+**Lokalizacja:** `assets/images/uploads/`
 **URL publiczny:** `/images/uploads/nazwa-pliku.jpg`
+
+**Kompresja:** automatyczna, max 0.5 MB / 2000 px (biblioteka browser-image-compression, przechwycenie `<input type="file">` przed obróbką przez Decap CMS)
 
 ## Dostęp dla redaktorów
 
@@ -85,7 +97,7 @@ Draft → In Review → Ready → Publish
 
 ### Zmiana providera uwierzytelniania
 
-Wystarczy edytować `static/admin/config.yml`:
+Wystarczy edytować `static/config.yml`:
 
 ```yaml
 # GitHub OAuth
@@ -107,8 +119,8 @@ backend:
 
 ### Test lokalny (bez GitHuba):
 ```bash
-make test-cms        # Testy konfiguracji
-make hugo-cms        # Uruchom serwer
+make test-cms        # Walidacja static/config.yml.
+make hugo-cms        # Uruchamia serwer z lokalnym proxy CMS.
 ```
 
 Otwórz: http://localhost:1313/admin/
@@ -124,7 +136,7 @@ Po push do GitHub otwórz: https://dlrzin.github.io/admin/
 - Sprawdź czy CDN Decap CMS jest dostępny
 
 ### "Error loading config.yml"
-- Sprawdź składnię YAML: `make test-cms`
+- Sprawdź składnię YAML: `make test-cms` (waliduje `static/config.yml`)
 - Sprawdź czy backend repo jest poprawny
 - Sprawdź wcięcia (YAML wymaga spacji, nie tabów)
 
@@ -139,15 +151,15 @@ Po push do GitHub otwórz: https://dlrzin.github.io/admin/
 - Może być opóźnienie 1-2 minuty
 
 ### Media nie wgrywają się
-- Sprawdź czy katalog `static/images/uploads/` istnieje
+- Sprawdź czy katalog `assets/images/uploads/` istnieje
 - Sprawdź uprawnienia zapisu
-- Sprawdź rozmiar pliku (max ~5MB dla GitHub)
+- Sprawdź rozmiar pliku — kompresja (max ~0.5 MB) działa automatycznie w przeglądarce
 
 ## Konfiguracja zaawansowana
 
 ### Dodanie nowej kolekcji
 
-W `static/admin/config.yml` dodaj:
+W `static/config.yml` dodaj:
 
 ```yaml
 collections:
@@ -159,6 +171,21 @@ collections:
       - {label: "Tytuł", name: "title", widget: "string"}
       - {label: "Treść", name: "body", widget: "markdown"}
 ```
+
+### Pola kadrowania
+
+Każdy obraz może mieć dwa niezależne kadry (baner vs karta):
+
+```yaml
+- label: "Focal point (baner)"
+  name: "image_focus_banner"
+  widget: "focal-point"  # Własny widget zarejestrowany w static/admin/index.html.
+- label: "Focal point (karta)"
+  name: "image_focus_card"
+  widget: "focal-point"  # Jak wyżej.
+```
+
+Partial `focal-vars.html` przelicza wartości na zmienne CSS `--focal-pos` i `--focal-zoom`.
 
 ### Dostosowanie widgetów
 

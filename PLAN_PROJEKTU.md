@@ -1,6 +1,6 @@
 # Plan Projektu: Testowa Strona Gazety/Bloga
 
-## Data utworzenia: 2026-02-07 | Ostatnia aktualizacja: 2026-04-09
+## Data utworzenia: 2026-02-07 | Ostatnia aktualizacja: 2026-04-19
 
 ---
 
@@ -92,26 +92,32 @@ Stworzenie testowej instancji strony internetowej dla lewackiej gazety.
 ```
 medium-test/
 ├── hugo.toml                   # Główna konfiguracja Hugo
+├── compress-image.html         # Standalone narzędzie kompresji (poza drzewem Hugo)
 ├── content/
 │   ├── artykuly/               # Artykuły
-│   ├── wydania/                # Wydania (grupy artykułów)
-│   ├── authors/                # Profile autorów
+│   ├── wydania/                # Wydania (slug: YYYY-N.md)
+│   ├── autorzy/                # Profile autorów
 │   ├── pages/                  # Strony statyczne
 │   └── tags/                   # Tagi
 ├── static/
 │   ├── admin/
-│   │   └── index.html          # Decap CMS + custom widgety
+│   │   └── index.html          # Decap CMS + custom widgety (focal-point, kompresja)
 │   ├── config.yml              # Konfiguracja Decap CMS
 │   └── css/
-│       └── style.css
+│       ├── style.css           # Główny CSS
+│       └── style-magazine.css  # Alternatywny układ.
 ├── assets/
 │   └── images/uploads/         # Obrazki uploadowane przez CMS
 ├── layouts/
 │   ├── _default/               # Bazowe layouty (baseof, list, single)
-│   ├── wydania/                # Layout wydania
-│   ├── pages/                  # Layout stron (about)
-│   ├── partials/               # Fragmenty (image, team-card)
+│   ├── wydania/                # Układ wydania
+│   ├── autorzy/                # Układ strony autora
+│   ├── pages/                  # Układ stron statycznych (O nas)
+│   ├── partials/               # banner-image, card-image, focal-vars, image, team-card
 │   └── index.html              # Strona główna
+├── tests/
+│   ├── reference-integrity/    # Testy integralności linków (Go)
+│   └── test-local-server.sh    # Testy lokalne.
 └── .github/
     └── workflows/
         └── deploy.yml          # GitHub Actions dla Hugo
@@ -158,12 +164,13 @@ medium-test/
 ### Faza 3: Decap CMS Integration (Priorytet: ŚREDNI)
 - [x] Instalacja Decap CMS
 - [x] Konfiguracja static/config.yml
-- [x] Definicja kolekcji (posts, pages, authors, editions)
+- [x] Definicja kolekcji (posts, editions, authors, pages)
 - [x] Konfiguracja widgetów i pól (focal-point, sources-editor, citekey, relation)
 - [x] Setup editorial workflow
 - [x] Fix: focal-point widget — aktualizacja obrazka bez przeładowania strony (DOM polling zamiast stale props); działa dla artykułów i wydań
 - [x] Model danych wydań: każde wydanie jest osobnym plikiem (np. `content/wydania/wiosna-2026.md`) dostępnym pod `/wydania/wiosna-2026/`, bez `_index.md`
 - [x] Kompresja obrazków w przeglądarce przed uploadem do repozytorium (browser-image-compression, max 0.5 MB / 2000 px, przechwycenie `<input type="file">` w fazie capture przed DecapCMS)
+- [x] Osobne narzędzie `compress-image.html` do ręcznej kompresji partii obrazków (JSZip)
 
 ### Faza 4: Uwierzytelnianie (Priorytet: ŚREDNI)
 - [x] Konfiguracja DecapBridge jako domyślny backend
@@ -175,6 +182,8 @@ medium-test/
 - [x] Stworzenie przykładowych artykułów
 - [-] Konfiguracja ról i uprawnień (obecnie tylko editorial workflow, bez ról per-user). Niemożliwe w DecapBridge, wymaga kont na GitHubie, więc odkładamy na zaś.
 - [x] Dostosowanie motywu wizualnego (typografia, ciemny motyw, responsywność, nawigacja)
+- [x] Układ alternatywny (`style-magazine.css`) z guzikiem, stan w localStorage
+- [x] Kadrowanie obrazków
 - [x] Dodanie nawigacji i menu
 - [x] Strona kontakt (dodana do `content/pages/about.md`)
 - [x] Lista wszystkich wydań (strona `/wydania/`) — obsługiwana przez `layouts/_default/list.html`
@@ -187,6 +196,7 @@ medium-test/
 
 ### Faza 6: Testing & Documentation (Priorytet: NISKI)
 - [x] Testowanie workflow redakcyjnego (wielokrotne PR-y przez CMS)
+- [x] Testy integralności linków — relacje artykuł↔wydanie↔autor
 - [ ] Testowanie z wieloma użytkownikami jednocześnie
 - [ ] Dokumentacja dla redaktorów
 - [x] Dokumentacja techniczna (Makefile, DECAP_CMS.md, DEPLOY_GITHUB.md)
@@ -224,7 +234,7 @@ backend:
 - ✓ Darmowy hosting
 - ✓ Bandwidth: 100GB/miesiąc
 - ✓ Build: 10 builds/hour
-- ✓Limit rozmiaru repo: 1GB (zalecane)
+- ✓ Limit rozmiaru repo: 1GB (zalecane)
 
 ### DecapBridge
 - ✓ Darmowy tier dostępny
