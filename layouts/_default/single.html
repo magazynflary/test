@@ -28,7 +28,7 @@
     </header>
 
     {{ with $.Params.image }}
-    {{ partial "image.html" (dict "src" . "alt" $.Title "class" "article-image" "style" (printf "object-position: %s" ($.Params.image_focus | default "50% 50%")) "sizes" "(max-width: 640px) 100vw, 720px") }}
+    {{ partial "image.html" (dict "src" . "alt" (or $.Params.image_alt $.Title) "class" "article-image" "style" (printf "object-position: %s" ($.Params.image_focus | default "50% 50%")) "sizes" "(max-width: 640px) 100vw, 720px") }}
     {{ end }}
 
     <div class="article-content">
