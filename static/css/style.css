@@ -534,6 +534,14 @@ main {
     margin-bottom: var(--space-6);
 }
 
+.article-content p:first-of-type {
+    font-weight: bold;
+}
+
+.article-content p:first-of-type strong {
+    font-style: italic;
+}
+
 .article-content ul,
 .article-content ol {
     margin-bottom: var(--space-6);
