@@ -59,8 +59,8 @@
 
     <script>
         (function() {
-            var t = localStorage.getItem('theme');
-            if (t) document.documentElement.setAttribute('data-theme', t);
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
             var savedLayout = localStorage.getItem('layout');
             if (savedLayout === 'magazine') document.documentElement.classList.add('view-magazine');
         })();

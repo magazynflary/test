@@ -1,7 +1,7 @@
 {{- $focus := .focus | default "50% 50%" -}}
-{{- $fp := split $focus " " -}}
-{{- $objPos := printf "%s %s" (index $fp 0) (index $fp 1) -}}
-{{- $zoom := cond (gt (len $fp) 2) (index $fp 2) "" -}}
-{{- $vars := printf "--focal-pos: %s" $objPos -}}
+{{- $focusParts := split $focus " " -}}
+{{- $objectPosition := printf "%s %s" (index $focusParts 0) (index $focusParts 1) -}}
+{{- $zoom := cond (gt (len $focusParts) 2) (index $focusParts 2) "" -}}
+{{- $vars := printf "--focal-pos: %s" $objectPosition -}}
 {{- if $zoom -}}{{- $vars = printf "%s; --focal-zoom: %s" $vars $zoom -}}{{- end -}}
 {{- return $vars -}}
