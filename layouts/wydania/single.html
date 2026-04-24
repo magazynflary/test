@@ -23,17 +23,7 @@
 {{ if $gridPages }}
 <div class="articles-grid">
     {{ range $gridPages }}
-    <article class="post-card">
-        <a href="{{ .Permalink }}" class="post-card__link">
-            {{ partial "card-image.html" (dict "page" .) }}
-            <h3 class="post-card__title">{{ .Title }}</h3>
-            <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-            {{ with .Params.author }}
-            {{ $authorPage := site.GetPage (printf "/autorzy/%s" .) }}
-            <p class="post-card__meta">{{ with $authorPage }}{{ .Params.name | default .Title }}{{ else }}{{ . }}{{ end }}</p>
-            {{ end }}
-        </a>
-    </article>
+    {{ partial "post-card.html" . }}
     {{ end }}
 </div>
 {{ end }}

@@ -4,23 +4,7 @@
 {{ if .Pages }}
 <div class="posts-grid">
     {{ range .Pages }}
-    <article class="post-card">
-        <a href="{{ .Permalink }}" class="post-card__link">
-            {{ $post := . }}
-            {{ partial "card-image.html" (dict "page" $post) }}
-            <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">
-                {{ .Date.Format "2006-01-02" }}
-            </time>
-            {{ with .Params.issue }}<p class="post-card__issue">{{ . }}</p>{{ end }}
-            <h3 class="post-card__title">{{ .Title }}</h3>
-            <p class="post-card__excerpt">{{ .Summary | plainify | truncate 150 | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}</p>
-        </a>
-        {{ with .GetTerms "tags" }}
-        <div class="post-card__tags">
-            {{ range . }}<a href="{{ .Permalink }}" class="tag tag--link">{{ .LinkTitle }}</a>{{ end }}
-        </div>
-        {{ end }}
-    </article>
+    {{ partial "post-card.html" . }}
     {{ end }}
 </div>
 {{ else }}
