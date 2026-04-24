@@ -183,12 +183,12 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-6);
+    gap: var(--space-2);
 }
 
 .site-logo {
     font-family: var(--font-display);
-    font-size: var(--text-3xl);
+    font-size: var(--text-2xl);
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--white);
@@ -216,8 +216,8 @@ a:hover {
 }
 
 .nav-icon {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: clamp(0.875rem, 4.5vw, 1.75rem);
+    height: clamp(0.875rem, 4.5vw, 1.75rem);
     flex-shrink: 0;
 }
 
@@ -234,7 +234,7 @@ a:hover {
     align-items: center;
     gap: var(--space-half);
     font-family: var(--font-display);
-    font-size: var(--text-2xs);
+    font-size: clamp(0.35rem, 1.4vw, var(--text-2xs));
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--white);
@@ -717,6 +717,7 @@ main {
 
     .header-inner {
         padding: var(--space-5) var(--space-8);
+        gap: var(--space-6);
     }
 
     .site-logo {
