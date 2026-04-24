@@ -242,7 +242,6 @@ a:hover {
 
 .site-nav a:hover {
     opacity: 1;
-    color: var(--white);
 }
 
 .site-nav a::after {
@@ -363,13 +362,17 @@ main {
     transform: translateZ(0);
 }
 
-.post-card__image {
-    width: 100%;
-    aspect-ratio: 390/290;
+.post-card__image,
+.article-image {
     object-fit: cover;
     object-position: var(--focal-pos, 50% 50%);
     transform: scale(var(--focal-zoom, 1));
     transform-origin: var(--focal-pos, 50% 50%);
+}
+
+.post-card__image {
+    width: 100%;
+    aspect-ratio: 390/290;
 }
 
 .editions-list {
@@ -447,23 +450,25 @@ main {
 
 .edition-card__overlay .post-card__title {
     margin-bottom: 0;
+    color: inherit;
+}
+
+.post-card__meta,
+.post-card__issue {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
 }
 
 .post-card__meta {
-    font-family: var(--font-display);
     font-size: var(--text-sm);
     letter-spacing: 0.15em;
-    text-transform: uppercase;
     color: var(--gray);
-    margin-bottom: var(--space-2);
 }
 
 .post-card__issue {
-    font-family: var(--font-display);
     font-size: var(--text-xl);
     letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: var(--space-2);
 }
 
 .post-card__title {
@@ -484,6 +489,10 @@ main {
 
 .post-card__author-link:hover {
     color: var(--red);
+}
+
+.article-author-link:hover {
+    text-decoration: underline;
 }
 
 .post-card__tags {
@@ -545,7 +554,8 @@ main {
 /* ============================================================
    SINGLE ARTICLE
    ============================================================ */
-.article {
+.article,
+.about-page {
     max-width: var(--content-width);
     margin: 0 auto;
 }
@@ -585,10 +595,6 @@ main {
     width: 100%;
     margin-bottom: var(--space-8);
     aspect-ratio: 1200/350;
-    object-fit: cover;
-    object-position: var(--focal-pos, 50% 50%);
-    transform: scale(var(--focal-zoom, 1));
-    transform-origin: var(--focal-pos, 50% 50%);
 }
 
 /* Article Content Typography */
@@ -599,15 +605,13 @@ main {
 
 .article-content h2 {
     font-size: var(--text-3xl);
-    margin-top: var(--space-12);
-    margin-bottom: var(--space-4);
+    margin-block: var(--space-12) var(--space-4);
     color: var(--red);
 }
 
 .article-content h3 {
     font-size: var(--text-2xl);
-    margin-top: var(--space-8);
-    margin-bottom: var(--space-3);
+    margin-block: var(--space-8) var(--space-3);
 }
 
 .article-content p {
@@ -737,13 +741,15 @@ main {
     opacity: 1;
 }
 
-[data-theme="dark"] .theme-toggle .icon-moon,
-:not([data-theme="dark"]) .theme-toggle .icon-sun {
+.theme-toggle .icon-sun {
     display: none;
 }
 
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+
 /* ============================================================
-   DARK THEME - OS preference
+   DARK THEME
    ============================================================ */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -757,16 +763,10 @@ main {
         --surface: #1E1E1E;
     }
 
-    :root:not([data-theme="light"]) .theme-toggle .icon-moon {
-        display: none;
-    }
-
-    :root:not([data-theme="light"]) .theme-toggle .icon-sun {
-        display: block;
-    }
+    :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+    :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
 }
 
-/* Dark theme - manual toggle */
 [data-theme="dark"] {
     --red: #E63946;
     --red-dark: #FF6B6B;
@@ -899,11 +899,6 @@ main {
 /* ============================================================
    ABOUT PAGE / TEAM CARDS
    ============================================================ */
-.about-page {
-    max-width: var(--content-width);
-    margin: 0 auto;
-}
-
 .about-intro {
     margin-bottom: var(--space-12);
     padding-bottom: var(--space-8);
@@ -925,30 +920,35 @@ main {
     align-items: flex-start;
 }
 
-.team-card__photo {
-    width: 6rem;
-    height: 6rem;
+.team-card__photo,
+.author-photo {
     border-radius: 50%;
     object-fit: cover;
-    flex-shrink: 0;
     border: 3px solid var(--red);
 }
 
-.team-card__name {
+.team-card__photo {
+    width: 6rem;
+    height: 6rem;
+    flex-shrink: 0;
+}
+
+.team-card__name,
+.team-card__role {
     font-family: var(--font-display);
-    font-size: var(--text-xl);
-    letter-spacing: 0.05em;
     text-transform: uppercase;
     margin-bottom: var(--space-1);
 }
 
+.team-card__name {
+    font-size: var(--text-xl);
+    letter-spacing: 0.05em;
+}
+
 .team-card__role {
-    font-family: var(--font-display);
     font-size: var(--text-sm);
     letter-spacing: 0.1em;
-    text-transform: uppercase;
     color: var(--red);
-    margin-bottom: var(--space-1);
 }
 
 .team-card__year {
@@ -976,9 +976,6 @@ main {
 .author-photo {
     width: 10rem;
     height: 10rem;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--red);
     margin-bottom: var(--space-4);
 }
 
@@ -988,10 +985,6 @@ main {
     line-height: 1.7;
     max-width: 65ch;
     margin-top: var(--space-6);
-}
-
-.article-author-link:hover {
-    text-decoration: underline;
 }
 
 /* ============================================================

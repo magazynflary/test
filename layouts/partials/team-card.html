@@ -2,7 +2,7 @@
     {{ with .Params.photo }}
     {{ partial "image.html" (dict "src" . "alt" ($.Params.name | default $.Title) "class" "team-card__photo") }}
     {{ end }}
-    <div class="team-card__body">
+    <div>
         <p class="team-card__name">{{ .Params.name | default .Title }}</p>
         {{ with .Params.role }}<p class="team-card__role">{{ . }}</p>{{ end }}
         {{ with .Params.birth_year }}<p class="team-card__year">ur.&nbsp;{{ . }}</p>{{ end }}

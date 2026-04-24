@@ -2,7 +2,7 @@
 {{ $authorSlug := .File.ContentBaseName }}
 {{ $articles := where site.RegularPages ".Params.author" $authorSlug }}
 
-<div class="author-profile">
+<div>
     <header class="author-header">
         {{ with .Params.photo }}
         {{ partial "image.html" (dict "src" . "alt" ($.Params.name | default $.Title) "class" "author-photo") }}
