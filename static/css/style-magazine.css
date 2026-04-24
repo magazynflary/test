@@ -1,5 +1,5 @@
 .layout-toggle-wrapper {
-    max-width: 720px;
+    max-width: var(--content-width);
     margin: 0 auto var(--space-4);
     display: flex;
     justify-content: flex-end;
@@ -56,13 +56,17 @@
     margin-bottom: 0;
 }
 
+.view-magazine .article-meta,
+.view-magazine .article-tags {
+    border-right: 3px solid var(--red);
+    padding-right: var(--space-4);
+}
+
 .view-magazine .article-meta {
     grid-column: 1;
     grid-row: 2;
     font-size: var(--text-xs);
     margin-bottom: 0;
-    border-right: 3px solid var(--red);
-    padding-right: var(--space-4);
 }
 
 .view-magazine .article-tags {
@@ -70,8 +74,6 @@
     grid-row: 3;
     flex-direction: column;
     margin-top: 0;
-    border-right: 3px solid var(--red);
-    padding-right: var(--space-4);
 }
 
 .view-magazine .article-tags .tag {

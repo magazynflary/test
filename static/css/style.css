@@ -199,10 +199,6 @@ a:hover {
     flex-shrink: 0;
 }
 
-.site-logo-img {
-    height: 2em;
-    width: auto;
-}
 
 .site-logo::before {
     content: '';
@@ -330,7 +326,6 @@ main {
 .post-card__link {
     display: block;
     color: inherit;
-    text-decoration: none;
 }
 
 .post-card__link::after {
@@ -361,7 +356,6 @@ main {
 }
 
 .post-card__image-wrapper {
-    max-width: none;
     width: calc(100% + 2 * var(--space-6));
     margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-4) calc(-1 * var(--space-6));
     aspect-ratio: 390/290;
@@ -434,9 +428,25 @@ main {
 
 .edition-card__overlay .post-card__meta,
 .edition-card__overlay .post-card__issue,
+.edition-banner__date,
+.edition-banner__issue {
+    line-height: 1.7;
+    margin-bottom: var(--space-2);
+}
+
+.edition-card__overlay .post-card__issue,
+.edition-banner__issue {
+    font-size: clamp(0.75rem, 3vw, var(--text-2xl));
+}
+
+.edition-card__overlay .post-card__title,
+.edition-banner__title {
+    font-size: clamp(1.25rem, 5vw, var(--text-5xl));
+    line-height: 1;
+}
+
 .edition-card__overlay .post-card__title {
     margin-bottom: 0;
-    line-height: 1.1;
 }
 
 .post-card__meta {
@@ -467,6 +477,15 @@ main {
     line-height: 1.6;
 }
 
+.article-author-link,
+.post-card__author-link {
+    color: inherit;
+}
+
+.post-card__author-link:hover {
+    color: var(--red);
+}
+
 .post-card__tags {
     display: flex;
     flex-wrap: wrap;
@@ -494,7 +513,6 @@ main {
 
 .tag--link:hover {
     background: var(--red);
-    color: var(--bg);
 }
 
 .tag--lg {
@@ -552,7 +570,6 @@ main {
 
 .article-edition-link {
     color: inherit;
-    text-decoration: none;
 }
 
 .article-edition-link:hover {
@@ -570,6 +587,8 @@ main {
     aspect-ratio: 1200/350;
     object-fit: cover;
     object-position: var(--focal-pos, 50% 50%);
+    transform: scale(var(--focal-zoom, 1));
+    transform-origin: var(--focal-pos, 50% 50%);
 }
 
 /* Article Content Typography */
@@ -771,29 +790,6 @@ main {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .edition-card__overlay {
-        gap: 0;
-    }
-
-    .edition-card__overlay .post-card__meta,
-    .edition-card__overlay .post-card__issue {
-        margin-bottom: var(--space-2);
-        line-height: 1.7;
-    }
-
-    .edition-card__overlay .post-card__issue {
-        font-size: var(--text-2xl);
-    }
-
-    .edition-card__overlay .post-card__title {
-        font-size: var(--text-3xl);
-        margin-bottom: var(--space-3);
-    }
-
-    .posts-grid .post-card:first-child {
-        grid-column: 1 / -1;
-    }
-
     .articles-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -874,25 +870,13 @@ main {
     text-transform: uppercase;
 }
 
-.edition-banner__date,
-.edition-banner__issue {
-    line-height: 1.7;
-    margin-bottom: var(--space-2);
-}
-
 .edition-banner__date {
     font-size: var(--text-sm);
     letter-spacing: 0.15em;
 }
 
 .edition-banner__issue {
-    font-size: clamp(0.75rem, 3vw, var(--text-2xl));
     letter-spacing: 0.08em;
-}
-
-.edition-banner__title {
-    font-size: clamp(1.25rem, 5vw, var(--text-5xl));
-    line-height: 1;
 }
 
 /* ============================================================
@@ -903,13 +887,13 @@ main {
 }
 
 .bibliography {
-    margin-top: 1.5rem;
+    margin-top: var(--space-6);
 }
 
 .bib-entry {
     padding-left: 2em;
     text-indent: -2em;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-2);
 }
 
 /* ============================================================
@@ -1004,11 +988,6 @@ main {
     line-height: 1.7;
     max-width: 65ch;
     margin-top: var(--space-6);
-}
-
-.article-author-link {
-    color: inherit;
-    text-decoration: none;
 }
 
 .article-author-link:hover {
