@@ -2,60 +2,39 @@
 {{ $mainSlug := .Params.artykul_glowny }}
 {{ $allPages := where .Site.RegularPages "Params.edition" .File.ContentBaseName }}
 
-{{ $mainPages := slice }}
-{{ $otherPages := slice }}
-{{ range $allPages }}
-    {{ if eq .File.ContentBaseName $mainSlug }}
-        {{ $mainPages = $mainPages | append . }}
-    {{ else }}
-        {{ $otherPages = $otherPages | append . }}
-    {{ end }}
+{{ $mainPages := where $allPages "File.ContentBaseName" $mainSlug | first 1 }}
+{{ $otherPages := where $allPages "File.ContentBaseName" "ne" $mainSlug }}
+
+{{ if .Params.image }}
+<div class="edition-banner">
+    <div class="edition-banner__image-wrapper">
+        {{ partial "banner-image.html" (dict "page" . "class" "edition-banner__image" "sizes" "100vw") }}
+        <div class="image-overlay">
+            <time class="edition-banner__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+            {{ with .Params.issue }}<p class="edition-banner__issue">{{ . }}</p>{{ end }}
+            <p class="edition-banner__title">{{ .Title }}</p>
+        </div>
+    </div>
+</div>
 {{ end }}
 
-<time class="edition-date">{{ .Date.Format "2006-01-02" }}</time>
-{{ with .Params.issue }}<p class="edition-issue">{{ . }}</p>{{ end }}
-<h1 class="page-title">{{ .Title }}</h1>
+{{ $gridPages := $mainPages | append $otherPages }}
 
-{{ partial "banner-image.html" (dict "page" . "class" "edition-image" "sizes" "100vw") }}
-
-{{ if or $mainPages $otherPages }}
-<div class="posts-grid">
-    {{ range $mainPages }}
-    <article class="post-card post-card--featured">
-        <a href="{{ .Permalink }}" class="post-card__link">
-            {{ partial "card-image.html" (dict "page" .) }}
-            <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">
-                {{ .Date.Format "2006-01-02" }}
-            </time>
-            <h3 class="post-card__title">{{ .Title }}</h3>
-            <p class="post-card__excerpt">{{ .Summary | plainify | truncate 150 | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}</p>
-        </a>
-        {{ with .GetTerms "tags" }}
-        <div class="post-card__tags">
-            {{ range . }}<a href="{{ .Permalink }}" class="tag tag--link">{{ .LinkTitle }}</a>{{ end }}
-        </div>
-        {{ end }}
-    </article>
-    {{ end }}
-    {{ range $otherPages }}
+{{ if $gridPages }}
+<div class="articles-grid">
+    {{ range $gridPages }}
     <article class="post-card">
         <a href="{{ .Permalink }}" class="post-card__link">
             {{ partial "card-image.html" (dict "page" .) }}
-            <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">
-                {{ .Date.Format "2006-01-02" }}
-            </time>
             <h3 class="post-card__title">{{ .Title }}</h3>
-            <p class="post-card__excerpt">{{ .Summary | plainify | truncate 150 | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}</p>
+            <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+            {{ with .Params.author }}
+            {{ $authorPage := site.GetPage (printf "/autorzy/%s" .) }}
+            <p class="post-card__meta">{{ with $authorPage }}{{ .Params.name | default .Title }}{{ else }}{{ . }}{{ end }}</p>
+            {{ end }}
         </a>
-        {{ with .GetTerms "tags" }}
-        <div class="post-card__tags">
-            {{ range . }}<a href="{{ .Permalink }}" class="tag tag--link">{{ .LinkTitle }}</a>{{ end }}
-        </div>
-        {{ end }}
     </article>
     {{ end }}
 </div>
-{{ else }}
-<p class="no-posts">Brak artykułów w tym wydaniu.</p>
 {{ end }}
 {{ end }}
