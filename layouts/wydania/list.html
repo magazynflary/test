@@ -1,0 +1,25 @@
+{{ define "main" }}
+<h1 class="page-title">{{ index .Site.Params.sectionTitles .Section | default .Title }}</h1>
+
+{{ if .Pages }}
+<div class="editions-list">
+    {{ range .Pages }}
+    <article class="post-card edition-card">
+        <a href="{{ .Permalink }}" class="post-card__link">
+            <div class="post-card__image-wrapper">
+                {{ partial "banner-image.html" (dict "page" . "class" "post-card__image" "sizes" "100vw") }}
+                <div class="edition-card__overlay nakladka-obrazu">
+                    <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+                    {{ with .Params.issue }}<p class="post-card__issue">{{ . }}</p>{{ end }}
+                    <h3 class="post-card__title">{{ .Title }}</h3>
+                </div>
+            </div>
+        </a>
+    </article>
+    {{ end }}
+</div>
+{{ else }}
+<p class="no-posts">Brak artykułów w tej sekcji.</p>
+{{ end }}
+{{ end }}
+
