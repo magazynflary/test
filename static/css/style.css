@@ -514,6 +514,7 @@ main {
 /* Article Content Typography */
 .article-content {
     font-size: var(--text-lg);
+    max-width: 80ch;
 }
 
 .article-content h2 {

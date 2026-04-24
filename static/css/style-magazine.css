@@ -93,9 +93,6 @@
 .view-magazine .article-content {
     grid-column: 2;
     grid-row: 3;
-    columns: 2;
-    column-gap: var(--space-8);
-    column-rule: 1px solid var(--gray-light);
     font-size: var(--text-base);
 }
 
@@ -107,11 +104,6 @@
     margin-right: 0.06em;
     margin-top: 0.04em;
     color: var(--red);
-}
-
-.view-magazine .article-content h2,
-.view-magazine .article-content h3 {
-    column-span: all;
 }
 
 .view-magazine .article-license {
@@ -143,7 +135,4 @@
         padding-right: 0;
     }
 
-    .view-magazine .article-content {
-        columns: 1;
-    }
 }
