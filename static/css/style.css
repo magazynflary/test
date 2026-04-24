@@ -395,12 +395,16 @@ main {
     padding: 0;
 }
 
-.edition-card .post-card__image-wrapper {
+.edition-card .post-card__image-wrapper,
+.edition-banner__image-wrapper {
     position: relative;
-    width: 100%;
-    margin: 0;
     aspect-ratio: 1200/350;
     overflow: hidden;
+}
+
+.edition-card .post-card__image-wrapper {
+    width: 100%;
+    margin: 0;
 }
 
 .edition-card .post-card__image {
@@ -859,20 +863,8 @@ main {
 /* ============================================================
    EDITION PAGE
    ============================================================ */
-.edition-banner__image-wrapper {
-    position: relative;
-    aspect-ratio: 1200/350;
-    overflow: hidden;
-}
-
 .edition-banner__image {
-    /* object-position is computed against the img box, not the wrapper — must match wrapper ratio. */
     aspect-ratio: 1200/350;
-    width: 100%;
-    object-fit: cover;
-    object-position: var(--focal-pos, 50% 50%);
-    transform: scale(var(--focal-zoom, 1));
-    transform-origin: var(--focal-pos, 50% 50%);
 }
 
 .edition-banner__date,
