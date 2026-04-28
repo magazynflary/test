@@ -173,7 +173,8 @@ a:hover {
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 4px solid var(--red);
+    /* Border red matches logo SVG fill, not --red token. */
+    border-bottom: 4px solid #bd0014;
 }
 
 .header-inner {
@@ -187,28 +188,18 @@ a:hover {
 }
 
 .site-logo {
-    font-family: var(--font-display);
     font-size: var(--text-2xl);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
     color: var(--white);
-    position: relative;
     display: flex;
     align-items: center;
-    gap: var(--space-2);
     flex-shrink: 0;
 }
 
-
-.site-logo::before {
-    content: '';
-    position: absolute;
-    left: calc(-1 * var(--space-4));
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0.5rem;
-    height: 100%;
-    background: var(--red);
+.site-logo__img {
+    display: block;
+    height: calc(1em + 2 * var(--space-4));
+    width: auto;
+    margin-block: calc(-1 * var(--space-4));
 }
 
 .nav-icon {
@@ -891,6 +882,11 @@ main {
 
     .site-logo {
         font-size: var(--text-4xl);
+    }
+
+    .site-logo__img {
+        height: calc(1em + 2 * var(--space-5));
+        margin-block: calc(-1 * var(--space-5));
     }
 
     .site-nav {
