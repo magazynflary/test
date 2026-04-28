@@ -533,7 +533,6 @@ main {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
-    margin-top: var(--space-4);
 }
 
 .tags-list {
@@ -554,16 +553,9 @@ main {
 /* ============================================================
    SINGLE ARTICLE
    ============================================================ */
-.article,
 .about-page {
     max-width: var(--content-width);
     margin: 0 auto;
-}
-
-.article-header {
-    margin-bottom: var(--space-8);
-    padding-bottom: var(--space-6);
-    border-bottom: 1px solid var(--gray-light);
 }
 
 .article-meta {
@@ -586,14 +578,8 @@ main {
     text-decoration: underline;
 }
 
-.article-title {
-    font-size: var(--text-5xl);
-    margin-bottom: var(--space-4);
-}
-
 .article-image {
     width: 100%;
-    margin-bottom: var(--space-8);
     aspect-ratio: 1200/350;
 }
 

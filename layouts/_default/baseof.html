@@ -61,8 +61,6 @@
         (function() {
             var savedTheme = localStorage.getItem('theme');
             if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
-            var savedLayout = localStorage.getItem('layout');
-            if (savedLayout === 'magazine') document.documentElement.classList.add('view-magazine');
         })();
     </script>
     <script src="https://cdn.counter.dev/script.js" data-id="a164b8b2-6f07-48a8-8cd4-91107b2e2ac9" data-utcoffset="1"></script>
@@ -124,14 +122,6 @@
             html.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
         });
-
-        var layoutToggle = document.querySelector('.layout-toggle');
-        if (layoutToggle) {
-            layoutToggle.addEventListener('click', function() {
-                var isMagazine = document.documentElement.classList.toggle('view-magazine');
-                localStorage.setItem('layout', isMagazine ? 'magazine' : 'standard');
-            });
-        }
     </script>
 </body>
 </html>
