@@ -1,4 +1,4 @@
-.PHONY: help test test-phase1 test-server test-cms test-links test-production validate-ready hugo hugo-cms cms build clean backstop-ref backstop-test backstop-approve
+.PHONY: help test test-phase1 test-server test-cms test-links test-production validate-ready hugo hugo-cms cms build hugo-build purge-css clean backstop-ref backstop-test backstop-approve
 
 help:
 	@echo "Dostępne komendy:"
@@ -28,8 +28,13 @@ cms:
 	@echo "Uruchamianie Decap CMS server..."
 	npx decap-server
 
-build:
+build: hugo-build purge-css
+
+hugo-build:
 	hugo --minify --buildFuture
+
+purge-css:
+	npx purgecss --config purgecss.config.js
 
 test: test-phase1 test-server test-cms test-links
 
