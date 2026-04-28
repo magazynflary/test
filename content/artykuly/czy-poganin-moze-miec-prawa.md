@@ -25,4 +25,8 @@ Włodkowic miał rację w 1415 roku. De las Casas miał rację w 1550 roku. Nikt
 
 Redakcja *Flar* zwraca uwagę, że powyższy tekst jest artykułem testowym, który używa historycznych pytań do sprawdzenia, czy formularz edycji w CMS-ie poprawnie zapisuje artykuły przypisane do wydania i autora.
 
+{{< pullquote >}}
+Poganin też ma prawa. Władza dowiaduje się o tym ostatnia — Konstancja 1415, Hiszpania 1550, kolejne raty w toku.
+{{< /pullquote >}}
+
 Wniosek: tak, zapisuje. Włodkowic byłby zadowolony, że przynajmniej coś działa.

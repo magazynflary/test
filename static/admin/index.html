@@ -525,6 +525,25 @@
       toPreview: function() { return '<div data-bibliography="1"></div>'; }
     });
 
+    CMS.registerEditorComponent({
+      id: 'pullquote',
+      label: 'Wyróżnik',
+      fields: [
+        { name: 'text', label: 'Treść', widget: 'text' }
+      ],
+      pattern: /{{< pullquote >}}([\s\S]*?){{< \/pullquote >}}/,
+      fromBlock: function(match) { return { text: match[1].trim() }; },
+      toBlock: function(data) { return '{{< pullquote >}}\n' + (data.text || '') + '\n{{< /pullquote >}}'; },
+      toPreview: function(data) {
+        return '<aside style="display:flex;gap:1rem;align-items:flex-start;margin:2rem 0">' +
+          '<svg viewBox="0 0 24 24" width="48" height="48" fill="#D1D5DB" aria-hidden="true">' +
+          '<polygon points="21.53,6.50 15.76,13.01 17.50,21.53 10.99,15.76 2.47,17.50 8.24,10.99 6.50,2.47 13.01,8.24"/>' +
+          '<polygon points="7.12,18.88 6.05,21 7.12,23.12 5,22.05 2.88,23.12 3.95,21 2.88,18.88 5,19.95"/></svg>' +
+          '<p style="font-family:Impact,sans-serif;font-size:2rem;line-height:1.05;text-transform:uppercase;margin:0">' +
+          (data.text || '') + '</p></aside>';
+      }
+    });
+
     function formatAPA(s) {
       var type = s.type || 'book';
       var r = (s.author || '') + ' (' + (s.year || '') + '). ';

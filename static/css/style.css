@@ -274,7 +274,8 @@ main {
 /* ============================================================
    HOMEPAGE
    ============================================================ */
-.hero {
+.hero,
+.about-intro {
     margin-bottom: var(--space-12);
     padding-bottom: var(--space-8);
     border-bottom: 1px solid var(--gray-light);
@@ -306,7 +307,10 @@ main {
 /* ============================================================
    ARTICLE CARDS
    ============================================================ */
-.posts-grid {
+.posts-grid,
+.editions-list,
+.articles-grid,
+.team-grid {
     display: grid;
     gap: var(--space-8);
 }
@@ -364,6 +368,7 @@ main {
 
 .post-card__image,
 .article-image {
+    width: 100%;
     object-fit: cover;
     object-position: var(--focal-pos, 50% 50%);
     transform: scale(var(--focal-zoom, 1));
@@ -371,19 +376,15 @@ main {
 }
 
 .post-card__image {
-    width: 100%;
     aspect-ratio: 390/290;
 }
 
-.editions-list {
-    display: grid;
+.editions-list,
+.articles-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-8);
 }
 
 .articles-grid {
-    display: grid;
-    grid-template-columns: 1fr;
     gap: var(--space-6);
     margin-top: var(--space-8);
 }
@@ -579,7 +580,6 @@ main {
 }
 
 .article-image {
-    width: 100%;
     aspect-ratio: 1200/350;
     grid-column: 1 / -1;
     grid-row: 1;
@@ -699,7 +699,7 @@ main {
     font-size: var(--text-base);
 }
 
-.article .article-content p:first-of-type::first-letter {
+.article .article-content > p:first-of-type::first-letter {
     font-family: var(--font-display);
     font-size: 4.5em;
     line-height: 0.75;
@@ -960,6 +960,48 @@ main {
 }
 
 /* ============================================================
+   PULLQUOTE
+   ============================================================ */
+.pullquote {
+    margin: var(--space-8) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+}
+
+.pullquote__icon {
+    width: 4.5rem;
+    height: 4.5rem;
+    fill: var(--gray-light);
+}
+
+.pullquote__text {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+@media (min-width: 769px) {
+    .article .pullquote__icon {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .article .article-content {
+        padding-left: calc(6rem + var(--space-4));
+    }
+
+    .article .article-content > .pullquote {
+        margin-left: calc(-6rem - var(--space-4));
+        flex-direction: row;
+        gap: var(--space-4);
+    }
+}
+
+/* ============================================================
    APA CITATIONS
    ============================================================ */
 .cite {
@@ -979,19 +1021,8 @@ main {
 /* ============================================================
    ABOUT PAGE / TEAM CARDS
    ============================================================ */
-.about-intro {
-    margin-bottom: var(--space-12);
-    padding-bottom: var(--space-8);
-    border-bottom: 1px solid var(--gray-light);
-}
-
 .team-section {
     margin-bottom: var(--space-12);
-}
-
-.team-grid {
-    display: grid;
-    gap: var(--space-8);
 }
 
 .team-card {
@@ -1079,9 +1110,5 @@ main {
     body {
         background: white;
         color: black;
-    }
-
-    .article {
-        max-width: 100%;
     }
 }
