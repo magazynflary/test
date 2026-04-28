@@ -581,6 +581,8 @@ main {
 .article-image {
     width: 100%;
     aspect-ratio: 1200/350;
+    grid-column: 1 / -1;
+    grid-row: 1;
 }
 
 /* Article Content Typography */
@@ -638,6 +640,98 @@ main {
     font-size: var(--text-sm);
     color: var(--gray);
     font-style: italic;
+    grid-column: 1 / -1;
+    grid-row: 4;
+}
+
+/* Magazine layout — grid with sidebar (meta/tags) + main column (title/content). */
+.article {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    column-gap: var(--space-8);
+    row-gap: var(--space-2);
+    align-items: start;
+}
+
+/* display:contents collapses .article-header as a box — its children
+   (meta, title, tags) become direct grid items without changing the HTML. */
+.article-header {
+    display: contents;
+}
+
+.article .article-meta,
+.article .article-tags {
+    border-right: 3px solid var(--red);
+    padding-right: var(--space-4);
+}
+
+.article .article-meta {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: var(--text-xs);
+    margin-bottom: 0;
+}
+
+.article .article-tags {
+    grid-column: 1;
+    grid-row: 3;
+    flex-direction: column;
+}
+
+.article .article-tags .tag {
+    text-align: center;
+    display: block;
+}
+
+.article-title {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.92;
+    border-bottom: 2px solid var(--text);
+    padding-bottom: var(--space-4);
+    align-self: end;
+}
+
+.article .article-content {
+    grid-column: 2;
+    grid-row: 3;
+    font-size: var(--text-base);
+}
+
+.article .article-content p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-size: 4.5em;
+    line-height: 0.75;
+    float: left;
+    margin-right: 0.06em;
+    margin-top: 0.04em;
+    color: var(--red);
+}
+
+@media (max-width: 768px) {
+    .article {
+        display: block;
+    }
+
+    .article-header {
+        display: block;
+    }
+
+    .article-image {
+        margin-bottom: var(--space-8);
+    }
+
+    .article .article-meta {
+        border-right: none;
+        padding-right: 0;
+    }
+
+    .article .article-tags {
+        flex-direction: row;
+        border-right: none;
+        padding-right: 0;
+    }
 }
 
 /* ============================================================
