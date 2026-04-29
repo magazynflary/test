@@ -122,7 +122,6 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
     line-height: 1.0;
     letter-spacing: 0.02em;
-    text-transform: uppercase;
     color: var(--red);
     text-wrap: balance;
 }
@@ -398,18 +397,6 @@ main {
     aspect-ratio: 1200/350;
 }
 
-.image-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: var(--space-4) var(--space-6);
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
-    color: var(--white);
-    overflow: hidden;
-}
-
 /* Title bar — sibling block below edition image, issue + title share cream bg. */
 .edition-card__title-bar {
     background: var(--surface-light);
@@ -427,8 +414,7 @@ main {
 }
 
 .edition-card__title-bar .post-card__issue,
-.edition-card__title-bar .post-card__title,
-.edition-banner__title {
+.edition-card__title-bar .post-card__title {
     font-size: clamp(1.75rem, 0.875rem + 4vw, 2.75rem);   /* 28 → 44px */
     line-height: 1;
 }
@@ -584,8 +570,7 @@ main {
     margin-bottom: var(--space-4);
 }
 
-.article-edition-link,
-.edition-banner__title {
+.article-edition-link {
     background: var(--surface-light);
     color: var(--black);
     padding: var(--space-1) var(--space-2);
@@ -1060,13 +1045,34 @@ main {
 /* ============================================================
    EDITION PAGE
    ============================================================ */
+.edition-banner {
+    position: relative;
+}
+
+.edition-banner::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transition: transform var(--transition);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.edition-banner:hover::before {
+    transform: scaleX(1);
+}
+
 .edition-banner__image {
     aspect-ratio: 1200/350;
 }
 
 .edition-banner__date,
-.edition-banner__issue,
-.edition-banner__title {
+.edition-banner__issue {
     font-family: var(--font-display);
     text-transform: uppercase;
 }
@@ -1101,7 +1107,6 @@ main {
     font-family: var(--font-display);
     font-size: var(--text-2xl);
     line-height: 1.1;
-    text-transform: uppercase;
     margin: 0;
 }
 

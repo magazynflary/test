@@ -13,11 +13,11 @@
 <div class="edition-banner">
     <div class="edition-banner__image-wrapper">
         {{ partial "banner-image.html" (dict "page" . "class" "post-card__image edition-banner__image" "sizes" "100vw" "focus" $bannerFocus) }}
-        <div class="image-overlay">
-            <time class="edition-banner__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-            {{ with .Params.issue }}<p class="edition-banner__issue">{{ . }}</p>{{ end }}
-            <p class="edition-banner__title">{{ .Title }}</p>
-        </div>
+    </div>
+    <div class="edition-card__title-bar">
+        <time class="edition-banner__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        {{ with .Params.issue }}<span class="post-card__issue">{{ . }}</span>{{ end }}
+        <h1 class="post-card__title">{{ .Title }}</h1>
     </div>
 </div>
 {{ end }}
