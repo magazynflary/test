@@ -1,23 +1,40 @@
 {{ define "main" }}
+{{- $authorPage := false -}}
+{{- with .Params.author -}}{{- $authorPage = site.GetPage (printf "/autorzy/%s" .) -}}{{- end -}}
+{{- $authorName := "" -}}
+{{- with $authorPage }}{{- $authorName = .Params.name | default .Title -}}{{- else -}}{{- $authorName = $.Params.author -}}{{- end -}}
 <article class="article">
     <header class="article-header">
-        <div class="article-meta">
+        <div class="article-byline">
             {{ with .Params.edition }}
                 {{ with site.GetPage (printf "wydania/%s" .) }}
                 <a href="{{ .Permalink }}" class="article-edition-link">{{ .Params.issue }} — {{ .Title }}</a>
                 {{ end }}
             {{ end }}
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-            {{ with .Params.author }}
-                {{ $authorPage := site.GetPage (printf "/autorzy/%s" .) }}
-                {{ with $authorPage }}
-                <a href="{{ .Permalink }}" class="article-author-link">{{ .Params.name | default .Title }}</a>
+            {{ with $authorName }}
+                {{ if $authorPage }}
+                <a href="{{ $authorPage.Permalink }}" class="article-author-link article-byline__author">{{ . }}</a>
                 {{ else }}
-                {{ . }}
+                <span class="article-byline__author">{{ . }}</span>
+                {{ end }}
+            {{ end }}
+            {{ with $authorPage }}
+                {{ with .Params.bio }}
+                <p class="article-byline__bio">{{ . }}</p>
                 {{ end }}
             {{ end }}
         </div>
-        <h1 class="article-title">{{ .Title }}</h1>
+
+        <div class="article-headline">
+            <time class="article-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+            <h1 class="article-title">{{ .Title }}</h1>
+            {{ with $authorName }}
+            <p class="article-author">
+                {{ if $authorPage }}<a href="{{ $authorPage.Permalink }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}
+            </p>
+            {{ end }}
+        </div>
+
         {{ with .GetTerms "tags" }}
         <div class="article-tags">
             {{ range . }}

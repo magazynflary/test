@@ -17,9 +17,11 @@
     --black: lab(7% 0 0);
     --gray-dark: lab(25% 0 0);
     --gray: lab(45% 0 0);
+    --gray-soft: lab(70% 0 0);
     --gray-light: lab(85% 0 0);
     --bg: lab(98% 0 0);
     --text: var(--black);
+    --text-soft: var(--gray-soft);
     --surface: lab(100% 0 0);
     --surface-light: lab(85% 0 15);
 
@@ -669,33 +671,64 @@ main {
     grid-row: 4;
 }
 
-/* Magazine layout — grid with sidebar (meta/tags) + main column (title/content). */
+/* Magazine layout — grid with sidebar (byline/tags) + main column (headline/content). */
 .article {
     display: grid;
-    grid-template-columns: 9rem 1fr;
+    grid-template-columns: 16rem 1fr;
     column-gap: var(--space-8);
     row-gap: var(--space-2);
     align-items: start;
 }
 
 /* display:contents collapses .article-header as a box — its children
-   (meta, title, tags) become direct grid items without changing the HTML. */
+   (byline, headline, tags) become direct grid items without changing the HTML. */
 .article-header {
     display: contents;
 }
 
-.article .article-meta,
+.article-byline,
 .article .article-tags {
     border-right: 3px solid var(--red);
     padding-right: var(--space-4);
 }
 
-.article .article-meta {
+.article-byline {
     grid-column: 1;
     grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
     font-size: var(--text-xs);
-    margin-bottom: 0;
     color: var(--gray);
+}
+
+.article-byline .article-edition-link {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-variant-caps: all-small-caps;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: center;
+    text-transform: none;
+    padding: var(--space-2);
+}
+
+.article-byline__author {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: var(--text-base);
+    color: var(--gray-dark);
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.article-byline__bio {
+    font-size: var(--text-sm);
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--gray-dark);
+    margin: 0;
 }
 
 .article .article-tags {
@@ -707,18 +740,50 @@ main {
 .article .article-tags .tag {
     text-align: center;
     display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-variant-caps: all-small-caps;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: none;
+}
+
+.article-headline {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+    border-bottom: 2px solid var(--text);
+    padding-bottom: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.article-date {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-dark);
 }
 
 .article-title {
-    grid-column: 2;
-    grid-row: 2;
     font-size: clamp(2.25rem, 5vw + 0.5rem, 4rem);
     line-height: 1.05;
     letter-spacing: -0.015em;
+    text-transform: none;
     text-wrap: balance;
-    border-bottom: 2px solid var(--text);
-    padding-bottom: var(--space-4);
-    align-self: end;
+}
+
+.article-author {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: var(--text-lg);
+    color: var(--gray-dark);
+}
+
+.article-author a {
+    color: inherit;
 }
 
 .article .article-content {
@@ -734,7 +799,7 @@ main {
     float: left;
     margin-right: 0.06em;
     margin-top: 0.04em;
-    color: rgb(172 171 170);
+    color: var(--text-soft);
 }
 
 @media (max-width: 768px) {
@@ -742,17 +807,31 @@ main {
         display: block;
     }
 
+    /* Mobile order: edition → tags → date/title/author. Headline children stacked. */
     .article-header {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
     }
+
+    .article-byline { order: 1; }
+    .article .article-tags { order: 2; }
+    .article-headline { order: 3; }
 
     .article-image-figure {
         margin-bottom: var(--space-8);
     }
 
-    .article .article-meta {
+    .article-byline {
         border-right: none;
         padding-right: 0;
+    }
+
+    /* Mobile: bio off — too wide for narrow column.
+       Author hidden — duplicates headline author. */
+    .article-byline__bio,
+    .article-byline__author {
+        display: none;
     }
 
     .article .article-tags {
