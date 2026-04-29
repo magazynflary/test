@@ -4,8 +4,6 @@
 {{ $past := (where $authors ".Params.is_active" false).ByWeight }}
 
 <div class="about-page">
-    <h1 class="page-title">{{ .Title }}</h1>
-
     <div class="about-intro article-content">
         {{ .Content | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}
     </div>

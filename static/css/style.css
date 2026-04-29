@@ -265,19 +265,10 @@ main {
 /* ============================================================
    HOMEPAGE
    ============================================================ */
-.hero,
 .about-intro {
     margin-bottom: var(--space-12);
     padding-bottom: var(--space-8);
     border-bottom: 1px solid var(--gray-light);
-}
-
-.hero-tagline {
-    font-size: var(--text-xl);
-    font-style: italic;
-    color: var(--gray-dark);
-    max-width: 37.5rem;
-    line-height: 1.5;
 }
 
 .section-title {

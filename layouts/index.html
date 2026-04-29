@@ -1,20 +1,10 @@
 {{ define "main" }}
-<section class="hero">
-    <p class="hero-tagline">{{ .Site.Params.description }}</p>
-</section>
-
-<section>
-    <h2 class="section-title">Najnowsze</h2>
-
-    {{ $posts := where .Site.RegularPages "Type" "artykuly" }}
-    {{ if $posts }}
-    <div class="posts-grid">
-        {{ range first 7 $posts }}
-        {{ partial "post-card.html" . }}
-        {{ end }}
-    </div>
-    {{ else }}
-    <p class="no-posts">Brak artykułów.</p>
-    {{ end }}
-</section>
+{{ $posts := where .Site.RegularPages "Type" "artykuly" }}
+{{ if $posts }}
+<div class="posts-grid">
+    {{ range $posts }}{{ partial "post-card.html" . }}{{ end }}
+</div>
+{{ else }}
+<p class="no-posts">Brak artykułów.</p>
+{{ end }}
 {{ end }}

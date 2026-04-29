@@ -1,6 +1,4 @@
 {{ define "main" }}
-<h1 class="page-title">{{ index .Site.Params.sectionTitles .Section | default .Title }}</h1>
-
 {{ if .Pages }}
 <div class="editions-list">
     {{ range .Pages }}
