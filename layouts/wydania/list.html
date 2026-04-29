@@ -6,11 +6,10 @@
         <a href="{{ .Permalink }}" class="post-card__link">
             <div class="post-card__image-wrapper">
                 {{ partial "banner-image.html" (dict "page" . "class" "post-card__image" "sizes" "100vw") }}
-                <div class="edition-card__overlay image-overlay">
-                    <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-                    {{ with .Params.issue }}<p class="post-card__issue">{{ . }}</p>{{ end }}
-                    <h3 class="post-card__title">{{ .Title }}</h3>
-                </div>
+            </div>
+            <div class="edition-card__title-bar">
+                {{ with .Params.issue }}<span class="post-card__issue">{{ . }}</span>{{ end }}
+                <h3 class="post-card__title">{{ .Title }}</h3>
             </div>
         </a>
     </article>

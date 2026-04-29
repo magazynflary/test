@@ -21,7 +21,7 @@
     --bg: lab(98% 0 0);
     --text: var(--black);
     --surface: lab(100% 0 0);
-    --surface-light: lab(85% 0 0);
+    --surface-light: lab(85% 0 15);
 
     /* Typography - System Fonts Only */
     /* Display: high-contrast magazine serif */
@@ -409,35 +409,35 @@ main {
     overflow: hidden;
 }
 
-.edition-card__overlay {
-    gap: var(--space-1);
+/* Title bar — sibling block below edition image, issue + title share cream bg. */
+.edition-card__title-bar {
+    background: var(--surface-light);
+    color: var(--black);
+    padding: var(--space-2) var(--space-4);
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
 }
 
-.edition-card__overlay .post-card__meta {
-    color: var(--white);
-}
-
-.edition-card__overlay .post-card__meta,
-.edition-card__overlay .post-card__issue,
 .edition-banner__date,
 .edition-banner__issue {
     line-height: 1.7;
     margin-bottom: var(--space-2);
 }
 
-.edition-card__overlay .post-card__issue,
-.edition-banner__issue {
-    font-size: clamp(0.75rem, 3vw, var(--text-2xl));
-}
-
-.edition-card__overlay .post-card__title,
+.edition-card__title-bar .post-card__issue,
+.edition-card__title-bar .post-card__title,
 .edition-banner__title,
 .articles-grid .post-card:first-child .post-card__title {
     font-size: clamp(1.75rem, 0.875rem + 4vw, 2.75rem);   /* 28 → 44px */
     line-height: 1;
 }
 
-.edition-card__overlay .post-card__title {
+.edition-banner__issue {
+    font-size: clamp(0.75rem, 3vw, var(--text-2xl));
+}
+
+.edition-card__title-bar .post-card__title {
     margin-bottom: 0;
     color: inherit;
 }
@@ -570,8 +570,7 @@ main {
 }
 
 .article-edition-link,
-.edition-banner__title,
-.edition-card__overlay .post-card__title {
+.edition-banner__title {
     background: var(--surface-light);
     color: var(--black);
     padding: var(--space-1) var(--space-2);
