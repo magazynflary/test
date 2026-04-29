@@ -62,6 +62,9 @@ collections:
       - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
       - {label: "Kadrowanie: baner (1200×350)", name: "image_focus_banner", widget: "focal-point", aspect_ratio: "1200:350", zoomable: true, default: "50% 50%", required: false}
       - {label: "Kadrowanie: karta (390×290)", name: "image_focus_card", widget: "focal-point", aspect_ratio: "390:290", zoomable: true, default: "50% 50%", required: false}
+      - {label: "Autor obrazka — nazwisko", name: "image_credit", widget: "string", required: false, hint: "Wyświetlane pod obrazkiem"}
+      - {label: "Autor obrazka — z redakcji", name: "image_credit_author", widget: "relation", collection: "authors", search_fields: ["name"], value_field: "{{slug}}", display_fields: ["name"], required: false, hint: "Jeśli z redakcji — pojawi się odnośnik wewnętrzny do strony autora"}
+      - {label: "Autor obrazka — link zewnętrzny", name: "image_credit_url", widget: "string", required: false, hint: "Jeśli spoza redakcji — link na zewnątrz"}
       - {label: "Opis dla wyszukiwarek", name: "description", widget: "text", required: false}
       - {label: "Źródła (APA)", name: "sources", widget: "sources-editor", required: false}
       - {label: "Treść", name: "body", widget: "markdown"}

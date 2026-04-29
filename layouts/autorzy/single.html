@@ -1,29 +1,26 @@
 {{ define "main" }}
 {{ $authorSlug := .File.ContentBaseName }}
-{{ $articles := where site.RegularPages ".Params.author" $authorSlug }}
+{{ $textArticles := where site.RegularPages ".Params.author" $authorSlug }}
+{{ $graphicsOnly := where (where site.RegularPages ".Params.image_credit_author" $authorSlug) ".Params.author" "ne" $authorSlug }}
 
-<div>
-    <header class="author-header">
-        {{ with .Params.photo }}
-        {{ partial "image.html" (dict "src" . "alt" ($.Params.name | default $.Title) "class" "author-photo") }}
-        {{ end }}
-        {{ with .Params.role }}
-        <div class="article-meta">{{ . }}</div>
-        {{ end }}
-        <h1 class="page-title">{{ .Params.name | default .Title }}</h1>
-        {{ with .Params.bio }}
-        <p class="author-bio">{{ . }}</p>
-        {{ end }}
-    </header>
+<header class="author-header">
+    {{ with .Params.photo }}{{ partial "image.html" (dict "src" . "alt" ($.Params.name | default $.Title) "class" "author-photo") }}{{ end }}
+    {{ with .Params.role }}<div class="article-meta">{{ . }}</div>{{ end }}
+    <h1 class="page-title">{{ .Params.name | default .Title }}</h1>
+    {{ with .Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
+</header>
 
-    {{ if $articles }}
+{{ range slice (dict "title" "Artykuły" "pages" $textArticles) (dict "title" "Grafika" "pages" $graphicsOnly) }}
+    {{ $sectionTitle := .title }}
+    {{ with .pages }}
+    <h2 class="section-title">{{ $sectionTitle }}</h2>
     <div class="posts-grid">
-        {{ range $articles }}
-        {{ partial "post-card.html" . }}
-        {{ end }}
+        {{ range . }}{{ partial "post-card.html" . }}{{ end }}
     </div>
-    {{ else }}
-    <p class="no-posts">Brak artykułów tego autora.</p>
     {{ end }}
-</div>
+{{ end }}
+
+{{ if and (not $textArticles) (not $graphicsOnly) }}
+<p class="no-posts">Brak artykułów tego autora.</p>
+{{ end }}
 {{ end }}

@@ -1,0 +1,18 @@
+{{- $page := . -}}
+{{- if $page.Params.image }}
+{{- $authorPage := false -}}
+{{- with $page.Params.image_credit_author -}}{{- $authorPage = site.GetPage (printf "/autorzy/%s" .) -}}{{- end -}}
+{{- $authorName := "" -}}
+{{- with $authorPage }}{{- $authorName = .Params.name | default .Title -}}{{- end -}}
+{{- $creditName := or $page.Params.image_credit $authorName -}}
+<figure class="article-image-figure">
+    {{ partial "banner-image.html" (dict "page" $page) }}
+    {{- with $creditName }}
+    <figcaption class="article-image-credit">
+        {{- if $authorPage }}<a href="{{ $authorPage.Permalink }}">{{ . }}</a>
+        {{- else if $page.Params.image_credit_url }}<a href="{{ $page.Params.image_credit_url }}" rel="noopener noreferrer">{{ . }}</a>
+        {{- else }}{{ . }}{{- end -}}
+    </figcaption>
+    {{- end }}
+</figure>
+{{- end }}

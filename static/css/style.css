@@ -562,10 +562,27 @@ main {
     text-decoration: underline;
 }
 
-.article-image {
-    aspect-ratio: 1200/350;
+.article-image-figure {
+    margin: 0;
     grid-column: 1 / -1;
     grid-row: 1;
+}
+
+.article-image-figure .article-image {
+    aspect-ratio: 1200/350;
+}
+
+.article-image-credit {
+    margin-top: var(--space-1);
+    text-align: right;
+    font-size: var(--text-xs);
+    color: var(--gray);
+}
+
+.article-image-credit a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 /* Article Content Typography */
@@ -712,7 +729,7 @@ main {
         display: block;
     }
 
-    .article-image {
+    .article-image-figure {
         margin-bottom: var(--space-8);
     }
 
