@@ -340,6 +340,8 @@ main {
     background: var(--red);
     transform: scaleX(0);
     transition: transform var(--transition);
+    z-index: 2;
+    pointer-events: none;
 }
 
 .post-card:hover::before {
@@ -524,6 +526,10 @@ main {
 :is(.posts-grid--no-tags, .articles-grid) .post-card {
     border: none;
     padding: 0;
+}
+
+.articles-grid .post-card {
+    padding-bottom: 3px;
 }
 
 :is(.posts-grid--no-tags, .articles-grid) .post-card__image-wrapper {
