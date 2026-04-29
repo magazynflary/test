@@ -5,10 +5,14 @@
 {{ $mainPages := where $allPages "File.ContentBaseName" $mainSlug | first 1 }}
 {{ $otherPages := where $allPages "File.ContentBaseName" "ne" $mainSlug }}
 
+{{- $mainPage := index $mainPages 0 -}}
+{{- $bannerFocus := "" -}}
+{{- with $mainPage -}}{{- $bannerFocus = .Params.image_focus_banner | default .Params.image_focus -}}{{- end -}}
+
 {{ if .Params.image }}
 <div class="edition-banner">
     <div class="edition-banner__image-wrapper">
-        {{ partial "banner-image.html" (dict "page" . "class" "post-card__image edition-banner__image" "sizes" "100vw") }}
+        {{ partial "banner-image.html" (dict "page" . "class" "post-card__image edition-banner__image" "sizes" "100vw" "focus" $bannerFocus) }}
         <div class="image-overlay">
             <time class="edition-banner__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
             {{ with .Params.issue }}<p class="edition-banner__issue">{{ . }}</p>{{ end }}

@@ -2,10 +2,14 @@
 {{ if .Pages }}
 <div class="editions-list">
     {{ range .Pages }}
+    {{- $mainSlug := .Params.artykul_glowny -}}
+    {{- $mainPage := index (where $.Site.RegularPages "File.ContentBaseName" $mainSlug) 0 -}}
+    {{- $bannerFocus := "" -}}
+    {{- with $mainPage -}}{{- $bannerFocus = .Params.image_focus_banner | default .Params.image_focus -}}{{- end -}}
     <article class="post-card edition-card">
         <a href="{{ .Permalink }}" class="post-card__link">
             <div class="post-card__image-wrapper">
-                {{ partial "banner-image.html" (dict "page" . "class" "post-card__image" "sizes" "100vw") }}
+                {{ partial "banner-image.html" (dict "page" . "class" "post-card__image" "sizes" "100vw" "focus" $bannerFocus) }}
             </div>
             <div class="edition-card__title-bar">
                 {{ with .Params.issue }}<span class="post-card__issue">{{ . }}</span>{{ end }}
