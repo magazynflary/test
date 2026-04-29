@@ -335,7 +335,7 @@ main {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     width: 4px;
     height: 100%;
     background: var(--red);
@@ -555,6 +555,15 @@ main {
 .post-card--featured .post-card__image {
     aspect-ratio: 1200/350;
 }
+
+/* Mobile single-column: separate featured from rest with a red rule. */
+@media (max-width: 639px) {
+    .articles-grid .post-card--featured {
+        border-bottom: 4px solid var(--red);
+        padding-bottom: var(--space-6);
+    }
+}
+
 
 /* ============================================================
    SINGLE ARTICLE
