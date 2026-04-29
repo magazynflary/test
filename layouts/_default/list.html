@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{ if .Pages }}
-<div class="posts-grid">
+<div class="articles-grid">
     {{ range .Pages }}{{ partial "post-card.html" (dict "page" .) }}{{ end }}
 </div>
 {{ else }}
