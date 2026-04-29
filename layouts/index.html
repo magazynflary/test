@@ -1,8 +1,18 @@
 {{ define "main" }}
-{{ $posts := where .Site.RegularPages "Type" "artykuly" }}
-{{ if $posts }}
-<div class="posts-grid">
-    {{ range $posts }}{{ partial "post-card.html" . }}{{ end }}
+{{/* Order: editions newest first, within each edition main article first then others. */}}
+{{ $items := slice }}
+{{ range sort (where .Site.RegularPages "Type" "wydania") "Date" "desc" }}
+    {{ $mainSlug := .Params.artykul_glowny }}
+    {{ $editionArticles := where site.RegularPages "Params.edition" .File.ContentBaseName }}
+    {{ $mainPages := where $editionArticles "File.ContentBaseName" $mainSlug | first 1 }}
+    {{ $otherPages := where $editionArticles "File.ContentBaseName" "ne" $mainSlug }}
+    {{ range $mainPages | append $otherPages }}
+        {{ $items = $items | append (dict "page" . "featured" (eq .File.ContentBaseName $mainSlug)) }}
+    {{ end }}
+{{ end }}
+{{ if $items }}
+<div class="posts-grid posts-grid--no-tags">
+    {{ range $items }}{{ partial "post-card.html" . }}{{ end }}
 </div>
 {{ else }}
 <p class="no-posts">Brak artykułów.</p>

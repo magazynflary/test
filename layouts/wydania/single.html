@@ -1,17 +1,30 @@
 {{ define "main" }}
 {{ $mainSlug := .Params.artykul_glowny }}
-{{ $editionArticles := where .Site.RegularPages "Params.edition" .File.ContentBaseName }}
-{{ $gridPages := where $editionArticles "File.ContentBaseName" $mainSlug | first 1 | append (where $editionArticles "File.ContentBaseName" "ne" $mainSlug) }}
+{{ $allPages := where .Site.RegularPages "Params.edition" .File.ContentBaseName }}
 
+{{ $mainPages := where $allPages "File.ContentBaseName" $mainSlug | first 1 }}
+{{ $otherPages := where $allPages "File.ContentBaseName" "ne" $mainSlug }}
+
+{{ if .Params.image }}
 <div class="edition-banner">
-    <time class="edition-banner__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-    {{ with .Params.issue }}<p class="edition-banner__issue">{{ . }}</p>{{ end }}
-    <p class="edition-banner__title">{{ .Title }}</p>
+    <div class="edition-banner__image-wrapper">
+        {{ partial "banner-image.html" (dict "page" . "class" "post-card__image edition-banner__image" "sizes" "100vw") }}
+        <div class="image-overlay">
+            <time class="edition-banner__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+            {{ with .Params.issue }}<p class="edition-banner__issue">{{ . }}</p>{{ end }}
+            <p class="edition-banner__title">{{ .Title }}</p>
+        </div>
+    </div>
 </div>
+{{ end }}
+
+{{ $gridPages := $mainPages | append $otherPages }}
 
 {{ if $gridPages }}
 <div class="articles-grid">
-    {{ range $gridPages }}{{ partial "post-card.html" . }}{{ end }}
+    {{ range $i, $page := $gridPages }}
+    {{ partial "post-card.html" (dict "page" $page "featured" (eq $i 0)) }}
+    {{ end }}
 </div>
 {{ end }}
 {{ end }}

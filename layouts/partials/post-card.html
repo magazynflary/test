@@ -1,18 +1,27 @@
-<article class="post-card">
-    <a href="{{ .Permalink }}" class="post-card__link">
-        {{ partial "card-image.html" (dict "page" .) }}
-        <time class="post-card__meta" datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ .Date.Format "2006-01-02" }}
-        </time>
-        {{ with .Params.issue }}<p class="post-card__issue">{{ . }}</p>{{ end }}
-        <h3 class="post-card__title">{{ .Title }}</h3>
-        <p class="post-card__excerpt">{{ .Summary | plainify | truncate 150 | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}</p>
+{{- $page := .page -}}
+{{- $featured := .featured -}}
+<article class="post-card{{ if $featured }} post-card--featured{{ end }}">
+    <a href="{{ $page.Permalink }}" class="post-card__link">
+        {{ if $featured }}
+        <div class="post-card__image-wrapper">
+            {{ partial "banner-image.html" (dict "page" $page "class" "post-card__image" "sizes" "(max-width: 640px) 100vw, 1280px") }}
+        </div>
+        {{ else }}
+        {{ partial "card-image.html" (dict "page" $page) }}
+        {{ end }}
+        {{ with $page.Params.issue }}<p class="post-card__issue">{{ . }}</p>{{ end }}
+        <h3 class="post-card__title">{{ $page.Title }}</h3>
+        <p class="post-card__excerpt">{{ $page.Summary | plainify | truncate 150 | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}</p>
     </a>
-    {{ with .Params.author }}
-    {{ $authorPage := site.GetPage (printf "/autorzy/%s" .) }}
-    <p class="post-card__meta">{{ with $authorPage }}<a href="{{ .Permalink }}" class="post-card__author-link">{{ .Params.name | default .Title }}</a>{{ else }}{{ . }}{{ end }}</p>
-    {{ end }}
-    {{ with .GetTerms "tags" }}
+    <p class="post-card__meta">
+        <time class="post-card__date" datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "2006-01-02" }}</time>
+        {{ with $page.Params.author }}
+            {{ $authorPage := site.GetPage (printf "/autorzy/%s" .) }}
+            <span class="post-card__byline-sep" aria-hidden="true"> · </span>
+            {{ with $authorPage }}<a href="{{ .Permalink }}" class="post-card__author-link">{{ .Params.name | default .Title }}</a>{{ else }}{{ . }}{{ end }}
+        {{ end }}
+    </p>
+    {{ with $page.GetTerms "tags" }}
     <div class="post-card__tags">
         {{ range . }}<a href="{{ .Permalink }}" class="tag tag--link">{{ .LinkTitle }}</a>{{ end }}
     </div>

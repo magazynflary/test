@@ -1,9 +1,7 @@
 {{ define "main" }}
 {{ if .Pages }}
 <div class="posts-grid">
-    {{ range .Pages }}
-    {{ partial "post-card.html" . }}
-    {{ end }}
+    {{ range .Pages }}{{ partial "post-card.html" (dict "page" .) }}{{ end }}
 </div>
 {{ else }}
 <p class="no-posts">Brak artykułów w tej sekcji.</p>

@@ -429,8 +429,7 @@ main {
 
 .edition-card__title-bar .post-card__issue,
 .edition-card__title-bar .post-card__title,
-.edition-banner__title,
-.articles-grid .post-card:first-child .post-card__title {
+.edition-banner__title {
     font-size: clamp(1.75rem, 0.875rem + 4vw, 2.75rem);   /* 28 → 44px */
     line-height: 1;
 }
@@ -442,19 +441,6 @@ main {
 .edition-card__title-bar .post-card__title {
     margin-bottom: 0;
     color: inherit;
-}
-
-.articles-grid .post-card:first-child .post-card__excerpt {
-    font-size: clamp(1.25rem, 0.875rem + 2vw, 1.875rem);  /* 20 → 30px */
-    line-height: 1.333;                                    /* 40/30 */
-}
-
-.posts-grid .post-card:not(:first-child) .post-card__title,
-.posts-grid .post-card:not(:first-child) .post-card__excerpt,
-.articles-grid .post-card:not(:first-child) .post-card__title,
-.articles-grid .post-card:not(:first-child) .post-card__excerpt {
-    font-size: clamp(1rem, 0.875rem + 0.75vw, 1.25rem);   /* 16 → 20px */
-    line-height: 1.2;                                      /* 24/20 */
 }
 
 .post-card__meta,
@@ -479,6 +465,8 @@ main {
     font-size: var(--text-2xl);
     margin-bottom: var(--space-3);
     line-height: 1.1;
+    text-transform: none;
+    color: var(--gray-dark);
 }
 
 .post-card__excerpt {
@@ -542,13 +530,30 @@ main {
     gap: var(--space-3);
 }
 
-/* Featured Post - First post larger */
-.posts-grid .post-card:first-child {
+/* Showcase grids (homepage, edition single): bare cards; hide chrome around the title. */
+:is(.posts-grid--no-tags, .articles-grid) :is(.post-card__excerpt, .post-card__date, .post-card__byline-sep),
+.posts-grid--no-tags .post-card__tags {
+    display: none;
+}
+
+:is(.posts-grid--no-tags, .articles-grid) .post-card {
+    border: none;
+    padding: 0;
+}
+
+:is(.posts-grid--no-tags, .articles-grid) .post-card__image-wrapper {
+    width: 100%;
+    margin: 0 0 var(--space-4);
+}
+
+/* Featured post — full grid width with banner aspect. */
+.post-card--featured {
     grid-column: 1 / -1;
 }
 
-.posts-grid .post-card:first-child .post-card__title {
-    font-size: var(--text-4xl);
+.post-card--featured .post-card__image-wrapper,
+.post-card--featured .post-card__image {
+    aspect-ratio: 1200/350;
 }
 
 /* ============================================================
@@ -1036,11 +1041,6 @@ main {
 
     .posts-grid {
         grid-template-columns: repeat(3, 1fr);
-    }
-
-    .posts-grid .post-card:first-child {
-        grid-column: 1 / 3;
-        grid-row: 1 / 3;
     }
 
     .articles-grid {

@@ -15,7 +15,7 @@
     {{ with .pages }}
     <h2 class="section-title">{{ $sectionTitle }}</h2>
     <div class="posts-grid">
-        {{ range . }}{{ partial "post-card.html" . }}{{ end }}
+        {{ range . }}{{ partial "post-card.html" (dict "page" .) }}{{ end }}
     </div>
     {{ end }}
 {{ end }}
