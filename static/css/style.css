@@ -10,17 +10,18 @@
    CSS CUSTOM PROPERTIES
    ============================================================ */
 :root {
-    /* Color Palette - Dwie Lewe Ręce */
-    --red: #A31621;
-    --red-dark: #7D111A;
-    --white: #FFFFFF;
-    --black: #1A1A1A;
-    --gray-dark: #374151;
-    --gray: #6B7280;
-    --gray-light: #D1D5DB;
-    --bg: #FAFAF9;
+    /* Color Palette - Light (default). Dark overrides in [data-theme="dark"]. */
+    --red: lab(30% 80 97);
+    --red-dark: lab(20% 80 97);
+    --white: lab(95% 0 15);
+    --black: lab(7% 0 0);
+    --gray-dark: lab(25% 0 0);
+    --gray: lab(45% 0 0);
+    --gray-light: lab(85% 0 0);
+    --bg: lab(98% 0 0);
     --text: var(--black);
-    --surface: var(--white);
+    --surface: lab(100% 0 0);
+    --surface-light: lab(85% 0 0);
 
     /* Typography - System Fonts Only */
     /* Display: high-contrast magazine serif */
@@ -120,7 +121,7 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.0;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: var(--text);
+    color: var(--red);
     text-wrap: balance;
 }
 
@@ -156,13 +157,13 @@ blockquote {
    LINKS
    ============================================================ */
 a {
-    color: var(--red);
+    color: var(--text);
     text-decoration: none;
     transition: color var(--transition);
 }
 
 a:hover {
-    color: var(--red-dark);
+    color: var(--red);
 }
 
 /* ============================================================
@@ -174,8 +175,7 @@ a:hover {
     position: sticky;
     top: 0;
     z-index: 100;
-    /* Border red matches logo SVG fill, not --red token. */
-    border-bottom: 4px solid #bd0014;
+    border-bottom: 4px solid var(--red);
 }
 
 .header-inner {
@@ -475,10 +475,6 @@ main {
     color: var(--red);
 }
 
-.article-author-link:hover {
-    text-decoration: underline;
-}
-
 .post-card__tags {
     display: flex;
     flex-wrap: wrap;
@@ -494,8 +490,8 @@ main {
     font-size: var(--text-xs);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    background: var(--text);
-    color: var(--bg);
+    background: var(--red);
+    color: var(--white);
     padding: var(--space-1) var(--space-2);
     display: inline-block;
 }
@@ -505,7 +501,8 @@ main {
 }
 
 .tag--link:hover {
-    background: var(--red);
+    background: var(--red-dark);
+    color: var(--white);
 }
 
 .tag--lg {
@@ -554,12 +551,13 @@ main {
     margin-bottom: var(--space-4);
 }
 
-.article-edition-link {
-    color: inherit;
-}
-
-.article-edition-link:hover {
-    text-decoration: underline;
+.article-edition-link,
+.edition-banner__title,
+.edition-card__overlay .post-card__title {
+    background: var(--surface-light);
+    color: var(--black);
+    padding: var(--space-1) var(--space-2);
+    display: inline-block;
 }
 
 .article-image-figure {
@@ -679,6 +677,7 @@ main {
     grid-row: 2;
     font-size: var(--text-xs);
     margin-bottom: 0;
+    color: var(--gray);
 }
 
 .article .article-tags {
@@ -717,7 +716,7 @@ main {
     float: left;
     margin-right: 0.06em;
     margin-top: 0.04em;
-    color: var(--red);
+    color: rgb(172 171 170);
 }
 
 @media (max-width: 768px) {
@@ -848,14 +847,13 @@ main {
    ============================================================ */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-        --red: #E63946;
-        --red-dark: #FF6B6B;
-        --gray-dark: #D1D5DB;
-        --gray: #9CA3AF;
-        --gray-light: #374151;
-        --bg: #111111;
-        --text: #E5E5E5;
-        --surface: #1E1E1E;
+        --gray-dark: lab(60% 0 0);
+        --gray: lab(40% 0 0);
+        --gray-light: lab(25% 0 0);
+        --bg: lab(7% 0 0);
+        --text: lab(90% 0 0);
+        --surface: lab(7% 0 0);
+        --surface-light: lab(95% 0 15);
     }
 
     :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
@@ -863,14 +861,13 @@ main {
 }
 
 [data-theme="dark"] {
-    --red: #E63946;
-    --red-dark: #FF6B6B;
-    --gray-dark: #D1D5DB;
-    --gray: #9CA3AF;
-    --gray-light: #374151;
-    --bg: #111111;
-    --text: #E5E5E5;
-    --surface: #1E1E1E;
+    --gray-dark: lab(60% 0 0);
+    --gray: lab(40% 0 0);
+    --gray-light: lab(25% 0 0);
+    --bg: lab(7% 0 0);
+    --text: lab(90% 0 0);
+    --surface: lab(7% 0 0);
+    --surface-light: lab(95% 0 15);
 }
 
 /* ============================================================
@@ -993,7 +990,7 @@ main {
 .pullquote__icon {
     width: 4.5rem;
     height: 4.5rem;
-    fill: var(--gray-light);
+    fill: var(--surface-light);
 }
 
 .pullquote__text {
@@ -1112,7 +1109,7 @@ main {
 
 .author-bio {
     font-size: var(--text-lg);
-    color: var(--gray-dark);
+    color: var(--gray);
     line-height: 1.7;
     max-width: 65ch;
     margin-top: var(--space-6);
