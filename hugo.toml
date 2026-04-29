@@ -21,7 +21,7 @@ home = ['html', 'rss']
 section = ['html', 'rss']
 
 [params]
-description = 'Rewolucja nie jest jabłkiem, które spada, kiedy jest dojrzałe. Trzeba sprawić, by spadło.'
+description = 'W trosce o dobro wspólne. Solidarni. Otwarci na dialog.'
 
 [params.sectionTitles]
 artykuly = "Artykuły"
