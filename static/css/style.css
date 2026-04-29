@@ -292,7 +292,12 @@ main {
    ============================================================ */
 .posts-grid,
 .editions-list,
-.articles-grid,
+.articles-grid {
+    display: grid;
+    column-gap: 1.25rem;     /* 20px */
+    row-gap: 2.8125rem;      /* 45px */
+}
+
 .team-grid {
     display: grid;
     gap: var(--space-8);
@@ -368,7 +373,6 @@ main {
 }
 
 .articles-grid {
-    gap: var(--space-6);
     margin-top: var(--space-8);
 }
 
@@ -427,14 +431,28 @@ main {
 }
 
 .edition-card__overlay .post-card__title,
-.edition-banner__title {
-    font-size: clamp(1.25rem, 5vw, var(--text-5xl));
+.edition-banner__title,
+.articles-grid .post-card:first-child .post-card__title {
+    font-size: clamp(1.75rem, 0.875rem + 4vw, 2.75rem);   /* 28 → 44px */
     line-height: 1;
 }
 
 .edition-card__overlay .post-card__title {
     margin-bottom: 0;
     color: inherit;
+}
+
+.articles-grid .post-card:first-child .post-card__excerpt {
+    font-size: clamp(1.25rem, 0.875rem + 2vw, 1.875rem);  /* 20 → 30px */
+    line-height: 1.333;                                    /* 40/30 */
+}
+
+.posts-grid .post-card:not(:first-child) .post-card__title,
+.posts-grid .post-card:not(:first-child) .post-card__excerpt,
+.articles-grid .post-card:not(:first-child) .post-card__title,
+.articles-grid .post-card:not(:first-child) .post-card__excerpt {
+    font-size: clamp(1rem, 0.875rem + 0.75vw, 1.25rem);   /* 16 → 20px */
+    line-height: 1.2;                                      /* 24/20 */
 }
 
 .post-card__meta,
@@ -573,7 +591,8 @@ main {
 .article-image-credit {
     margin-top: var(--space-1);
     text-align: right;
-    font-size: var(--text-xs);
+    font-size: clamp(1rem, 0.875rem + 0.5vw, 1.125rem);   /* 16 → 18px */
+    font-style: italic;
     color: var(--gray);
 }
 
@@ -939,7 +958,6 @@ main {
 
     .posts-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: var(--space-6);
     }
 
     .posts-grid .post-card:first-child {
