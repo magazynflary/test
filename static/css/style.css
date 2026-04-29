@@ -23,11 +23,12 @@
     --surface: var(--white);
 
     /* Typography - System Fonts Only */
-    /* Display: Impact (Win/Mac), Arial Black fallback */
-    --font-display: Impact, "Arial Black", "Helvetica Neue", sans-serif;
-    /* Body: condensed/geometric sans-serif */
-    /* Android: Roboto Condensed | Windows: Century Gothic | macOS/iOS: Avenir Next Condensed */
-    --font-body: "Roboto Condensed", "Century Gothic", "Avenir Next Condensed", Avenir, sans-serif;
+    /* Display: high-contrast magazine serif */
+    /* iOS/macOS: Bodoni 72 (modern) → Didot (older) | Windows: Sitka Banner | fallback: Georgia */
+    --font-display: "Bodoni 72", Didot, "Sitka Banner", Georgia, serif;
+    /* Body: Cambria-like screen serif */
+    /* Windows: Cambria | macOS/iOS: Charter | Android: Noto Serif | Linux: Liberation Serif */
+    --font-body: Cambria, Charter, "Noto Serif", "Liberation Serif", Georgia, serif;
 
     /* Type Scale - Mobile First */
     --text-2xs: 0.5rem;
@@ -573,15 +574,24 @@ main {
     max-width: 80ch;
 }
 
+.article-content h2,
+.article-content h3 {
+    font-family: var(--font-body);
+    line-height: 1.25;
+    text-wrap: balance;
+    margin-block: 2em 0.5em;
+}
+
 .article-content h2 {
-    font-size: var(--text-3xl);
-    margin-block: var(--space-12) var(--space-4);
-    color: var(--red);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 1.5vw + 1rem, 1.875rem);
 }
 
 .article-content h3 {
-    font-size: var(--text-2xl);
-    margin-block: var(--space-8) var(--space-3);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(1.25rem, 1vw + 0.875rem, 1.5rem);
+    color: var(--red);
 }
 
 .article-content p {
@@ -668,8 +678,10 @@ main {
 .article-title {
     grid-column: 2;
     grid-row: 2;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 0.92;
+    font-size: clamp(2.25rem, 5vw + 0.5rem, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
     border-bottom: 2px solid var(--text);
     padding-bottom: var(--space-4);
     align-self: end;
