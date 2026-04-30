@@ -67,7 +67,7 @@ collections:
       - {label: "Autor obrazka — link zewnętrzny", name: "image_credit_url", widget: "string", required: false, hint: "Jeśli spoza redakcji — link na zewnątrz"}
       - {label: "Opis dla wyszukiwarek", name: "description", widget: "text", required: false}
       - {label: "Źródła (APA)", name: "sources", widget: "sources-editor", required: false}
-      - {label: "Treść", name: "body", widget: "markdown"}
+      - {label: "Treść", name: "body", widget: "markdown", required: false}
 
   # Editions - groups of posts
   - name: "editions"
