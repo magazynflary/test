@@ -68,6 +68,7 @@ collections:
       - {label: "Opis dla wyszukiwarek", name: "description", widget: "text", required: false}
       - {label: "Źródła (APA)", name: "sources", widget: "sources-editor", required: false}
       - {label: "Treść", name: "body", widget: "markdown", required: false}
+      - {label: "Ukryj przed wyszukiwarką (Noindex)", name: "noindex", widget: "boolean", default: false, required: false, hint: "Zaznacz, jeśli ta strona ma nie pojawiać się w Google i sitemapie."}
 
   # Editions - groups of posts
   - name: "editions"
