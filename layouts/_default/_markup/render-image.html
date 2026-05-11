@@ -1,1 +1,2 @@
-{{ partial "image.html" (dict "src" .Destination "alt" .Text "title" .Title "sizes" "(max-width: 640px) 100vw, 720px") }}
+{{ $fallbackAlt := printf "Ilustracja do artykułu: %s" .Page.Title }}
+{{ partial "image.html" (dict "src" .Destination "alt" (default $fallbackAlt .Text) "title" .Title "sizes" "(max-width: 640px) 100vw, 720px") }}
