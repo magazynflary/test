@@ -28,3 +28,11 @@ W sierpniu 1980 roku robotnicy Stoczni Gdańskiej sformułowali 21 postulatów. 
 Formularz kontaktowy na stronie internetowej pisma działa i odpowiedź przychodzi w rozsądnym terminie.
 
 Redakcja *Flar* zaznacza, że postulaty 1–21 są autentyczne i można je znaleźć w zbiorach Europejskiego Centrum Solidarności w Gdańsku. Postulat 22 jest nasz i uważamy, że jest równie słuszny.
+
+minus escape'owany: \-.
+półpauza unikodowa: –.
+pauza unikowowa: —.
+minus: -.
+półpauza markdownowa: --.
+pauza markdownowa: ---.
+
