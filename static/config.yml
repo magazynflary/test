@@ -114,6 +114,7 @@ collections:
     fields:
       - {label: "Imię i nazwisko", name: "name", widget: "string"}
       - {label: "Aktywny/-a", name: "is_active", widget: "boolean", default: true, hint: "Odznacz dla byłych współpracowników"}
+      - {label: "W redakcji", name: "is_editor", widget: "boolean", default: false, hint: "Zaznacz jeśli należy do redakcji"}
       - {label: "Rola w redakcji", name: "role", widget: "string", required: false, hint: "np.: Redaktor naczelna, Publicysta"}
       - {label: "Kolejność", name: "weight", widget: "number", value_type: "int", default: 1, hint: "Niższy numer = wyżej na liście"}
       - {label: "Rok urodzenia", name: "birth_year", widget: "number", value_type: "int", required: false}

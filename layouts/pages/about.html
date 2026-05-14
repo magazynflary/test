@@ -1,29 +1,37 @@
 {{ define "main" }}
-{{ $authors := where site.RegularPages "Section" "autorzy" }}
-{{ $active := (where $authors ".Params.is_active" true).ByWeight }}
-{{ $past := (where $authors ".Params.is_active" false).ByWeight }}
+{{/* Composite key: Hugo lacks native multi-key sort (weight, surname). */}}
+{{ $allAuthors := where site.RegularPages "Section" "autorzy" }}
+{{ $tagged := slice }}
+{{ range $allAuthors }}
+    {{ $sortKey := printf "%05d-%s"
+        (cond (isset .Params "weight") .Params.weight 999)
+        (replaceRE `.* ` "" .Params.name) }}
+    {{ $tagged = $tagged | append (dict
+        "page" .
+        "sortKey" $sortKey
+        "active" .Params.is_active
+        "editor" (default false .Params.is_editor)) }}
+{{ end }}
+{{ $sorted := sort $tagged "sortKey" }}
+{{ $active := where $sorted "active" true }}
+{{ $sections := slice
+    (dict "title" "Redakcja"              "items" (where $active "editor" true))
+    (dict "title" "Autorzy"               "items" (where $active "editor" false))
+    (dict "title" "Współpracowali z nami" "items" (where $sorted "active" false)) }}
 
 <div class="about-page">
     <div class="about-intro article-content">
         {{ .Content | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}
     </div>
-
-    {{ if $active }}
-    <section class="team-section">
-        <h2 class="section-title">Redakcja</h2>
-        <div class="team-grid">
-            {{ range $active }}{{ partial "team-card.html" . }}{{ end }}
-        </div>
-    </section>
-    {{ end }}
-
-    {{ if $past }}
-    <section class="team-section">
-        <h2 class="section-title">Współpracowali z nami</h2>
-        <div class="team-grid">
-            {{ range $past }}{{ partial "team-card.html" . }}{{ end }}
-        </div>
-    </section>
+    {{ range $sections }}
+        {{ if .items }}
+        <section class="team-section">
+            <h2 class="section-title">{{ .title }}</h2>
+            <div class="team-grid">
+                {{ range .items }}{{ partial "team-card.html" .page }}{{ end }}
+            </div>
+        </section>
+        {{ end }}
     {{ end }}
 </div>
 {{ end }}
