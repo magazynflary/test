@@ -8,7 +8,7 @@
         <div class="article-byline">
             {{ with .Params.edition }}
                 {{ with site.GetPage (printf "wydania/%s" .) }}
-                <a href="{{ .Permalink }}" class="article-edition-link">{{ .Params.issue }} — {{ .Title }}</a>
+                <a href="{{ .Permalink }}" class="article-edition-link">{{ partial "issue-label.html" .Params.issue }} — {{ .Title }}</a>
                 {{ end }}
             {{ end }}
             {{ with $authorName }}

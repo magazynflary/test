@@ -12,7 +12,7 @@
                 {{ partial "banner-image.html" (dict "page" . "class" "post-card__image" "sizes" "100vw" "focus" $bannerFocus) }}
             </div>
             <div class="edition-card__title-bar">
-                {{ with .Params.issue }}<span class="post-card__issue">{{ . }}</span>{{ end }}
+                {{ with .Params.issue }}<span class="post-card__issue">{{ partial "issue-label.html" . }}</span>{{ end }}
                 <h3 class="post-card__title">{{ .Title }}</h3>
             </div>
         </a>

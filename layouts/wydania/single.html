@@ -16,7 +16,7 @@
     </div>
     <div class="edition-card__title-bar">
         <time class="edition-banner__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-        {{ with .Params.issue }}<span class="post-card__issue">{{ . }}</span>{{ end }}
+        {{ with .Params.issue }}<span class="post-card__issue">{{ partial "issue-label.html" . }}</span>{{ end }}
         <h1 class="post-card__title">{{ .Title }}</h1>
     </div>
 </div>
