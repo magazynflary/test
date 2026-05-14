@@ -1,6 +1,8 @@
 {{ define "main" }}
 {{/* Composite key: Hugo lacks native multi-key sort (weight, surname). */}}
 {{ $allAuthors := where site.RegularPages "Section" "autorzy" }}
+{{/* Blacklist collective pseudo-author "Redakcja" — not a person. */}}
+{{ $allAuthors = where $allAuthors "Params.name" "not in" (slice "Redakcja" "redakcja") }}
 {{ $tagged := slice }}
 {{ range $allAuthors }}
     {{ $sortKey := printf "%05d-%s"
