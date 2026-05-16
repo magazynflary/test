@@ -189,6 +189,26 @@ a:hover {
     gap: var(--space-2);
 }
 
+.header-banner {
+    background-color: var(--surface-light);
+    color: var(--black);
+    text-align: center;
+}
+
+.header-banner > p > a {
+    background-color: var(--red);
+    padding: 0.3rem 0.5rem;
+    margin: 0.5rem;
+    display: inline-block;
+    color: white;
+}
+
+[data-theme="dark"] .header-banner {
+    background-color: var(--surface-light);
+    color: var(--bg);
+}
+
+
 .site-logo {
     font-size: var(--text-2xl);
     color: var(--white);

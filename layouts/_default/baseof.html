@@ -98,6 +98,13 @@
             </nav>
         </div>
     </header>
+    <div class="header-banner">
+        <p>Pisz z nami. Myśl głośno.
+            {{ with site.GetPage "/pages/about" }}
+            <a href="{{ .Permalink }}">Dołącz do nas</a>
+            {{ end }}
+        </p>
+    </div>
 
     <main>
         {{ block "main" . }}{{ end }}
