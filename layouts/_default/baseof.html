@@ -50,7 +50,10 @@
     {{- end -}}
     {{- end }}
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ $displayTitle }} | {{ .Site.Title }}{{ end }}</title>
-    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+
+    {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
+        <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+
     <link rel="icon" type="image/png" href="{{ "images/favicon.png" | relURL }}">
     {{ range .AlternativeOutputFormats -}}
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
