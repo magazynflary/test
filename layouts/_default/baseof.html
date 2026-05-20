@@ -5,12 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Params.bio }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
     <link rel="canonical" href="{{ .Permalink }}">
 
     <!-- Open Graph -->
     <meta property="og:title" content="{{ $displayTitle }}">
-    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Params.bio }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:site_name" content="{{ .Site.Title }}">
     <meta property="og:locale" content="pl_PL">
@@ -18,7 +18,7 @@
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $displayTitle }}">
-    <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Params.bio }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
 
     {{ if .IsPage -}}
     <meta property="og:type" content="article">
