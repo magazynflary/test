@@ -47,7 +47,7 @@
     {{ partial "article-image.html" . }}
 
     <div class="article-content">
-        {{ .Content | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&#x202F;&#x202F;$3" | safeHTML }}
+        {{ partial "polish-orphans.html" .Content }}
     </div>
     {{ if eq .Section "artykuly" }}
     <footer class="article-license">

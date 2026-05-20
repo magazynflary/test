@@ -12,7 +12,7 @@
         {{ end }}
         {{ with $page.Params.issue }}<p class="post-card__issue">{{ partial "issue-label.html" . }}</p>{{ end }}
         <h3 class="post-card__title">{{ $page.Title }}</h3>
-        <p class="post-card__excerpt">{{ $page.Summary | plainify | truncate 150 | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}</p>
+        <p class="post-card__excerpt">{{ partial "polish-orphans.html" ($page.Summary | plainify | truncate 150) }}</p>
     </a>
     <p class="post-card__meta">
         <time class="post-card__date" datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "2006-01-02" }}</time>

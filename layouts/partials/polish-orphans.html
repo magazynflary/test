@@ -1,0 +1,2 @@
+{{- /* No line-end orphan single-letter prepositions. */ -}}
+{{- replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&#x202F;&#x202F;$3" . | safeHTML -}}

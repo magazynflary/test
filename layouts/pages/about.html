@@ -23,7 +23,7 @@
 
 <div class="about-page">
     <div class="about-intro article-content">
-        {{ .Content | replaceRE `(\s)([aAiIoOuUwWzZ]) (\S)` "$1$2&nbsp;$3" | safeHTML }}
+        {{ partial "polish-orphans.html" .Content }}
     </div>
     {{ range $sections }}
         {{ if .items }}
