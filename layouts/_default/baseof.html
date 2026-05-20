@@ -49,15 +49,18 @@
     <meta property="og:image" content="{{ $src }}">
     <meta name="twitter:image" content="{{ $src }}">
     {{- else -}}
-    {{- $img := resources.Get $src -}}
-    {{- if $img -}}
-    {{- $ogImg := $img.Resize "1200x webp q80" -}}
-    <meta property="og:image" content="{{ $ogImg.Permalink }}">
-    <meta property="og:image:width" content="{{ $ogImg.Width }}">
-    <meta property="og:image:height" content="{{ $ogImg.Height }}">
+      {{- $img := resources.Get $src -}}
+      {{- if $img -}}
+        {{- $ogImg := $img.Resize "1200x webp q80" -}}
+        <meta property="og:image" content="{{ $ogImg.Permalink }}">
+        <meta property="og:image:width" content="{{ $ogImg.Width }}">
+        <meta property="og:image:height" content="{{ $ogImg.Height }}">
+        <meta name="twitter:image" content="{{ $ogImg.Permalink }}">
+      {{- else -}}
+        <meta property="og:image" content="{{ $src | absURL }}">
+        <meta name="twitter:image" content="{{ $src | absURL }}">
+      {{- end -}}
     {{- end -}}
-    {{- end -}}
-    {{- end }}
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ $displayTitle }} | {{ .Site.Title }}{{ end }}</title>
 
     {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
@@ -69,17 +72,51 @@
     {{ end -}}
 
     {{ if .IsPage }}
+    {{- $authorName := "Redakcja Flary" -}}
+    {{- with .Params.author -}}
+      {{- $authorPage := site.GetPage (printf "/autorzy/%s" .) -}}
+      {{- if $authorPage -}}
+        {{- $authorName = $authorPage.Params.name | default $authorPage.Title -}}
+      {{- else -}}
+        {{- $authorName = . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $jsonImageURL := "" -}}
+    {{- if $socialImageSrc -}}
+      {{- $jsonSrc := strings.TrimLeft "/" $socialImageSrc -}}
+      {{- if or (hasPrefix $jsonSrc "http://") (hasPrefix $jsonSrc "https://") -}}
+        {{- $jsonImageURL = $jsonSrc -}}
+      {{- else -}}
+        {{- with resources.Get $jsonSrc -}}
+          {{- $jsonImg := .Resize "1200x webp q80" -}}
+          {{- $jsonImageURL = $jsonImg.Permalink -}}
+        {{- else -}}
+          {{- $jsonImageURL = $jsonSrc | absURL -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
     <script type="application/ld+json">
     {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "headline": "{{ .Title }}",
-    "image": ["{{ .Params.image | absURL }}"],
-    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
-    "author": [{
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "{{ .Title }}",
+      {{- if $jsonImageURL }}
+      "image": ["{{ $jsonImageURL }}"],
+      {{- end }}
+      "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+      "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+      "author": [{
         "@type": "Person",
-        "name": "{{ .Params.author | default "Redakcja Flary" }}"
-    }]
+        "name": "{{ $authorName }}"
+      }],
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ .Site.Title }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ "images/logo-cz.svg" | absURL }}"
+        }
+      }
     }
     </script>
     {{ end }}
