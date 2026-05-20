@@ -5,18 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    {{- $pageDescription := partial "page-description.html" . -}}
+    <meta name="description" content="{{ $pageDescription }}">
     <link rel="canonical" href="{{ .Permalink }}">
 
     <meta property="og:title" content="{{ $displayTitle }}">
-    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta property="og:description" content="{{ $pageDescription }}">
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:site_name" content="{{ .Site.Title }}">
     <meta property="og:locale" content="pl_PL">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $displayTitle }}">
-    <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta name="twitter:description" content="{{ $pageDescription }}">
 
     {{ if .IsPage -}}
     <meta property="og:type" content="article">
