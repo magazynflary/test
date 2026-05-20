@@ -29,24 +29,27 @@
     {{ else -}}
     <meta property="og:type" content="website">
     {{ end -}}
-    {{- $ogImageSrc := "" -}}
+    {{- $socialImageSrc := "" -}}
     {{- with .Params.image -}}
-      {{- $ogImageSrc = . -}}
+      {{- $socialImageSrc = . -}}
     {{- else -}}
       {{- with .Params.edition -}}
         {{- $edition := site.GetPage (printf "/wydania/%s" .) -}}
         {{- with $edition -}}
           {{- with .Params.image -}}
-            {{- $ogImageSrc = . -}}
+            {{- $socialImageSrc = . -}}
           {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
-    {{- with $ogImageSrc -}}
-    {{- $src := strings.TrimLeft "/" . -}}
+    {{- if not $socialImageSrc -}}
+      {{- $socialImageSrc = "images/logo-cz.svg" -}}
+    {{- end -}}
+    {{- $src := strings.TrimLeft "/" $socialImageSrc -}}
     {{- $isExternal := or (hasPrefix $src "http://") (hasPrefix $src "https://") -}}
     {{- if $isExternal -}}
     <meta property="og:image" content="{{ $src }}">
+    <meta name="twitter:image" content="{{ $src }}">
     {{- else -}}
     {{- $img := resources.Get $src -}}
     {{- if $img -}}
