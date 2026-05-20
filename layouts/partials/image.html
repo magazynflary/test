@@ -4,13 +4,15 @@
 {{- $style := .style | default "" -}}
 {{- $sizes := .sizes | default "(max-width: 640px) 100vw, 720px" -}}
 {{- $title := .title | default "" -}}
+{{- $loadingPriority := .loadingPriority | default "" -}}
+{{- $loadingAttrs := cond (eq $loadingPriority "high") (safeHTMLAttr `loading="eager" fetchpriority="high"`) (safeHTMLAttr `loading="lazy"`) -}}
 {{- $isExternal := or (hasPrefix $src "http://") (hasPrefix $src "https://") -}}
 {{- if $isExternal -}}
 <img src="{{ $src }}" alt="{{ $alt }}"
   {{- with $class }} class="{{ . }}"{{ end }}
   {{- with $style }} style="{{ . | safeCSS }}"{{ end }}
   {{- with $title }} title="{{ . }}"{{ end }}
-  loading="lazy">
+  {{ $loadingAttrs }}>
 {{- else -}}
   {{- $img := resources.Get $src -}}
   {{- if $img -}}
@@ -24,12 +26,12 @@
   {{- with $class }} class="{{ . }}"{{ end }}
   {{- with $style }} style="{{ . | safeCSS }}"{{ end }}
   {{- with $title }} title="{{ . }}"{{ end }}
-  loading="lazy">
+  {{ $loadingAttrs }}>
   {{- else -}}
 <img src="{{ $src | relURL }}" alt="{{ $alt }}"
   {{- with $class }} class="{{ . }}"{{ end }}
   {{- with $style }} style="{{ . | safeCSS }}"{{ end }}
   {{- with $title }} title="{{ . }}"{{ end }}
-  loading="lazy">
+  {{ $loadingAttrs }}>
   {{- end -}}
 {{- end -}}

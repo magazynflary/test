@@ -1,7 +1,10 @@
 {{ define "main" }}
 {{ if .Pages }}
 <div class="articles-grid">
-    {{ range .Pages }}{{ partial "post-card.html" (dict "page" .) }}{{ end }}
+    {{ range $cardIndex, $page := .Pages }}
+        {{ $loadingPriority := cond (eq $cardIndex 0) "high" "" }}
+        {{ partial "post-card.html" (dict "page" $page "loadingPriority" $loadingPriority) }}
+    {{ end }}
 </div>
 {{ else }}
 <p class="no-posts">Brak artykułów w tej sekcji.</p>

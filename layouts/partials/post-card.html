@@ -1,13 +1,14 @@
 {{- $page := .page -}}
 {{- $featured := .featured -}}
+{{- $loadingPriority := .loadingPriority | default "" -}}
 <article class="post-card{{ if $featured }} post-card--featured{{ end }}">
     <a href="{{ $page.Permalink }}" class="post-card__link">
         {{ if $featured }}
         <div class="post-card__image-wrapper">
-            {{ partial "banner-image.html" (dict "page" $page "class" "post-card__image" "sizes" "(max-width: 640px) 100vw, 1280px") }}
+            {{ partial "banner-image.html" (dict "page" $page "class" "post-card__image" "sizes" "(max-width: 640px) 100vw, 1280px" "loadingPriority" $loadingPriority) }}
         </div>
         {{ else }}
-        {{ partial "card-image.html" (dict "page" $page) }}
+        {{ partial "card-image.html" (dict "page" $page "loadingPriority" $loadingPriority) }}
         {{ end }}
         {{ with $page.Params.issue }}<p class="post-card__issue">{{ partial "issue-label.html" . }}</p>{{ end }}
         <h3 class="post-card__title">{{ $page.Title }}</h3>

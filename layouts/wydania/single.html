@@ -12,7 +12,7 @@
 {{ if .Params.image }}
 <div class="edition-banner">
     <div class="edition-banner__image-wrapper">
-        {{ partial "banner-image.html" (dict "page" . "class" "post-card__image edition-banner__image" "sizes" "100vw" "focus" $bannerFocus) }}
+        {{ partial "banner-image.html" (dict "page" . "class" "post-card__image edition-banner__image" "sizes" "100vw" "focus" $bannerFocus "loadingPriority" "high") }}
     </div>
     <div class="edition-card__title-bar">
         <time class="edition-banner__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>

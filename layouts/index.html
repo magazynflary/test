@@ -12,7 +12,10 @@
 {{ end }}
 {{ if $items }}
 <div class="posts-grid posts-grid--no-tags">
-    {{ range $items }}{{ partial "post-card.html" . }}{{ end }}
+    {{ range $cardIndex, $item := $items }}
+        {{ $loadingPriority := cond (eq $cardIndex 0) "high" "" }}
+        {{ partial "post-card.html" (merge $item (dict "loadingPriority" $loadingPriority)) }}
+    {{ end }}
 </div>
 {{ else }}
 <p class="no-posts">Brak artykułów.</p>
