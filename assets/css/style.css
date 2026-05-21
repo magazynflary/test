@@ -461,6 +461,7 @@ main {
     font-size: var(--text-sm);
     letter-spacing: 0.15em;
     color: var(--gray);
+    padding: 0 0.5rem 0 0.5rem;
 }
 
 .post-card__issue {
@@ -474,6 +475,7 @@ main {
     line-height: 1.1;
     text-transform: none;
     color: var(--gray-dark);
+    padding: 0 0.5rem 0 0.5rem;
 }
 
 .post-card__excerpt {
