@@ -100,7 +100,10 @@
     {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "{{ .Permalink }}"},
+      "inLanguage": "pl",
       "headline": "{{ .Title }}",
+      "description": "{{ $pageDescription }}",
       {{- if $jsonImageURL }}
       "image": ["{{ $jsonImageURL }}"],
       {{- end }}
