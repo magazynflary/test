@@ -1,6 +1,7 @@
 baseURL = 'https://drlzin.github.io/test/'
 enableRobotsTXT = true
 languageCode = 'pl'
+defaultContentLanguage = 'pl'
 title = 'Flary'
 
 [taxonomies]
