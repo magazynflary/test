@@ -2,6 +2,7 @@
 edition: 2026-2
 author: anna-mrozek
 title: Wałęsa, wąsy i walka klas
+url: /staly-adres/
 date: 2026-02-25
 draft: false
 tags:

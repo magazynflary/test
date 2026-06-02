@@ -56,6 +56,13 @@ collections:
       - {label: "Wydanie", name: "edition", widget: "relation", collection: "editions", value_field: "{{slug}}", search_fields: ["issue", "title"], display_fields: ["issue", "title"], required: false}
       - {label: "Autor", name: "author", widget: "relation", collection: "authors", search_fields: ["name"], value_field: "{{slug}}", display_fields: ["name"], required: false}
       - {label: "Tytuł", name: "title", widget: "string"}
+      - label: "Stały adres (nadpisuje zwykły URL)"
+        name: "url"
+        widget: "string"
+        required: false
+        hint: "np.: /manifest/."
+        # Reserved prefix list duplicated in tests/reference-integrity/url_collisions_test.go — keep in sync.
+        pattern: ["^/(?!(artykuly|autorzy|pages|tags|wydania|admin|css|images)/)[a-z0-9][a-z0-9-]*/$", "Zły format. Wymagane: /slowo/ (ukośnik na końcu i początku; małe litery, cyfry, minus). Zakazane prefiksy: /artykuly/, /autorzy/, /pages/, /tags/, /wydania/, /admin/, /css/, /images/"]
       - {label: "Data publikacji", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
       - {label: "Wersja robocza", name: "draft", widget: "boolean", default: false}
       - {label: "Tagi", name: "tags", widget: "list", required: false, hint: "rozdzielone przecinkiem, np.: 'historia, polityka'"}
