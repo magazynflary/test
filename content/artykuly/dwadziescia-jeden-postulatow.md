@@ -35,4 +35,4 @@ pauza unikowowa: —.
 minus: -.
 półpauza markdownowa: --.
 pauza markdownowa: ---.
-
+plus/minus: +/-.
