@@ -9,8 +9,8 @@
     {{ partial "banner-image.html" (dict "page" $page) }}
     {{- with $creditName }}
     <figcaption class="article-image-credit">
-        {{- if $authorPage }}<a href="{{ $authorPage.Permalink }}">{{ . }}</a>
-        {{- else if $page.Params.image_credit_url }}<a href="{{ $page.Params.image_credit_url }}" rel="noopener noreferrer">{{ . }}</a>
+        {{- if $authorPage }}Ilustracja: <a href="{{ $authorPage.Permalink }}">{{ . }}</a>
+        {{- else if $page.Params.image_credit_url }}Ilustracja: <a href="{{ $page.Params.image_credit_url }}" rel="noopener noreferrer">{{ . }}</a>
         {{- else }}{{ . }}{{- end -}}
     </figcaption>
     {{- end }}
