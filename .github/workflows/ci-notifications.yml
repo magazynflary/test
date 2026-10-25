@@ -55,7 +55,7 @@ jobs:
                  else "" end) as $note
             | (if $cmp == "" then "" else "\n\n Diff: " + $cmp end) as $diff
             | { message:
-                ( "🔨 New push to **" + $repo + "** (`" + $br + "`), commits: "
+                ( "New push to **" + $repo + "** (`" + $br + "`), commits: "
                   + ($cs | length | tostring) + ":\n" + $list + $note + $diff ) }
           ' "$GITHUB_EVENT_PATH" \
           | curl -sS --fail-with-body --max-time 15 -X POST \
