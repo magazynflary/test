@@ -1,0 +1,68 @@
+on:
+  push:
+    branches: [ "**" ]
+
+permissions: {}
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Send notification to Nextcloud Talk
+        continue-on-error: true
+        shell: bash
+        env:
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+          COMPARE_URL: ${{ github.event.compare }}
+          NC_URL: ${{ secrets.NC_URL }}
+          NC_ROOM_TOKEN: ${{ secrets.NC_ROOM_TOKEN }}
+          NC_USER: ${{ secrets.NC_USER }}
+          NC_PASSWORD: ${{ secrets.NC_PASSWORD }}
+        run: |
+          set -euo pipefail
+
+          if [ "$(jq '(.commits // []) | length' "$GITHUB_EVENT_PATH")" = "0" ]; then
+            echo "No commits to send."
+            exit 0
+          fi
+
+          auth_header() {
+            printf 'Authorization: Basic %s\n' \
+              "$(printf '%s:%s' "$NC_USER" "$NC_PASSWORD" | base64 -w0)"
+          }
+
+          jq -c --arg repo "$REPO" --arg branch "$BRANCH" --arg compare "$COMPARE_URL" '
+            def clean: gsub("\\p{Cc}"; " ") | gsub("@"; "(at)");
+            def md: clean | gsub("(?<x>[\\\\`*_~#\\[\\]<>()!])"; "\\\(.x)");
+            def safeurl: if startswith("https://github.com/") then . else "" end;
+            def line:
+              ((.message // "") | split("\n")[0] // "" | .[0:500] | md) as $msg
+              | ((.author.name // "Unknown author") | .[0:100] | md) as $author
+              | ((.id // "") | gsub("[^0-9a-f]"; "") | .[0:7]) as $id
+              | ((.url // "") | safeurl) as $u
+              | (if $u == "" then "- `\($id)`" else "- [`\($id)`](\($u))" end)
+                + " \($msg) — *\($author)*";
+
+            (.commits // []) as $cs
+            | ($branch | clean | gsub("`"; "") | .[0:100]) as $br
+            | ($repo | md | .[0:200]) as $rp
+            | ($compare | safeurl) as $cmp
+            | ($cs | map(line) | join("\n")) as $list
+            | (if ($cs | length) > 20
+                 then "\n 20 commits is the message limit reached; more might be pushed."
+                 else "" end) as $note
+            | (if $cmp == "" then "" else "\n\n Diff: " + $cmp end) as $diff
+            | { message:
+                ( "🔨 New push to **" + $repo + "** (`" + $br + "`), commits: "
+                  + ($cs | length | tostring) + ":\n" + $list + $note + $diff ) }
+          ' "$GITHUB_EVENT_PATH" \
+          | curl -sS --fail-with-body --max-time 15 -X POST \
+              "${NC_URL}/ocs/v2.php/apps/spreed/api/v1/chat/${NC_ROOM_TOKEN}" \
+              -H @<(auth_header) \
+              -H "Content-Type: application/json" \
+              -H "Accept: application/json" \
+              -H "OCS-APIRequest: true" \
+              --data-binary @-
+
