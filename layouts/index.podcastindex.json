@@ -11,7 +11,12 @@
     * file = the article's file name without .md - the recordings are named
       after it (YYYY-MM-DD-slug.mp3);
     * audio = the optional "Plik audio" field from Decap (empty = match by
-      the file name).
+      the file name);
+    * description = the "Opis dla wyszukiwarek" field; without it the lead,
+      i.e. the first paragraph with text - the one the article page shows as
+      the lead (CSS .article-content p:first-of-type) - skipping pull quotes,
+      block quotes and image-only paragraphs; without any paragraph the
+      summary. description_source says which: description | lead | summary.
 */ -}}
 {{- $articles := slice -}}
 {{- range sort (where site.RegularPages "Section" "artykuly") "File.ContentBaseName" -}}
@@ -24,14 +29,29 @@
       {{- $authorName = . -}}
     {{- end -}}
   {{- end -}}
+  {{- $description := .Description -}}
+  {{- $source := "description" -}}
+  {{- if not $description -}}
+    {{- $source = "lead" -}}
+    {{- $body := .Content | replaceRE `(?s)<(?:div|aside) class="pullquote">.*?</(?:div|aside)>` "" | replaceRE `(?s)<blockquote.*?</blockquote>` "" -}}
+    {{- range findRE `(?s)<p[^>]*>.*?</p>` $body -}}
+      {{- if not $description -}}
+        {{- $description = . | replaceRE `<br\s*/?>` " " | plainify | htmlUnescape | strings.TrimSpace -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $description -}}
+    {{- $source = "summary" -}}
+    {{- $description = partial "page-description.html" . | plainify | htmlUnescape -}}
+  {{- end -}}
   {{- $articles = $articles | append (dict
     "file" .File.ContentBaseName
     "title" .Title
     "link" .Permalink
     "date" (.Date.Format "2006-01-02T15:04:05Z07:00")
     "author" $authorName
-    "description" (partial "page-description.html" . | plainify | htmlUnescape)
-    "description_source" (cond (ne .Description "") "description" "summary")
+    "description" $description
+    "description_source" $source
     "audio" (.Params.audio | default "")
   ) -}}
 {{- end -}}
