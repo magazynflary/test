@@ -1,0 +1,9 @@
+{{- /*
+  /podcast-episodes.json - the episodes list this build used for the article
+  players (partials/podcast-episodes.html), republished (--minify may rewrite
+  numbers, e.g. 1000 -> 1E+3 - still the same JSON values): the next
+  build falls back to it when the audio server is down, and the scheduled
+  build compares it with the server's list to skip unneeded builds. Empty
+  when no list was available.
+*/ -}}
+{{- (partialCached "podcast-episodes.html" "podcast-episodes").raw -}}

@@ -1,0 +1,56 @@
+{{- /*
+  The audio server's list of article recordings (episodes.json, written by
+  audio-feed on the server), for the article players. Call it through
+  partialCached so the list is fetched once per build.
+
+  Returns a dict:
+    episodes - article file name (without .md) -> {url, duration, bytes, ...}
+    raw      - the JSON text used, republished as /podcast-episodes.json
+    source   - "audio server", "last published copy" or "" (none)
+
+  Sources, first usable wins:
+    1. site.Params.podcast.episodesURL - the audio server;
+    2. /podcast-episodes.json of the currently published site - the copy the
+       previous build used, so a temporary audio server outage keeps the
+       players instead of removing them.
+  Neither usable: no players, and the build still succeeds (a warning).
+*/ -}}
+{{- $result := dict "episodes" dict "raw" "" "source" "" -}}
+{{- $candidates := slice -}}
+{{- with site.Params.podcast.episodesURL -}}
+  {{- $candidates = $candidates | append (dict "url" . "source" "audio server") -}}
+{{- end -}}
+{{- $candidates = $candidates | append (dict "url" (absURL "podcast-episodes.json") "source" "last published copy") -}}
+{{- range $candidates -}}
+  {{- if not $result.source -}}
+    {{- $candidate := . -}}
+    {{- $problem := "" -}}
+    {{- with try (resources.GetRemote $candidate.url) -}}
+      {{- if .Err -}}
+        {{- $problem = .Err -}}
+      {{- else if not .Value -}}
+        {{- $problem = "not found" -}}
+      {{- else -}}
+        {{- $raw := .Value.Content -}}
+        {{- with try (transform.Unmarshal (dict "format" "json") $raw) -}}
+          {{- if .Err -}}
+            {{- $problem = "not JSON" -}}
+          {{- else if and (reflect.IsMap .Value) (eq (int (index .Value "version" | default 0)) 1) (reflect.IsMap (index .Value "episodes")) -}}
+            {{- $result = dict "episodes" (index .Value "episodes") "raw" $raw "source" $candidate.source -}}
+          {{- else -}}
+            {{- $problem = "not a version 1 episodes list" -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- with $problem -}}
+      {{- warnf "podcast players: %s %s unusable (%s)" $candidate.source $candidate.url . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq $result.source "last published copy" -}}
+  {{- warnf "podcast players: using the last published copy (%d recordings) - the audio server was unavailable" (len $result.episodes) -}}
+{{- else if not $result.source -}}
+  {{- warnf "podcast players: no episodes list available - articles are built without players" -}}
+{{- end -}}
+{{- return $result -}}

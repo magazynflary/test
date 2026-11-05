@@ -5,6 +5,16 @@ on:
     branches:
       - master
   workflow_dispatch:
+    inputs:
+      only_if_audio_changed:
+        description: "Build only if the audio recordings changed (what the hourly run does)"
+        type: boolean
+        default: false
+  # Hourly: picks up recordings uploaded to the audio server, for the article
+  # players. The check job skips the build when the recordings are unchanged,
+  # so it builds only after an upload, a correction or a removal.
+  schedule:
+    - cron: "17 * * * *"
 
 permissions:
   contents: read
@@ -19,8 +29,54 @@ defaults:
   run:
     shell: bash
 
+env:
+  # The audio server's article -> recording list (audio-feed) for the article
+  # players. The repository variable PODCAST_EPISODES_URL overrides it (the
+  # test site points at the testing server).
+  PODCAST_EPISODES_URL: ${{ vars.PODCAST_EPISODES_URL || 'https://audio.magazynflary.pl/episodes.json' }}
+
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      build: ${{ steps.check.outputs.build }}
+    steps:
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Did the recordings change?
+        id: check
+        env:
+          ONLY_IF_CHANGED: ${{ github.event_name == 'schedule' || inputs.only_if_audio_changed == true }}
+          # The list the published site was built with (partials/podcast-episodes.html).
+          PUBLISHED_COPY_URL: ${{ steps.pages.outputs.base_url }}/podcast-episodes.json
+        run: |
+          if [ "$ONLY_IF_CHANGED" != "true" ]; then
+            echo "build=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # jq -e with "objects": anything but a JSON object under .episodes
+          # counts as unavailable. Numbers are normalized (". + 0"): Hugo's
+          # --minify rewrites them in the published copy (1000 -> 1E+3).
+          EPISODES='.episodes | objects | walk(if type == "number" then . + 0 else . end)'
+          if ! current=$(curl -fsS --max-time 30 "$PODCAST_EPISODES_URL" | jq -ecS "$EPISODES"); then
+            echo "Audio server unavailable - nothing to update, the published players stay."
+            echo "build=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          published=$(curl -fsS --max-time 30 "$PUBLISHED_COPY_URL" | jq -ecS "$EPISODES" || echo "none")
+          if [ "$current" = "$published" ]; then
+            echo "Recordings unchanged - no build."
+            echo "build=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Recordings changed - building."
+            echo "build=true" >> "$GITHUB_OUTPUT"
+          fi
+
   build:
+    needs: check
+    if: needs.check.outputs.build == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -42,6 +98,7 @@ jobs:
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
+          HUGO_PARAMS_PODCAST_EPISODESURL: ${{ env.PODCAST_EPISODES_URL }}
         run: |
           hugo \
             --minify \

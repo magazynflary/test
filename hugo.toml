@@ -18,7 +18,7 @@ leftSingleQuote = '&raquo;'
 rightSingleQuote = '&laquo;'
 
 [outputs]
-home = ['html', 'rss', 'podcastindex']
+home = ['html', 'rss', 'podcastindex', 'podcastepisodes']
 section = ['html', 'rss']
 
 # /podcast-index.json - article data for the podcast feed, which is built
@@ -29,8 +29,28 @@ baseName = 'podcast-index'
 isPlainText = true
 notAlternative = true
 
+# /podcast-episodes.json - the copy of the audio server's episodes.json this
+# build used for the article players (partials/podcast-episodes.html): the
+# fallback when the audio server is down at the next build, and the marker
+# the scheduled build compares (.github/workflows/deploy.yml).
+[outputFormats.podcastepisodes]
+mediaType = 'application/json'
+baseName = 'podcast-episodes'
+isPlainText = true
+notAlternative = true
+
+# Remote resources (only episodes.json) are fetched fresh on every build.
+[caches.getresource]
+maxAge = 0
+
 [params]
 description = 'W trosce o dobro wspólne. Solidarni. Otwarci na dialog.'
+
+[params.podcast]
+# The audio server's article -> recording list (audio-feed). CI overrides it
+# with the repository variable PODCAST_EPISODES_URL when set (the test site
+# uses the testing server); see .github/workflows/deploy.yml.
+episodesURL = 'https://audio.magazynflary.pl/episodes.json'
 
 [params.sectionTitles]
 artykuly = "Artykuły"
