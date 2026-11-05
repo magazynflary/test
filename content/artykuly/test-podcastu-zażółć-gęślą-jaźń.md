@@ -6,6 +6,7 @@ draft: false
 tags:
   - test
 description: Poprawiony opis testowy - sprawdzenie, czy edycja artykułu trafia do feedu.
+audio: 2026-11-05-inne-nagranie.mp3
 ---
 
 Artykuł testowy do sprawdzenia feedu podcastu (`audio.<domena testowa>/podcast.xml`). Zostanie usunięty po testach.
