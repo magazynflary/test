@@ -69,7 +69,7 @@ Nagrania nie leżą w tym repo, tylko na serwerze `audio.magazynflary.pl`. Feed 
 
 **Pole „Plik audio (podcast)”** wypełnia się tylko wyjątkowo, gdy nagranie nazywa się inaczej, niż wynika z daty i nazwy pliku artykułu. Puste pole = przypisanie po nazwie.
 
-**Opis odcinka:** aplikacje podcastowe pokazują pole „Opis dla wyszukiwarek”, poprzedzone nazwiskiem autora. Bez niego pokazują początek tekstu, więc warto je wypełnić, i to **przed wrzuceniem nagrania**. Późniejsze poprawki tytułu i opisu trafiają do feedu w kilka minut, ale część aplikacji (np. Pocket Casts) zapamiętuje odcinek przy pierwszym pobraniu i dalej pokazuje starą wersję.
+**Opis odcinka:** aplikacje podcastowe pokazują pole „Opis dla wyszukiwarek”, poprzedzone nazwiskiem autora. Bez niego pokazują lead, czyli pierwszy akapit artykułu (ten pogrubiony na stronie), więc warto je wypełnić, i to **przed wrzuceniem nagrania**. Późniejsze poprawki tytułu i opisu trafiają do feedu w kilka minut, ale część aplikacji (np. Pocket Casts) zapamiętuje odcinek przy pierwszym pobraniu i dalej pokazuje starą wersję.
 
 **Coś się nie pojawia?**
 - `https://audio.magazynflary.pl/episodes.json`: `episodes` to przypisane nagrania, `not_in_feed` to pliki poza feedem z powodem, `warnings` to uwagi do artykułów (np. brak opisu).
