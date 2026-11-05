@@ -18,8 +18,16 @@ leftSingleQuote = '&raquo;'
 rightSingleQuote = '&laquo;'
 
 [outputs]
-home = ['html', 'rss']
+home = ['html', 'rss', 'podcastindex']
 section = ['html', 'rss']
+
+# /podcast-index.json - article data for the podcast feed, which is built
+# on the audio server (audio-feed). Template: layouts/index.podcastindex.json.
+[outputFormats.podcastindex]
+mediaType = 'application/json'
+baseName = 'podcast-index'
+isPlainText = true
+notAlternative = true
 
 [params]
 description = 'W trosce o dobro wspólne. Solidarni. Otwarci na dialog.'

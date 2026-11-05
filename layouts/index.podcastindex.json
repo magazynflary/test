@@ -1,0 +1,38 @@
+{{- /*
+  /podcast-index.json - every article, for the podcast feed.
+
+  The feed (podcast.xml) is built on the audio server by audio-feed
+  (repository of the server, roles/audio_hosting), which fetches this file
+  every few minutes and joins it with the list of published recordings.
+  This file is a contract with that script:
+    * version 1 - do not rename or drop fields, do not change their meaning;
+    * all articles, never only the latest N (a missing article = its
+      episode disappears from the podcast);
+    * file = the article's file name without .md - the recordings are named
+      after it (YYYY-MM-DD-slug.mp3);
+    * audio = the optional "Plik audio" field from Decap (empty = match by
+      the file name).
+*/ -}}
+{{- $articles := slice -}}
+{{- range sort (where site.RegularPages "Section" "artykuly") "File.ContentBaseName" -}}
+  {{- $authorName := "Redakcja Flary" -}}
+  {{- with .Params.author -}}
+    {{- $authorPage := site.GetPage (printf "/autorzy/%s" .) -}}
+    {{- if $authorPage -}}
+      {{- $authorName = $authorPage.Params.name | default $authorPage.Title -}}
+    {{- else -}}
+      {{- $authorName = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $articles = $articles | append (dict
+    "file" .File.ContentBaseName
+    "title" .Title
+    "link" .Permalink
+    "date" (.Date.Format "2006-01-02T15:04:05Z07:00")
+    "author" $authorName
+    "description" (partial "page-description.html" . | plainify | htmlUnescape)
+    "description_source" (cond (ne .Description "") "description" "summary")
+    "audio" (.Params.audio | default "")
+  ) -}}
+{{- end -}}
+{{- dict "version" 1 "articles" $articles | jsonify (dict "indent" "  ") -}}
