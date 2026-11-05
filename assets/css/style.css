@@ -834,6 +834,33 @@ main {
     color: inherit;
 }
 
+/* Audio player (partials/podcast-player.html) - only on articles with a recording. */
+.article-audio {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 28rem;
+    margin-top: var(--space-4);
+}
+
+.article-audio__label,
+.article-audio__unavailable {
+    font-size: var(--text-sm);
+    color: var(--gray);
+}
+
+.article-audio__label {
+    font-weight: 600;
+}
+
+.article-audio__player {
+    width: 100%;
+}
+
+.article-audio [hidden] {
+    display: none;
+}
+
 .article .article-content {
     grid-column: 2;
     grid-row: 3;
@@ -1284,7 +1311,8 @@ main {
    ============================================================ */
 @media print {
     .site-header,
-    .site-footer {
+    .site-footer,
+    .article-audio {
         display: none;
     }
 

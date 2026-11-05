@@ -33,6 +33,7 @@
                 {{ if $authorPage }}<a href="{{ $authorPage.Permalink }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}
             </p>
             {{ end }}
+            {{ if eq .Section "artykuly" }}{{ partial "podcast-player.html" . }}{{ end }}
         </div>
 
         {{ with .GetTerms "tags" }}

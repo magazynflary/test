@@ -1,0 +1,31 @@
+{{- /*
+  The article's audio player, only when the audio server lists a recording
+  for this article (partials/podcast-episodes.html). preload="none": nothing
+  is downloaded before the reader presses play (no traffic, no skewed
+  listening statistics). If the file is gone when played (removed after this
+  build), the player is replaced by a short notice.
+*/ -}}
+{{- $episodes := (partialCached "podcast-episodes.html" "podcast-episodes").episodes -}}
+{{- with index $episodes .File.ContentBaseName -}}
+  {{- $episode := . -}}
+  {{- with $episode.url -}}
+    {{- $minutes := 0 -}}
+    {{- with $episode.duration -}}
+      {{- $minutes = math.Max 1 (math.Round (div (float .) 60)) | int -}}
+    {{- end -}}
+<div class="article-audio">
+    <span class="article-audio__label">Posłuchaj artykułu{{ with $minutes }} · {{ . }} min{{ end }}</span>
+    <audio class="article-audio__player" controls preload="none" src="{{ . }}"></audio>
+    <span class="article-audio__unavailable" hidden>Nagranie jest chwilowo niedostępne.</span>
+</div>
+<script>
+    (function (box) {
+        var audio = box.querySelector("audio");
+        audio.addEventListener("error", function () {
+            audio.hidden = true;
+            box.querySelector(".article-audio__unavailable").hidden = false;
+        });
+    })(document.currentScript.previousElementSibling);
+</script>
+  {{- end -}}
+{{- end -}}

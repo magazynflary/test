@@ -71,11 +71,13 @@ Nagrania nie leżą w tym repo, tylko na serwerze `audio.magazynflary.pl`. Feed 
 
 **Opis odcinka:** aplikacje podcastowe pokazują pole „Opis dla wyszukiwarek”, poprzedzone nazwiskiem autora. Bez niego pokazują lead, czyli pierwszy akapit artykułu (ten pogrubiony na stronie), więc warto je wypełnić, i to **przed wrzuceniem nagrania**. Późniejsze poprawki tytułu i opisu trafiają do feedu w kilka minut, ale część aplikacji (np. Pocket Casts) zapamiętuje odcinek przy pierwszym pobraniu i dalej pokazuje starą wersję.
 
+**Odtwarzacz na stronie artykułu:** artykuł z nagraniem dostaje pod tytułem odtwarzacz „Posłuchaj artykułu · N min”. Strona przebudowuje się sama co godzinę, ale tylko wtedy, gdy zmieniła się lista nagrań, więc odtwarzacz pojawia się najpóźniej ok. godzinę po wrzuceniu pliku (od razu, jeśli w międzyczasie ktoś coś opublikuje). Jeśli w czasie buildu serwer audio nie odpowiada, strona korzysta z listy z poprzedniego buildu i odtwarzacze nie znikają. Gdy nagranie zostanie usunięte, odtwarzacz znika przy najbliższym buildzie, a do tego czasu po kliknięciu pokazuje „Nagranie jest chwilowo niedostępne”.
+
 **Coś się nie pojawia?**
 - `https://audio.magazynflary.pl/episodes.json`: `episodes` to przypisane nagrania, `not_in_feed` to pliki poza feedem z powodem, `warnings` to uwagi do artykułów (np. brak opisu).
 - `https://audio.magazynflary.pl/manifest.json`, sekcja `ignored`: pliki o złej nazwie lub w złym formacie.
 
-**Dla programistów:** `/podcast-index.json` (`layouts/index.podcastindex.json`) to kontrakt z serwerem. Nie zmieniaj nazw ani znaczenia pól i nie ograniczaj liczby artykułów: artykuł, którego brak w pliku, traci odcinek w podcaście. Szczegóły po stronie serwera: `docs/audio-hosting.md` w repo infrastruktury.
+**Dla programistów:** `/podcast-index.json` (`layouts/index.podcastindex.json`) to kontrakt z serwerem. Odtwarzacz: `layouts/partials/podcast-player.html`, lista nagrań: `layouts/partials/podcast-episodes.html` (z serwera audio, a gdy nie odpowiada, z kopii `/podcast-episodes.json` opublikowanej przez poprzedni build), build co godzinę: `.github/workflows/deploy.yml`. Adres listy na stronie testowej ustawia zmienna repozytorium `PODCAST_EPISODES_URL` (Settings → Secrets and variables → Actions → Variables); bez niej używany jest serwer produkcyjny. Nie zmieniaj nazw ani znaczenia pól i nie ograniczaj liczby artykułów: artykuł, którego brak w pliku, traci odcinek w podcaście. Szczegóły po stronie serwera: `docs/audio-hosting.md` w repo infrastruktury.
 
 ## Dostęp dla redaktorów
 
