@@ -73,6 +73,13 @@ collections:
       - {label: "Autor obrazka — z redakcji", name: "image_credit_author", widget: "relation", collection: "authors", search_fields: ["name"], value_field: "{{slug}}", display_fields: ["name"], required: false, hint: "Jeśli z redakcji — pojawi się odnośnik wewnętrzny do strony autora"}
       - {label: "Autor obrazka — link zewnętrzny", name: "image_credit_url", widget: "string", required: false, hint: "Jeśli spoza redakcji — link na zewnątrz"}
       - {label: "Opis dla wyszukiwarek", name: "description", widget: "text", required: false}
+      # Podcast: read by audio-feed on the audio server via /podcast-index.json. Same name rule as the server (audio-manifest NAME_RE).
+      - label: "Plik audio (podcast) — tylko wyjątkowo"
+        name: "audio"
+        widget: "string"
+        required: false
+        hint: "Zwykle zostaw puste: nagranie przypisze się samo po nazwie pliku (data + nazwa artykułu, np. 2026-05-13-samotni-wsrod-ludzi.mp3). Wpisz nazwę pliku z folderu „Audio publiczne” tylko wtedy, gdy nagranie nazywa się inaczej."
+        pattern: ['^\d{4}-\d{2}-\d{2}-[a-z0-9]+(-[a-z0-9]+)*\.mp3$', "Zły format. Wymagane: RRRR-MM-DD-nazwa.mp3 (małe litery bez polskich znaków, cyfry, minus), np. 2026-05-13-samotni-wsrod-ludzi.mp3"]
       - {label: "Źródła (APA)", name: "sources", widget: "sources-editor", required: false}
       - {label: "Treść", name: "body", widget: "markdown", required: false}
       - {label: "Ukryj przed wyszukiwarką (Noindex)", name: "noindex", widget: "boolean", default: false, required: false, hint: "Zaznacz, jeśli ta strona ma nie pojawiać się w Google i sitemapie."}

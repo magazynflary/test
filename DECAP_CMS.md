@@ -56,6 +56,27 @@ Draft → In Review → Ready → Publish
 
 **Kompresja:** automatyczna, max 0.5 MB / 2000 px (biblioteka browser-image-compression, przechwycenie `<input type="file">` przed obróbką przez Decap CMS)
 
+## Podcast (nagrania artykułów)
+
+Nagrania nie leżą w tym repo, tylko na serwerze `audio.magazynflary.pl`. Feed podcastu (`https://audio.magazynflary.pl/podcast.xml`) też buduje serwer. Co 2 minuty łączy listę nagrań z plikiem `/podcast-index.json` tej strony (tytuły, autorzy, opisy, adresy artykułów).
+
+**Dodanie nagrania:**
+1. Nazwa pliku: `RRRR-MM-DD-nazwa-artykulu.mp3`, czyli data publikacji i nazwa pliku artykułu bez polskich znaków, np. `2026-05-13-samotni-wsrod-ludzi.mp3`. Tak nazywa pliki magazynflary-audio.
+2. Wrzuć plik do folderu **Audio publiczne** w Nextcloud (grupa `audio`).
+3. Po ok. 3 minutach odcinek jest w feedzie. W CMS nic nie trzeba zmieniać. Artykuł musi być już opublikowany na stronie.
+
+**Poprawka nagrania:** nowy plik z `-v2` (potem `-v3` itd.), z resztą nazwy bez zmian, nawet jeśli w międzyczasie zmieniła się data artykułu. Feed bierze najwyższą wersję jako ten sam odcinek. Stary plik można potem usunąć. Nie podmieniaj pliku pod tą samą nazwą: aplikacje i przeglądarki trzymają stare kopie.
+
+**Pole „Plik audio (podcast)”** wypełnia się tylko wyjątkowo, gdy nagranie nazywa się inaczej, niż wynika z daty i nazwy pliku artykułu. Puste pole = przypisanie po nazwie.
+
+**Opis odcinka:** aplikacje podcastowe pokazują pole „Opis dla wyszukiwarek”. Bez niego pokazują początek tekstu, więc warto je wypełnić.
+
+**Coś się nie pojawia?**
+- `https://audio.magazynflary.pl/episodes.json`: `episodes` to przypisane nagrania, `not_in_feed` to pliki poza feedem z powodem, `warnings` to uwagi do artykułów (np. brak opisu).
+- `https://audio.magazynflary.pl/manifest.json`, sekcja `ignored`: pliki o złej nazwie lub w złym formacie.
+
+**Dla programistów:** `/podcast-index.json` (`layouts/index.podcastindex.json`) to kontrakt z serwerem. Nie zmieniaj nazw ani znaczenia pól i nie ograniczaj liczby artykułów: artykuł, którego brak w pliku, traci odcinek w podcaście. Szczegóły po stronie serwera: `docs/audio-hosting.md` w repo infrastruktury.
+
 ## Dostęp dla redaktorów
 
 ### Lokalnie (test):
