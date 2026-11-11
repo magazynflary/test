@@ -1,0 +1,18 @@
+{{- /*
+  A short invitation to the newsletter at the end of an article: a link
+  to /newsletter/, not the form itself - the form (and its captcha
+  script from the newsletter server) loads only on that one page.
+  Shown only when the newsletter page exists and sign-ups are open.
+*/ -}}
+{{- $cfg := site.Params.newsletter | default dict -}}
+{{- with site.GetPage "/pages/newsletter" -}}
+{{- if and $cfg.url $cfg.listuuid }}
+<aside class="newsletter-cta" aria-label="Newsletter">
+    <p class="newsletter-cta__text">
+        <strong>Newsletter Flary.</strong> Raz na kwartał premiera nowego
+        numeru prosto do Twojej skrzynki.
+    </p>
+    <a class="newsletter-cta__link" href="{{ .RelPermalink }}">Zapisz się</a>
+</aside>
+{{- end }}
+{{- end -}}

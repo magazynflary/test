@@ -1,0 +1,14 @@
+{{ define "main" }}
+{{- /* The newsletter pages (content/pages/newsletter*.md, layout: newsletter):
+       the text from the CMS, then the sign-up form unless the page says
+       newsletter_form: false (the "check your inbox" page). */ -}}
+<div class="newsletter-page">
+    <h1 class="newsletter-page__title">{{ .Title }}</h1>
+    <div class="article-content">
+        {{ partial "polish-orphans.html" .Content }}
+    </div>
+    {{ if ne .Params.newsletter_form false }}
+        {{ partial "newsletter-form.html" . }}
+    {{ end }}
+</div>
+{{ end }}

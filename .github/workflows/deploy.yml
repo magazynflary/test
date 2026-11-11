@@ -102,7 +102,15 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_PARAMS_PODCAST_EPISODESURL: ${{ env.PODCAST_EPISODES_URL }}
           HUGO_PARAMS_PODCAST_FEEDURL: ${{ env.PODCAST_FEED_URL }}
+          # Newsletter form target (hugo.toml [params.newsletter], empty
+          # there): the TESTING server's URL and list UUID, never
+          # production's. Exported only when set - an empty HUGO_PARAMS_*
+          # would blank the hugo.toml value. Unset = "coming soon", no form.
+          NEWSLETTER_URL: ${{ vars.NEWSLETTER_URL }}
+          NEWSLETTER_LIST_UUID: ${{ vars.NEWSLETTER_LIST_UUID }}
         run: |
+          if [ -n "$NEWSLETTER_URL" ]; then export HUGO_PARAMS_NEWSLETTER_URL="$NEWSLETTER_URL"; fi
+          if [ -n "$NEWSLETTER_LIST_UUID" ]; then export HUGO_PARAMS_NEWSLETTER_LISTUUID="$NEWSLETTER_LIST_UUID"; fi
           hugo \
             --minify \
             --buildFuture \
