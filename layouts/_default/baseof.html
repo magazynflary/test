@@ -190,6 +190,9 @@
             {{- with site.GetPage "/pages/newsletter" }}
             <a href="{{ .RelPermalink }}" class="footer-quote footer-email">Newsletter</a>
             {{- end }}
+            {{- with site.GetPage "/pages/polityka-prywatnosci" }}
+            <a href="{{ .RelPermalink }}" class="footer-quote footer-email">Polityka prywatności</a>
+            {{- end }}
         </div>
     </footer>
     <script>
