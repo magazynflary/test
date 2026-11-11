@@ -56,3 +56,22 @@ episodesURL = 'https://audio.magazynflary.pl/episodes.json'
 artykuly = "Artykuły"
 wydania = "Wydania"
 
+
+# Newsletter - listmonk at newsletter.magazynflary.pl (infrastructure
+# repository: docs/newsletter.md). The form (partials/newsletter-form.html)
+# posts straight to listmonk, which redirects back to the "check your
+# inbox" page after a sign-up. listmonk only redirects to - and only
+# allows CORS (needed by the ALTCHA widget) from - addresses listed
+# EXACTLY in listmonk -> Settings -> Security -> Trusted URLs: put the
+# full URL of /newsletter/sprawdz-skrzynke/ of every site there.
+# CI overrides url and listUUID with the repository variables
+# NEWSLETTER_URL and NEWSLETTER_LIST_UUID when set (the test site uses
+# the testing server) - .github/workflows/deploy.yml.
+[params.newsletter]
+url = "https://newsletter.magazynflary.pl"
+# The UUID of the newsletter list in listmonk (public, double opt-in).
+# Empty = no form, a "coming soon" note instead (and a build warning).
+listUUID = ""
+# ALTCHA proof-of-work captcha (self-hosted by listmonk, no third
+# party). Must match listmonk -> Settings -> Security -> CAPTCHA.
+captcha = true

@@ -8,6 +8,9 @@
     {{- $pageDescription := partial "page-description.html" . -}}
     <meta name="description" content="{{ $pageDescription }}">
     <link rel="canonical" href="{{ .Permalink }}">
+    {{- if .Params.noindex }}
+    <meta name="robots" content="noindex">
+    {{- end }}
 
     <meta property="og:title" content="{{ $displayTitle }}">
     <meta property="og:description" content="{{ $pageDescription }}">
@@ -184,6 +187,9 @@
             <span class="footer-text">&copy; {{ now.Year }} {{ .Site.Title }}</span>
             <span class="footer-quote">{{ .Site.Params.description }}</span>
             <span class="footer-quote">Dołącz do nas: <a href="mailto:redakcja@magazynflary.pl" class="footer-email">redakcja@magazynflary.pl</a></span>
+            {{- with site.GetPage "/pages/newsletter" }}
+            <a href="{{ .RelPermalink }}" class="footer-quote footer-email">Newsletter</a>
+            {{- end }}
         </div>
     </footer>
     <script>

@@ -1,0 +1,63 @@
+{{- /*
+  Newsletter sign-up form. A plain HTML form posting straight to listmonk
+  (site.Params.newsletter, hugo.toml): listmonk subscribes the address to
+  the list (double opt-in: it mails a confirmation link) and redirects to
+  the "check your inbox" page given in "next" - only when that URL is in
+  listmonk's Trusted URLs, otherwise it shows its own message page.
+
+  Fields are listmonk's (cmd/public.go, v6.2.0): email, l (list UUID),
+  nonce (a honeypot - listmonk rejects the sign-up when it is filled),
+  altcha (filled by the ALTCHA widget), next. Only the e-mail address is
+  asked for: nothing else is needed to send a newsletter (data
+  minimisation).
+*/ -}}
+{{- $cfg := site.Params.newsletter | default dict -}}
+{{- $url := strings.TrimSuffix "/" ($cfg.url | default "") -}}
+{{- $list := $cfg.listuuid | default "" -}}
+{{- $thanks := site.GetPage "/pages/newsletter-sprawdz-skrzynke" -}}
+{{- $privacy := site.GetPage "/pages/polityka-prywatnosci" -}}
+{{- if and $url $list }}
+<form class="newsletter-form" method="post" action="{{ $url }}/subscription/form" accept-charset="UTF-8">
+    <input type="hidden" name="l" value="{{ $list }}">
+    {{- with $thanks }}
+    <input type="hidden" name="next" value="{{ .Permalink }}">
+    {{- end }}
+
+    <label class="newsletter-form__label" for="newsletter-email">Adres e-mail</label>
+    <div class="newsletter-form__row">
+        <input class="newsletter-form__input" id="newsletter-email" name="email" type="email"
+               required autocomplete="email" maxlength="200" placeholder="ty@example.org">
+        <button class="newsletter-form__submit" type="submit">Zapisz się</button>
+    </div>
+
+    {{- /* Honeypot: invisible for people and assistive technology; bots that fill every field get rejected. */}}
+    <div class="newsletter-form__hp" aria-hidden="true">
+        <label for="newsletter-nonce">Zostaw to pole puste</label>
+        <input id="newsletter-nonce" name="nonce" type="text" tabindex="-1" autocomplete="off">
+    </div>
+
+    <label class="newsletter-form__consent">
+        <input type="checkbox" name="consent" required>
+        <span>Chcę otrzymywać newsletter Magazynu Flary.</span>
+    </label>
+
+    {{- if $cfg.captcha }}
+    <altcha-widget class="newsletter-form__captcha"
+        challengeurl="{{ $url }}/api/public/captcha/altcha"
+        auto="onfocus" hidelogo hidefooter
+        strings='{"label":"Nie jestem robotem","verifying":"Sprawdzanie…","verified":"Sprawdzono","error":"Weryfikacja nie powiodła się – spróbuj ponownie.","expired":"Weryfikacja wygasła – spróbuj ponownie.","waitAlert":"Trwa weryfikacja… chwilę.","ariaLinkLabel":"Strona ALTCHA"}'></altcha-widget>
+    <script type="module" src="{{ $url }}/public/static/altcha.umd.js" async defer></script>
+    {{- end }}
+
+    <p class="newsletter-form__note">
+        Wyślemy Ci link potwierdzający – zapis zacznie działać dopiero po
+        jego kliknięciu. Wypiszesz się w każdej chwili linkiem w każdej
+        wiadomości.
+        {{- with $privacy }} Zasady przetwarzania danych: <a href="{{ .RelPermalink }}">{{ .Title | lower }}</a>.{{ end }}
+    </p>
+</form>
+{{- else }}
+{{- warnf "newsletter: params.newsletter.url or params.newsletter.listUUID is empty - the sign-up form is replaced by a note (hugo.toml)" }}
+<p class="newsletter-form__unavailable">Zapisy do newslettera ruszą wkrótce.</p>
+{{- end }}
+{{- if not $privacy }}{{ warnf "newsletter: no /pages/polityka-prywatnosci page - the form links to no privacy policy (needed before production)" }}{{ end }}

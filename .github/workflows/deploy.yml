@@ -99,7 +99,14 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
           HUGO_PARAMS_PODCAST_EPISODESURL: ${{ env.PODCAST_EPISODES_URL }}
+          # Newsletter form target (hugo.toml [params.newsletter]): the
+          # repository variables override it only when set - an empty
+          # HUGO_PARAMS_* would blank the hugo.toml value.
+          NEWSLETTER_URL: ${{ vars.NEWSLETTER_URL }}
+          NEWSLETTER_LIST_UUID: ${{ vars.NEWSLETTER_LIST_UUID }}
         run: |
+          if [ -n "$NEWSLETTER_URL" ]; then export HUGO_PARAMS_NEWSLETTER_URL="$NEWSLETTER_URL"; fi
+          if [ -n "$NEWSLETTER_LIST_UUID" ]; then export HUGO_PARAMS_NEWSLETTER_LISTUUID="$NEWSLETTER_LIST_UUID"; fi
           hugo \
             --minify \
             --buildFuture \

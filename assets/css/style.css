@@ -978,6 +978,143 @@ main {
 }
 
 /* ============================================================
+   NEWSLETTER
+   Form (partials/newsletter-form.html) on /newsletter/, a short
+   invitation (partials/newsletter-cta.html) under articles.
+   ============================================================ */
+.newsletter-page {
+    max-width: var(--content-width);
+    margin: 0 auto;
+}
+
+.newsletter-page__title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-6);
+}
+
+.newsletter-form {
+    margin-top: var(--space-8);
+    padding: var(--space-6);
+    background: var(--surface-light);
+    color: var(--on-surface-light);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.newsletter-form__label {
+    font-weight: 700;
+}
+
+.newsletter-form__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.newsletter-form__input {
+    flex: 1 1 16rem;
+    min-width: 0;
+    padding: var(--space-3);
+    font: inherit;
+    color: var(--text);
+    background: var(--surface);
+    border: 2px solid var(--text);
+    border-radius: 0;
+}
+
+.newsletter-form__input:focus-visible,
+.newsletter-form__consent input:focus-visible,
+.newsletter-form__submit:focus-visible,
+.newsletter-cta__link:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 2px;
+}
+
+.newsletter-form__submit,
+.newsletter-cta__link {
+    padding: var(--space-3) var(--space-6);
+    font: inherit;
+    font-weight: 700;
+    color: var(--on-red);
+    background: var(--red);
+    border: none;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.newsletter-form__submit:hover,
+.newsletter-cta__link:hover {
+    color: var(--on-red);
+    background: var(--red-dark);
+}
+
+.newsletter-form__consent {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    cursor: pointer;
+}
+
+.newsletter-form__consent input {
+    margin-top: 0.3em;
+    accent-color: var(--red);
+}
+
+.newsletter-form__note {
+    font-size: var(--text-sm);
+    opacity: 0.85;
+}
+
+.newsletter-form__note a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* The ALTCHA widget, styled through its CSS custom properties. */
+.newsletter-form__captcha {
+    --altcha-border-radius: 0;
+    --altcha-color-base: var(--surface);
+    --altcha-color-border: var(--text);
+    --altcha-color-text: var(--text);
+    --altcha-max-width: 100%;
+}
+
+/* Honeypot: off-screen for people, still in the form for bots. */
+.newsletter-form__hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.newsletter-form__unavailable {
+    margin-top: var(--space-8);
+    font-style: italic;
+    color: var(--gray);
+}
+
+.newsletter-cta {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    margin-top: var(--space-8);
+    padding: var(--space-4) var(--space-6);
+    background: var(--surface-light);
+    color: var(--on-surface-light);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+}
+
+.newsletter-cta__text {
+    margin: 0;
+}
+
+/* ============================================================
    NO POSTS MESSAGE
    ============================================================ */
 .no-posts {

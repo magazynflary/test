@@ -116,6 +116,13 @@ collections:
       - {label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
       - {label: "Wersja robocza", name: "draft", widget: "boolean", default: false}
       - {label: "Treść", name: "body", widget: "markdown"}
+      # Technical front matter of some pages (layout: about/newsletter, the
+      # /newsletter/ URLs, the form switch, noindex) - hidden from editors,
+      # declared so that saving a page in the CMS keeps it.
+      - {label: "Układ", name: "layout", widget: "hidden", required: false}
+      - {label: "Adres", name: "url", widget: "hidden", required: false}
+      - {label: "Formularz newslettera", name: "newsletter_form", widget: "hidden", required: false}
+      - {label: "Bez indeksowania", name: "noindex", widget: "hidden", required: false}
 
   # Authors (profiles)
   - name: "authors"
