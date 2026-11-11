@@ -1,0 +1,13 @@
+{{ define "main" }}
+{{- /* A plain text page (layout: page): the title and the text from the
+       CMS - e.g. the privacy policy. Same column as the newsletter page. */ -}}
+<div class="newsletter-page">
+    <h1 class="newsletter-page__title">{{ .Title }}</h1>
+    <div class="article-content">
+        {{ partial "polish-orphans.html" .Content }}
+    </div>
+    {{ with .Lastmod }}{{ if not .IsZero }}
+    <p class="article-license">Ostatnia zmiana: <time datetime="{{ .Format "2006-01-02" }}">{{ .Format "2006-01-02" }}</time></p>
+    {{ end }}{{ end }}
+</div>
+{{ end }}
