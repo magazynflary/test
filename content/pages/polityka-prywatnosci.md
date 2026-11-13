@@ -7,8 +7,18 @@ url: /polityka-prywatnosci/
 ---
 
 **SZKIC – do uzupełnienia i przeglądu prawnego przed publikacją.**
-Miejsca oznaczone [DO UZUPEŁNIENIA] i [DO SPRAWDZENIA] trzeba wypełnić
-lub potwierdzić; tę ramkę usuń przed publikacją.
+Miejsca oznaczone [DO UZUPEŁNIENIA] trzeba wypełnić; tę ramkę usuń przed
+publikacją. Pytania do prawnika:
+
+1. counter.dev (statystyki) nie oferuje umowy powierzenia
+   przetwarzania (art. 28 RODO). Czy przy danych zbiorczych jest
+   potrzebna, a jeśli tak – co dalej?
+2. Skrypt counter.dev zapisuje w przeglądarce znacznik `_swa`
+   (sessionStorage, do zamknięcia karty), żeby nie liczyć wizyty
+   dwa razy. Czy to wymaga zgody (art. 399 Prawa komunikacji
+   elektronicznej), czyli banera zgody?
+3. Czy opis zgody na newsletter i podstaw prawnych jest wystarczający
+   (art. 6 RODO, art. 398 PKE)?
 
 Ta strona wyjaśnia, jakie dane osobowe przetwarzamy, gdy czytasz Magazyn
 Flary, słuchasz naszych nagrań, zapisujesz się na newsletter albo do
@@ -16,8 +26,7 @@ nas piszesz – po co, jak długo i jakie masz prawa.
 
 ## Kto odpowiada za Twoje dane
 
-Administratorem danych jest **Dominik Kacprowski**, który prowadzi
-Magazyn Flary w imieniu redakcji. Kontakt we wszystkich sprawach
+Administratorem danych jest **Dominik Kacprowski** w imieniu redakcji Magazynu Flary. Kontakt we wszystkich sprawach
 dotyczących danych osobowych: **[DO UZUPEŁNIENIA: adres e-mail do spraw
 danych]**.
 
@@ -36,17 +45,20 @@ Dane trafiają do USA; GitHub przekazuje je na podstawie mechanizmów
 przewidzianych w RODO (EU-US Data Privacy Framework i standardowe
 klauzule umowne).
 
-**Statystyki odwiedzin.** Korzystamy z usługi counter.dev, która liczy
-odwiedziny w formie zbiorczej (np. liczba wyświetleń, z jakiej strony
-ktoś przyszedł, kraj, rodzaj urządzenia). Według opisu usługi nie
-używa ona plików cookies i nie zapisuje adresów IP do profilowania
-odwiedzających. Skrypt statystyk jest pobierany z serwerów sieci
-Cloudflare, która przy tej okazji widzi Twój adres IP.
-[DO SPRAWDZENIA: zakres danych, miejsce ich przechowywania i dane
-podmiotu prowadzącego counter.dev – jego polityka prywatności nie opisuje
-danych odwiedzających.] Robimy to w naszym prawnie uzasadnionym
-interesie, jakim jest wiedza, czy i jak strona jest czytana (art. 6
-ust. 1 lit. f RODO).
+**Statystyki odwiedzin.** Liczymy odwiedziny usługą
+[counter.dev](https://counter.dev) (prowadzi ją Irae Hueck Costa,
+Berlin). Przy każdej podstronie wysyłany jest jej adres, a przy wejściu
+na stronę z zewnątrz także adres strony, z której przychodzisz, i
+rozdzielczość ekranu. Jak przy każdym połączeniu, counter.dev otrzymuje
+przy tym Twój adres IP (ustala z niego kraj) i informację o przeglądarce.
+Według jego polityki prywatności przechowuje wyłącznie dane zbiorcze, a
+nie pojedyncze wizyty – na serwerach Linode we Frankfurcie (Niemcy).
+Skrypt i dane statystyk przechodzą przez sieć Cloudflare, Inc. (USA),
+która widzi przy tym adres IP. Statystyki nie używają plików cookies;
+skrypt zapisuje w Twojej przeglądarce jedynie znacznik, że wizyta została
+już policzona (sessionStorage, znika po zamknięciu karty). Robimy to w
+naszym prawnie uzasadnionym interesie, jakim jest wiedza, czy i jak
+strona jest czytana (art. 6 ust. 1 lit. f RODO).
 
 **Ustawienia w przeglądarce.** Jeśli przełączysz motyw jasny/ciemny,
 zapamiętujemy Twój wybór w pamięci Twojej przeglądarki (localStorage).
@@ -55,7 +67,7 @@ Ta informacja nie jest nigdzie wysyłana. Sami nie używamy plików cookies.
 ## Nagrania audio
 
 Gdy odtwarzasz lub pobierasz nasze nagrania (na stronie albo w aplikacji
-do podcastów), nasz serwer zapisuje Twój adres IP, aplikację lub
+do podcastów), nasz serwer w Niemczech zapisuje Twój adres IP, aplikację lub
 przeglądarkę, z której korzystasz, oraz czas zapytania. Te dane służą
 do utrzymania usługi i do liczenia anonimowych statystyk słuchalności
 (bez adresów IP), a po **14 dniach** są automatycznie usuwane. Podstawą
@@ -84,11 +96,10 @@ około **6 miesiącach** – jeśli w tym czasie będziemy musieli odtworzyć
 bazę z kopii, ponownie usuniemy z niej osoby wypisane.
 
 **Kto jeszcze ma dostęp.** Newsletter działa na naszym własnym serwerze
-(Contabo GmbH, [DO SPRAWDZENIA: lokalizacja serwera, np. Niemcy]),
-kopie zapasowe przechowuje Hetzner Online GmbH (Niemcy), a wiadomości
-wysyła [DO UZUPEŁNIENIA: dostawca wysyłki – po wyborze: nazwa, kraj,
-miejsce przetwarzania danych]. Każda z tych firm przetwarza dane
-wyłącznie na nasze zlecenie. Strony newslettera (potwierdzenie zapisu,
+w Niemczech, kopie zapasowe są przechowywane – zaszyfrowane – także w
+Niemczech, a wiadomości wysyła [DO UZUPEŁNIENIA: dostawca wysyłki – po
+wyborze: nazwa, kraj, miejsce przetwarzania danych]. Dostawcy tych usług
+przetwarzają dane wyłącznie na nasze zlecenie. Strony newslettera (potwierdzenie zapisu,
 wypisanie) zapisują w dziennikach serwera adres IP i adres odwiedzanej
 strony; dzienniki są usuwane po 14 dniach.
 
@@ -99,9 +110,10 @@ link „zarządzaj subskrypcją” jest w każdej wiadomości.
 
 Jeśli napiszesz do nas e-mail, przetwarzamy Twój adres i treść
 wiadomości, żeby odpowiedzieć i prowadzić korespondencję (art. 6 ust. 1
-lit. f RODO). Poczta działa u OVH ([DO SPRAWDZENIA: OVH SAS, Francja]).
-[DO UZUPEŁNIENIA: jak długo przechowujecie korespondencję, np. do
-zakończenia sprawy, a potem X miesięcy.]
+lit. f RODO). Pocztę redakcji obsługuje dostawca poczty e-mail z Unii
+Europejskiej. Korespondencję przechowujemy tak długo, jak jest
+potrzebna do prowadzenia sprawy i zachowania jej historii; na Twoją
+prośbę ją usuniemy.
 
 ## Twoje prawa
 
