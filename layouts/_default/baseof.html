@@ -148,7 +148,7 @@
                 <span>Menu</span>
             </button>
             <a href="{{ .Site.Home.Permalink }}" class="site-logo" aria-label="{{ .Site.Title }}">
-                <img src="{{ "images/logo-cz.svg" | relURL }}" alt="{{ .Site.Title }}" class="site-logo__img">
+                {{ partial "site-logo.html" . }}
             </a>
             <nav class="site-nav" id="site-nav" popover aria-label="Menu główne">
                 <button class="menu-close" type="button" popovertarget="site-nav" popovertargetaction="hide" autofocus>
