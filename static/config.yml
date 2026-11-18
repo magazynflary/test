@@ -116,6 +116,11 @@ collections:
       - {label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
       - {label: "Wersja robocza", name: "draft", widget: "boolean", default: false}
       - {label: "Treść", name: "body", widget: "markdown"}
+      # Technical front matter of some pages (layout: about/subscribe, the
+      # /subskrybuj/ URL) - hidden from editors, declared so that saving a
+      # page in the CMS keeps it.
+      - {label: "Układ", name: "layout", widget: "hidden", required: false}
+      - {label: "Adres", name: "url", widget: "hidden", required: false}
 
   # Authors (profiles)
   - name: "authors"

@@ -13,6 +13,9 @@
     /* Color Palette - Light (default). Dark overrides in [data-theme="dark"]. */
     --red: lab(30% 80 97);
     --red-dark: lab(20% 80 97);
+    /* The logo's orange: hover/focus in the header, which is black in both
+       themes (--red is too dark on it in the light theme). */
+    --header-accent: #e58c23;
     --white: lab(95% 0 15);
     --black: lab(7% 0 0);
     --gray-dark: lab(25% 0 0);
@@ -266,7 +269,17 @@ a:hover {
     transition: opacity var(--transition);
 }
 
-.site-nav a:hover {
+/* Header items - menu links, "Menu", "Zamknij", "Subskrybuj", "Styl" -
+   light up the same way on hover and keyboard focus. */
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.menu-toggle:hover,
+.menu-close:hover,
+.header-subscribe:hover,
+.header-subscribe:focus-visible,
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+    color: var(--header-accent);
     opacity: 1;
 }
 
@@ -277,13 +290,150 @@ a:hover {
     left: var(--space-3);
     right: var(--space-3);
     height: 2px;
-    background: var(--red);
+    background: var(--header-accent);
     transform: scaleX(0);
     transition: transform var(--transition);
 }
 
 .site-nav a:hover::after {
     transform: scaleX(1);
+}
+
+/* The menu is a popover (the Popover API: no JavaScript). On phones it opens
+   as a full-screen panel from the "Menu" button; everywhere else - wider
+   screens, and browsers without the API - it is an ordinary part of the
+   header, so the browser's popover styles are undone here. */
+.site-nav[popover] {
+    position: static;
+    inset: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
+    margin-inline-start: auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    overflow: visible;
+}
+
+.menu-toggle,
+.menu-close,
+.header-subscribe {
+    display: none;
+}
+
+@supports selector(:popover-open) {
+    @media (max-width: 639px) {
+        .header-inner {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            align-items: center;
+            gap: var(--space-3);
+            padding-inline: var(--space-4);
+        }
+
+        .site-logo {
+            justify-self: center;
+        }
+
+        .site-logo__img {
+            height: calc(1em + 2 * var(--space-2));
+            margin-block: calc(-1 * var(--space-2));
+        }
+
+        .menu-toggle,
+        .menu-close {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-half);
+            padding: var(--space-1);
+            font: inherit;
+            font-family: var(--font-display);
+            font-size: var(--text-2xs);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* .header-inner: the general .theme-toggle rule comes later in this file. */
+        .header-inner .theme-toggle {
+            font-size: var(--text-2xs);
+        }
+
+        .header-subscribe {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-half);
+            padding: var(--space-1);
+            font-family: var(--font-display);
+            font-size: var(--text-2xs);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        .menu-toggle:focus-visible,
+        .menu-close:focus-visible,
+        .header-subscribe:focus-visible {
+            outline: 3px solid var(--red);
+            outline-offset: 2px;
+        }
+
+        .site-nav:not(:popover-open) {
+            display: none;
+        }
+
+        .site-nav:popover-open {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            max-height: none;
+            margin: 0;
+            padding: var(--space-4) var(--space-6) var(--space-8);
+            background: var(--black);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: var(--space-1);
+            overflow-y: auto;
+        }
+
+        .site-nav:popover-open .menu-close {
+            align-self: flex-start;
+            margin-bottom: var(--space-4);
+        }
+
+        .site-nav:popover-open a {
+            flex-direction: row;
+            gap: var(--space-4);
+            font-size: var(--text-xl);
+            padding: var(--space-3) 0;
+            opacity: 1;
+        }
+
+        .site-nav:popover-open a::after {
+            display: none;
+        }
+
+        .site-nav:popover-open .nav-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        /* The page behind the open menu does not scroll. */
+        body:has(.site-nav:popover-open) {
+            overflow: hidden;
+        }
+    }
 }
 
 /* ============================================================
@@ -861,6 +1011,146 @@ main {
     display: none;
 }
 
+.article-audio__subscribe {
+    font-size: var(--text-sm);
+    color: var(--gray);
+}
+
+/* ============================================================
+   SUBSCRIBE
+   /subskrybuj/ (layouts/pages/subscribe.html): the articles' RSS
+   and the podcast feed, each address with a copy button
+   (partials/feed-address.html).
+   ============================================================ */
+.subscribe-page {
+    max-width: var(--content-width);
+    margin: 0 auto;
+}
+
+.subscribe-page__title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-6);
+}
+
+.subscribe-feed {
+    margin-top: var(--space-8);
+    padding: var(--space-6);
+    background: var(--surface-light);
+    color: var(--on-surface-light);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.subscribe-feed__title {
+    font-size: var(--text-xl);
+    margin: 0;
+}
+
+.subscribe-feed__apps {
+    margin: 0;
+    padding-left: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+}
+
+.feed-address {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.feed-address__url {
+    flex: 1 1 16rem;
+    min-width: 0;
+    padding: var(--space-3);
+    font: inherit;
+    font-size: var(--text-sm);
+    color: var(--text);
+    background: var(--surface);
+    border: 2px solid var(--text);
+    border-radius: 0;
+}
+
+.feed-address__copy {
+    padding: var(--space-3) var(--space-6);
+    font: inherit;
+    font-weight: 700;
+    color: var(--on-red);
+    background: var(--red);
+    border: none;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.feed-address__copy:hover {
+    background: var(--red-dark);
+}
+
+.feed-address__url:focus-visible,
+.feed-address__copy:focus-visible,
+.article-audio__subscribe:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 2px;
+}
+
+.feed-address [hidden] {
+    display: none;
+}
+
+/* End of an article (partials/subscribe-cta.html). */
+.subscribe-cta {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    margin-top: var(--space-8);
+    padding: var(--space-4) var(--space-6);
+    background: var(--surface-light);
+    color: var(--on-surface-light);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+}
+
+.subscribe-cta__text {
+    flex: 1 1 20rem;
+    margin: 0;
+}
+
+.subscribe-social {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+}
+
+.subscribe-social a {
+    font-weight: 700;
+}
+
+.subscribe-cta__link {
+    padding: var(--space-3) var(--space-6);
+    font-weight: 700;
+    color: var(--on-red);
+    background: var(--red);
+    transition: background var(--transition);
+}
+
+.subscribe-cta__link:hover {
+    color: var(--on-red);
+    background: var(--red-dark);
+}
+
+.subscribe-cta__link:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 2px;
+}
+
 .article .article-content {
     grid-column: 2;
     grid-row: 3;
@@ -997,7 +1287,13 @@ main {
     cursor: pointer;
     padding: var(--space-1);
     display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: var(--space-half);
+    font-family: var(--font-display);
+    font-size: clamp(0.35rem, 1.4vw, var(--text-2xs));
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     opacity: 0.7;
     transition: opacity var(--transition);
     flex-shrink: 0;
@@ -1097,6 +1393,14 @@ main {
     }
 
     .site-nav a {
+        flex-direction: row;
+        gap: var(--space-2);
+        font-size: var(--text-lg);
+        letter-spacing: 0.1em;
+        padding: var(--space-2) var(--space-4);
+    }
+
+    .theme-toggle {
         flex-direction: row;
         gap: var(--space-2);
         font-size: var(--text-lg);

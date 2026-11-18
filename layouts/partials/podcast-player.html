@@ -17,6 +17,9 @@
     <span class="article-audio__label">Posłuchaj artykułu{{ with $minutes }} · {{ . }} min{{ end }}</span>
     <audio class="article-audio__player" controls preload="none" src="{{ . }}"></audio>
     <span class="article-audio__unavailable" hidden>Nagranie jest chwilowo niedostępne.</span>
+    {{- with site.GetPage "/pages/subskrybuj" }}
+    <a class="article-audio__subscribe" href="{{ .RelPermalink }}#podcast">Słuchaj w aplikacji podcastowej</a>
+    {{- end }}
 </div>
 <script>
     (function (box) {

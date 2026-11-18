@@ -34,6 +34,8 @@ env:
   # players. The repository variable PODCAST_EPISODES_URL overrides it (the
   # test site points at the testing server).
   PODCAST_EPISODES_URL: ${{ vars.PODCAST_EPISODES_URL || 'https://audio.magazynflary.pl/episodes.json' }}
+  # The podcast feed for the subscribe page and <head>; PODCAST_FEED_URL overrides it.
+  PODCAST_FEED_URL: ${{ vars.PODCAST_FEED_URL || 'https://audio.magazynflary.pl/podcast.xml' }}
 
 jobs:
   check:
@@ -99,6 +101,7 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
           HUGO_PARAMS_PODCAST_EPISODESURL: ${{ env.PODCAST_EPISODES_URL }}
+          HUGO_PARAMS_PODCAST_FEEDURL: ${{ env.PODCAST_FEED_URL }}
         run: |
           hugo \
             --minify \

@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{- /* The subscribe page (content/pages/subskrybuj.md, layout: subscribe): the
+       text from the CMS, then the ways of following Flary - own channels first:
+       the articles' RSS (index.xml), the podcast feed built on the audio server
+       (params.podcast.feedURL), then the profiles on social media
+       (params.social). Empty settings leave their section out. */ -}}
+<div class="subscribe-page">
+    <h1 class="subscribe-page__title">{{ .Title }}</h1>
+    <div class="article-content">
+        {{ partial "polish-orphans.html" .Content }}
+    </div>
+
+    <section class="subscribe-feed" id="artykuly">
+        <h2 class="subscribe-feed__title">Artykuły</h2>
+        <p>Wszystkie nowe artykuły w czytniku RSS, np. Feedly, Inoreader, NetNewsWire albo Thunderbird. Wklej w nim ten adres:</p>
+        {{ partial "feed-address.html" ("index.xml" | absURL) }}
+    </section>
+
+    {{ with site.Params.podcast.feedURL }}
+    <section class="subscribe-feed" id="podcast">
+        <h2 class="subscribe-feed__title">Podcast</h2>
+        <p>Artykuły do słuchania, czytane głosem syntetycznym. Wklej ten adres w aplikacji podcastowej:</p>
+        {{ partial "feed-address.html" . }}
+        <ul class="subscribe-feed__apps">
+            <li><strong>Apple Podcasts</strong> – Biblioteka, menu „…”, „Obserwuj program przez URL”.</li>
+            <li><strong>AntennaPod</strong> – „Dodaj podcast”, „Dodaj podcast przez adres RSS”.</li>
+            <li><strong>Pocket Casts</strong> – wklej adres w wyszukiwarce.</li>
+            <li><strong>Overcast</strong> – „+”, „Add URL”.</li>
+        </ul>
+    </section>
+    {{ end }}
+
+    {{ with site.Params.social }}
+    <section class="subscribe-feed" id="media-spolecznosciowe">
+        <h2 class="subscribe-feed__title">Media społecznościowe</h2>
+        <ul class="subscribe-social">
+            {{ range . }}<li><a href="{{ .url }}" rel="me">{{ .name }}</a></li>
+            {{ end }}
+        </ul>
+    </section>
+    {{ end }}
+</div>
+{{ end }}

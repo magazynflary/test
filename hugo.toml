@@ -51,6 +51,23 @@ description = 'W trosce o dobro wspólne. Solidarni. Otwarci na dialog.'
 # with the repository variable PODCAST_EPISODES_URL when set (the test site
 # uses the testing server); see .github/workflows/deploy.yml.
 episodesURL = 'https://audio.magazynflary.pl/episodes.json'
+# The podcast feed, shown on the subscribe page and linked in <head>. CI
+# overrides it with the repository variable PODCAST_FEED_URL when set.
+feedURL = 'https://audio.magazynflary.pl/podcast.xml'
+
+# Profiles on social media: links on the subscribe page (/subskrybuj/), in
+# this order. Plain links only - no embedded widgets or scripts.
+[[params.social]]
+name = "Instagram"
+url = "https://www.instagram.com/magazynflary/"
+
+[[params.social]]
+name = "Facebook"
+url = "https://www.facebook.com/profile.php?id=61590579332307"
+
+[[params.social]]
+name = "X"
+url = "https://x.com/MagazynFlary"
 
 [params.sectionTitles]
 artykuly = "Artykuły"

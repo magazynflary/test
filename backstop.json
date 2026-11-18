@@ -1,0 +1,35 @@
+{
+  "id": "flary",
+  "viewports": [
+    {"label": "phone-360", "width": 360, "height": 800},
+    {"label": "phone-390", "width": 390, "height": 844},
+    {"label": "tablet-768", "width": 768, "height": 1024},
+    {"label": "desktop-1280", "width": 1280, "height": 900}
+  ],
+  "scenarios": [
+    {"label": "home", "url": "http://localhost:1313/test/"},
+    {"label": "article-with-audio", "url": "http://localhost:1313/test/2026/03/20/reforma-czy-rewolucja-z-przypisami-redakcji/"},
+    {"label": "subscribe", "url": "http://localhost:1313/test/subskrybuj/"},
+    {"label": "about", "url": "http://localhost:1313/test/pages/about/"},
+    {"label": "editions", "url": "http://localhost:1313/test/wydania/"}
+  ],
+  "scenarioDefaults": {
+    "selectors": ["document"],
+    "delay": 500,
+    "misMatchThreshold": 0.1,
+    "requireSameDimensions": true
+  },
+  "paths": {
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
+    "bitmaps_test": "backstop_data/bitmaps_test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
+  },
+  "engine": "puppeteer",
+  "engineOptions": {"args": ["--no-sandbox"]},
+  "report": ["browser"],
+  "openReport": false,
+  "asyncCaptureLimit": 4,
+  "asyncCompareLimit": 20
+}
