@@ -1,0 +1,16 @@
+{{- /*
+  A short invitation at the end of an article to the subscribe page
+  (/subskrybuj/: the articles' RSS, the podcast feed, social media). Shown
+  only when that page exists. When the newsletter is added, its invitation
+  belongs here too - one invitation to all the ways of following Flary.
+*/ -}}
+{{- with site.GetPage "/pages/subskrybuj" }}
+<aside class="subscribe-cta" aria-label="Subskrypcja">
+    <p class="subscribe-cta__text">
+        <strong>Nie przegap kolejnych tekstów.</strong> Czytaj Flary w czytniku
+        RSS, słuchaj w aplikacji podcastowej albo obserwuj nas w mediach
+        społecznościowych.
+    </p>
+    <a class="subscribe-cta__link" href="{{ .RelPermalink }}">Subskrybuj</a>
+</aside>
+{{- end -}}

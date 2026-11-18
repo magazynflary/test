@@ -1,0 +1,23 @@
+{{- /* A feed address to copy: the address as selectable text, a "copy" button
+       and a plain link. The button needs JavaScript and the Clipboard API; it
+       stays hidden without them, the address can still be selected by hand. */ -}}
+<div class="feed-address">
+    <input class="feed-address__url" type="text" value="{{ . }}" readonly aria-label="Adres feedu" onfocus="this.select()">
+    <button class="feed-address__copy" type="button" hidden>Kopiuj adres</button>
+</div>
+<script>
+    (function (box) {
+        var input = box.querySelector("input");
+        var button = box.querySelector("button");
+        if (!navigator.clipboard) return;
+        button.hidden = false;
+        button.addEventListener("click", function () {
+            navigator.clipboard.writeText(input.value).then(function () {
+                button.textContent = "Skopiowano";
+                setTimeout(function () { button.textContent = "Kopiuj adres"; }, 2000);
+            }, function () {
+                input.focus();
+            });
+        });
+    })(document.currentScript.previousElementSibling);
+</script>
