@@ -99,7 +99,7 @@ bazę z kopii, ponownie usuniemy z niej osoby wypisane.
 w Niemczech, kopie zapasowe są przechowywane – zaszyfrowane – także w
 Niemczech, a wiadomości wysyłamy za pośrednictwem dostawców poczty:
 OVH SAS (Francja) oraz Amazon Web Services EMEA SARL (Luksemburg; usługa
-Amazon SES, dane przetwarzane we Frankfurcie nad Menem w Niemczech).
+Amazon SES, dane przetwarzane w Sztokholmie w Szwecji).
 Spółka dominująca Amazon Web Services ma siedzibę w USA; ewentualne
 przekazanie danych do USA zabezpieczają standardowe klauzule umowne
 zatwierdzone przez Komisję Europejską (art. 46 ust. 2 lit. c RODO) oraz
