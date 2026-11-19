@@ -1,4 +1,4 @@
-baseURL = 'https://drlzin.github.io/test/'
+baseURL = 'https://magazynflary.github.io/test/'
 enableRobotsTXT = true
 locale = 'pl'
 defaultContentLanguage = 'pl'
