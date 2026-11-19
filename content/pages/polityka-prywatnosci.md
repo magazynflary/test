@@ -97,8 +97,14 @@ bazę z kopii, ponownie usuniemy z niej osoby wypisane.
 
 **Kto jeszcze ma dostęp.** Newsletter działa na naszym własnym serwerze
 w Niemczech, kopie zapasowe są przechowywane – zaszyfrowane – także w
-Niemczech, a wiadomości wysyła [DO UZUPEŁNIENIA: dostawca wysyłki – po
-wyborze: nazwa, kraj, miejsce przetwarzania danych]. Dostawcy tych usług
+Niemczech, a wiadomości wysyłamy za pośrednictwem dostawców poczty:
+OVH SAS (Francja) oraz Amazon Web Services EMEA SARL (Luksemburg; usługa
+Amazon SES, dane przetwarzane we Frankfurcie nad Menem w Niemczech).
+Spółka dominująca Amazon Web Services ma siedzibę w USA; ewentualne
+przekazanie danych do USA zabezpieczają standardowe klauzule umowne
+zatwierdzone przez Komisję Europejską (art. 46 ust. 2 lit. c RODO) oraz
+udział Amazon w programie EU-U.S. Data Privacy Framework (art. 45 RODO).
+Dostawcy tych usług
 przetwarzają dane wyłącznie na nasze zlecenie. Strony newslettera (potwierdzenie zapisu,
 wypisanie) zapisują w dziennikach serwera adres IP i adres odwiedzanej
 strony; dzienniki są usuwane po 14 dniach.
