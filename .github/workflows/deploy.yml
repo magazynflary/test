@@ -86,6 +86,25 @@ jobs:
         with:
           submodules: recursive
 
+      # The test site must never point at the production newsletter server
+      # (sign-ups from staging would go to the real list). prod builds with
+      # this same file (ported from test), hence the repository condition:
+      # the step is skipped there.
+      - name: Newsletter points at the testing server only
+        if: github.repository == 'magazynflary/test'
+        env:
+          NEWSLETTER_URL: ${{ vars.NEWSLETTER_URL }}
+        run: |
+          toml_url=$(python3 -c 'import tomllib; print(tomllib.load(open("hugo.toml", "rb")).get("params", {}).get("newsletter", {}).get("url", ""))')
+          for url in "$NEWSLETTER_URL" "$toml_url"; do
+            host=${url#*://}; host=${host%%[/?#]*}; host=${host##*@}; host=${host%%:*}; host=${host%.}
+            if [ "${host,,}" = "newsletter.magazynflary.pl" ]; then
+              echo "::error::The newsletter URL '$url' (repository variable NEWSLETTER_URL or hugo.toml [params.newsletter] url) is the PRODUCTION server. The test site may point only at the testing server."
+              exit 1
+            fi
+          done
+          echo "Newsletter URL: ${NEWSLETTER_URL:-${toml_url:-(none - coming soon)}}"
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
