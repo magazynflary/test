@@ -1343,7 +1343,7 @@ main {
 .newsletter-form__consent input:focus-visible,
 .newsletter-form__submit:focus-visible,
 .newsletter-cta__link:focus-visible {
-    outline: 3px solid var(--red);
+    outline: 3px solid var(--focus);
     outline-offset: 2px;
 }
 
@@ -1352,8 +1352,8 @@ main {
     padding: var(--space-3) var(--space-6);
     font: inherit;
     font-weight: 700;
-    color: var(--on-red);
-    background: var(--red);
+    color: var(--on-accent);
+    background: var(--accent);
     border: none;
     cursor: pointer;
     transition: background var(--transition);
@@ -1361,8 +1361,8 @@ main {
 
 .newsletter-form__submit:hover,
 .newsletter-cta__link:hover {
-    color: var(--on-red);
-    background: var(--red-dark);
+    color: var(--on-accent);
+    background: var(--accent-dark);
 }
 
 .newsletter-form__consent {
@@ -1374,7 +1374,7 @@ main {
 
 .newsletter-form__consent input {
     margin-top: 0.3em;
-    accent-color: var(--red);
+    accent-color: var(--accent);
 }
 
 .newsletter-form__note {
