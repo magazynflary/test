@@ -7,5 +7,6 @@ url: /subskrybuj/
 ---
 
 Flary możesz śledzić na kilka sposobów. Jest RSS tekstowy i podcast
-z artykułami czytanymi przez lektora. Jesteśmy też w mediach
+z artykułami czytanymi przez lektora. Raz na kwartał, w dniu premiery
+nowego numeru, wysyłamy newsletter. Jesteśmy też w mediach
 społecznościowych.
