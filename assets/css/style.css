@@ -1177,6 +1177,11 @@ main {
     outline-offset: 2px;
 }
 
+/* The newsletter's link on /subskrybuj/: a button, not stretched. */
+.subscribe-feed__link {
+    align-self: flex-start;
+}
+
 .article .article-content {
     grid-column: 2;
     grid-row: 3;
@@ -1295,8 +1300,8 @@ main {
 
 /* ============================================================
    NEWSLETTER
-   Form (partials/newsletter-form.html) on /newsletter/, a short
-   invitation (partials/newsletter-cta.html) under articles.
+   Form (partials/newsletter-form.html) on /newsletter/; the
+   invitations are the subscribe ones (subscribe-cta, /subskrybuj/).
    ============================================================ */
 .newsletter-page {
     max-width: var(--content-width);
@@ -1341,14 +1346,12 @@ main {
 
 .newsletter-form__input:focus-visible,
 .newsletter-form__consent input:focus-visible,
-.newsletter-form__submit:focus-visible,
-.newsletter-cta__link:focus-visible {
+.newsletter-form__submit:focus-visible {
     outline: 3px solid var(--focus);
     outline-offset: 2px;
 }
 
-.newsletter-form__submit,
-.newsletter-cta__link {
+.newsletter-form__submit {
     padding: var(--space-3) var(--space-6);
     font: inherit;
     font-weight: 700;
@@ -1359,8 +1362,7 @@ main {
     transition: background var(--transition);
 }
 
-.newsletter-form__submit:hover,
-.newsletter-cta__link:hover {
+.newsletter-form__submit:hover {
     color: var(--on-accent);
     background: var(--accent-dark);
 }
@@ -1410,24 +1412,6 @@ main {
     margin-top: var(--space-8);
     font-style: italic;
     color: var(--gray);
-}
-
-.newsletter-cta {
-    grid-column: 1 / -1;
-    grid-row: 5;
-    margin-top: var(--space-8);
-    padding: var(--space-4) var(--space-6);
-    background: var(--surface-light);
-    color: var(--on-surface-light);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
-}
-
-.newsletter-cta__text {
-    margin: 0;
 }
 
 /* ============================================================

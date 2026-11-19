@@ -2,8 +2,11 @@
 {{- /* The subscribe page (content/pages/subskrybuj.md, layout: subscribe): the
        text from the CMS, then the ways of following Flary - own channels first:
        the articles' RSS (index.xml), the podcast feed built on the audio server
-       (params.podcast.feedURL), then the profiles on social media
-       (params.social). Empty settings leave their section out. */ -}}
+       (params.podcast.feedURL), the newsletter (a link to /newsletter/, where
+       the form is - its captcha script loads on that page only), then the
+       profiles on social media (params.social). Empty settings leave their
+       section out; the newsletter shows while its sign-ups are open
+       (params.newsletter url and listUUID). */ -}}
 <div class="subscribe-page">
     <h1 class="subscribe-page__title">{{ .Title }}</h1>
     <div class="article-content">
@@ -28,6 +31,17 @@
             <li><strong>Overcast</strong> – „+”, „Add URL”.</li>
         </ul>
     </section>
+    {{ end }}
+
+    {{- $nl := site.Params.newsletter | default dict }}
+    {{ if and $nl.url $nl.listuuid }}
+    {{ with site.GetPage "/pages/newsletter" }}
+    <section class="subscribe-feed" id="newsletter">
+        <h2 class="subscribe-feed__title">Newsletter</h2>
+        <p>Raz na kwartał, w dniu premiery nowego numeru, spis treści z linkami do tekstów i nagrań – prosto do Twojej skrzynki.</p>
+        <a class="subscribe-cta__link subscribe-feed__link" href="{{ .RelPermalink }}">Zapisz się</a>
+    </section>
+    {{ end }}
     {{ end }}
 
     {{ with site.Params.social }}
