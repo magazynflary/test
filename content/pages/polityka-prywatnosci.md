@@ -79,9 +79,11 @@ ani przekierowań linków.
 **Jak długo.** Do czasu wypisania się. Po wypisaniu usuwamy Twój adres
 z bazy po **30 dniach**; tak samo zapisy, których nikt nie potwierdził –
 po 30 dniach od zapisu. Kopie zapasowe bazy, przechowywane w Hetzner
-Online GmbH, są szyfrowane i znikają najpóźniej po około **6 miesiącach**
-– jeśli w tym czasie będziemy musieli odtworzyć bazę z kopii, ponownie
-usuniemy z niej osoby wypisane. Jeśli wiadomość na Twój adres zostanie
+Online GmbH, są szyfrowane i znikają najpóźniej po około **6 miesiącach**.
+Jeśli będziemy musieli odtworzyć bazę z kopii zapasowej, usuniemy z niej
+osoby wypisane przed wykonaniem tej kopii; jeśli wypisałeś się tuż przed
+awarią, możesz dostać od nas jeszcze jedną wiadomość – wtedy wypisz się
+ponownie albo napisz do nas. Jeśli wiadomość na Twój adres zostanie
 trwale odrzucona albo oznaczysz ją jako spam, Amazon SES zapisze adres na
 liście blokowanych, żebyśmy więcej na niego nie wysyłali; na Twoją prośbę
 usuniemy go z tej listy.
