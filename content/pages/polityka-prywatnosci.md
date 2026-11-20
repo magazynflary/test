@@ -53,8 +53,9 @@ Ta informacja nie jest nigdzie wysyłana. Sami nie używamy plików cookies.
 ## Nagrania audio
 
 Gdy odtwarzasz lub pobierasz nasze nagrania (na stronie albo w aplikacji
-do podcastów), nasz serwer w Niemczech zapisuje Twój adres IP, aplikację lub
-przeglądarkę, z której korzystasz, oraz czas zapytania. Te dane służą
+do podcastów), nasz serwer w Niemczech, wynajmowany od Contabo GmbH,
+zapisuje Twój adres IP, aplikację lub przeglądarkę, z której korzystasz,
+oraz czas zapytania. Te dane służą
 do utrzymania usługi i do liczenia anonimowych statystyk słuchalności
 (bez adresów IP), a po **14 dniach** są automatycznie usuwane. Podstawą
 jest nasz prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO).
@@ -76,14 +77,19 @@ wiadomości ani w co klikasz – w wiadomościach nie ma pikseli śledzących
 ani przekierowań linków.
 
 **Jak długo.** Do czasu wypisania się. Po wypisaniu usuwamy Twój adres
-z bazy w ciągu **30 dni**; tak samo zapisy, których nikt nie potwierdził
-w ciągu 30 dni. Kopie zapasowe bazy są szyfrowane i znikają najpóźniej po
-około **6 miesiącach** – jeśli w tym czasie będziemy musieli odtworzyć
-bazę z kopii, ponownie usuniemy z niej osoby wypisane.
+z bazy po **30 dniach**; tak samo zapisy, których nikt nie potwierdził –
+po 30 dniach od zapisu. Kopie zapasowe bazy, przechowywane w Hetzner
+Online GmbH, są szyfrowane i znikają najpóźniej po około **6 miesiącach**
+– jeśli w tym czasie będziemy musieli odtworzyć bazę z kopii, ponownie
+usuniemy z niej osoby wypisane. Jeśli wiadomość na Twój adres zostanie
+trwale odrzucona albo oznaczysz ją jako spam, Amazon SES zapisze adres na
+liście blokowanych, żebyśmy więcej na niego nie wysyłali; na Twoją prośbę
+usuniemy go z tej listy.
 
-**Kto jeszcze ma dostęp.** Newsletter działa na naszym własnym serwerze
-w Niemczech, kopie zapasowe są przechowywane – zaszyfrowane – także w
-Niemczech, a wiadomości wysyłamy wyłącznie za pośrednictwem usługi
+**Kto jeszcze ma dostęp.** Newsletter działa na naszym serwerze
+w Niemczech, wynajmowanym od Contabo GmbH, kopie zapasowe są
+przechowywane – zaszyfrowane – także w Niemczech, w Hetzner Online GmbH,
+a wiadomości wysyłamy wyłącznie za pośrednictwem usługi
 Amazon SES, którą świadczy Amazon Web Services EMEA SARL (Luksemburg),
 w regionie eu-north-1 – dane są przetwarzane w Sztokholmie (Szwecja).
 Spółka dominująca Amazon Web Services ma siedzibę w USA; ewentualne
@@ -91,9 +97,11 @@ przekazanie danych do USA zabezpieczają standardowe klauzule umowne
 zatwierdzone przez Komisję Europejską (art. 46 ust. 2 lit. c RODO) oraz
 udział Amazon w programie EU-U.S. Data Privacy Framework (art. 45 RODO).
 Dostawcy tych usług przetwarzają dane wyłącznie na nasze zlecenie.
-Strony newslettera (potwierdzenie zapisu, wypisanie) zapisują
-w dziennikach serwera adres IP i adres odwiedzanej strony; dzienniki są
-usuwane po 14 dniach.
+Dzienniki serwera zapisują odwiedziny stron newslettera (potwierdzenie
+zapisu, wypisanie). Strona zapisu na newsletter pobiera z naszego serwera
+zabezpieczenie przed automatami (ALTCHA), dlatego już samo jej otwarcie
+zapisuje w dziennikach serwera adres IP, nazwę przeglądarki, adres strony
+i stronę, z której przychodzisz; dzienniki usuwamy po 14 dniach.
 
 Samodzielnie możesz w każdej chwili pobrać swoje dane albo je usunąć –
 link „zarządzaj subskrypcją” jest w każdej wiadomości.
