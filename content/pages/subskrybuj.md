@@ -6,6 +6,6 @@ layout: subscribe
 url: /subskrybuj/
 ---
 
-Nowe teksty Flar możesz dostawać na kilka sposobów. RSS i podcast
-prowadzimy sami, na własnym serwerze – bez pośrednictwa platform i bez
-zakładania konta. Jesteśmy też w mediach społecznościowych.
+Flary możesz śledzić na kilka sposobów. Jest RSS tekstowy i podcast
+z artykułami czytanymi przez lektora. Jesteśmy też w mediach
+społecznościowych.
