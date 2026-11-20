@@ -53,12 +53,14 @@ Ta informacja nie jest nigdzie wysyłana. Sami nie używamy plików cookies.
 ## Nagrania audio
 
 Gdy odtwarzasz lub pobierasz nasze nagrania (na stronie albo w aplikacji
-do podcastów), nasz serwer w Niemczech, wynajmowany od Contabo GmbH,
-zapisuje Twój adres IP, aplikację lub przeglądarkę, z której korzystasz,
-oraz czas zapytania. Te dane służą
-do utrzymania usługi i do liczenia anonimowych statystyk słuchalności
-(bez adresów IP), a po **14 dniach** są automatycznie usuwane. Podstawą
-jest nasz prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO).
+do podcastów), a także za każdym razem, gdy aplikacja, w której
+subskrybujesz nasz podcast, sprawdza, czy są nowe odcinki, nasz serwer
+w Niemczech, wynajmowany od Contabo GmbH, zapisuje przy każdym zapytaniu
+Twój adres IP, aplikację lub przeglądarkę, z której korzystasz, adres
+pobieranego pliku oraz czas zapytania. Te dane służą do utrzymania
+usługi i do liczenia anonimowych statystyk słuchalności (bez adresów
+IP), a po **14 dniach** są automatycznie usuwane. Podstawą jest nasz
+prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO).
 
 ## Newsletter
 
@@ -104,6 +106,9 @@ zapisu, wypisanie). Strona zapisu na newsletter pobiera z naszego serwera
 zabezpieczenie przed automatami (ALTCHA), dlatego już samo jej otwarcie
 zapisuje w dziennikach serwera adres IP, nazwę przeglądarki, adres strony
 i stronę, z której przychodzisz; dzienniki usuwamy po 14 dniach.
+Podstawą dla tych dzienników nie jest zgoda, tylko nasz prawnie
+uzasadniony interes – bezpieczeństwo i działanie usługi (art. 6 ust. 1
+lit. f RODO).
 
 Samodzielnie możesz w każdej chwili pobrać swoje dane albo je usunąć –
 link „zarządzaj subskrypcją” jest w każdej wiadomości.
