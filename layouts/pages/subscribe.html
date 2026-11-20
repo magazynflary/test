@@ -5,12 +5,19 @@
        (params.podcast.feedURL), the newsletter (a link to /newsletter/, where
        the form is - its captcha script loads on that page only), then the
        profiles on social media (params.social). Empty settings leave their
-       section out; the newsletter shows while its sign-ups are open
-       (params.newsletter url and listUUID). */ -}}
+       section out; the newsletter - its sentence after the introduction and
+       its section - shows only while its sign-ups are open (params.newsletter
+       url and listUUID, and the /newsletter/ page exists). */ -}}
+{{- $nl := site.Params.newsletter | default dict }}
+{{- $nlPage := site.GetPage "/pages/newsletter" }}
+{{- $nlOpen := and $nl.url $nl.listuuid $nlPage }}
 <div class="subscribe-page">
     <h1 class="subscribe-page__title">{{ .Title }}</h1>
     <div class="article-content">
         {{ partial "polish-orphans.html" .Content }}
+        {{- if $nlOpen }}
+        {{ partial "polish-orphans.html" "<p>Raz na kwartał, w dniu premiery nowego numeru, wysyłamy newsletter.</p>" }}
+        {{- end }}
     </div>
 
     <section class="subscribe-feed" id="artykuly">
@@ -33,9 +40,8 @@
     </section>
     {{ end }}
 
-    {{- $nl := site.Params.newsletter | default dict }}
-    {{ if and $nl.url $nl.listuuid }}
-    {{ with site.GetPage "/pages/newsletter" }}
+    {{ if $nlOpen }}
+    {{ with $nlPage }}
     <section class="subscribe-feed" id="newsletter">
         <h2 class="subscribe-feed__title">Newsletter</h2>
         <p>Raz na kwartał, w dniu premiery nowego numeru, spis treści z linkami do tekstów i nagrań – prosto do Twojej skrzynki.</p>
