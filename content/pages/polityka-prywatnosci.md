@@ -1,24 +1,10 @@
 ---
 title: "Polityka prywatności"
-date: 2026-11-11T12:00:00
-draft: true
+date: 2026-11-20T12:00:00
+draft: false
 layout: page
 url: /polityka-prywatnosci/
 ---
-
-**SZKIC – do uzupełnienia i przeglądu prawnego przed publikacją.**
-Miejsca oznaczone [DO UZUPEŁNIENIA] trzeba wypełnić; tę ramkę usuń przed
-publikacją. Pytania do prawnika:
-
-1. counter.dev (statystyki) nie oferuje umowy powierzenia
-   przetwarzania (art. 28 RODO). Czy przy danych zbiorczych jest
-   potrzebna, a jeśli tak – co dalej?
-2. Skrypt counter.dev zapisuje w przeglądarce znacznik `_swa`
-   (sessionStorage, do zamknięcia karty), żeby nie liczyć wizyty
-   dwa razy. Czy to wymaga zgody (art. 399 Prawa komunikacji
-   elektronicznej), czyli banera zgody?
-3. Czy opis zgody na newsletter i podstaw prawnych jest wystarczający
-   (art. 6 RODO, art. 398 PKE)?
 
 Ta strona wyjaśnia, jakie dane osobowe przetwarzamy, gdy czytasz Magazyn
 Flary, słuchasz naszych nagrań, zapisujesz się na newsletter albo do
@@ -26,9 +12,9 @@ nas piszesz – po co, jak długo i jakie masz prawa.
 
 ## Kto odpowiada za Twoje dane
 
-Administratorem danych jest **Dominik Kacprowski** w imieniu redakcji Magazynu Flary. Kontakt we wszystkich sprawach
-dotyczących danych osobowych: **[DO UZUPEŁNIENIA: adres e-mail do spraw
-danych]**.
+Administratorem danych jest **Dominik Kacprowski** w imieniu redakcji
+Magazynu Flary. Kontakt we wszystkich sprawach dotyczących danych
+osobowych: **[redakcja@magazynflary.pl](mailto:redakcja@magazynflary.pl)**.
 
 Magazyn Flary przygotowuje się do rejestracji stowarzyszenia. Gdy
 stowarzyszenie powstanie, przejmie rolę administratora. Poinformujemy
@@ -97,17 +83,17 @@ bazę z kopii, ponownie usuniemy z niej osoby wypisane.
 
 **Kto jeszcze ma dostęp.** Newsletter działa na naszym własnym serwerze
 w Niemczech, kopie zapasowe są przechowywane – zaszyfrowane – także w
-Niemczech, a wiadomości wysyłamy za pośrednictwem usługi Amazon SES,
-którą świadczy Amazon Web Services EMEA SARL (Luksemburg); dane są
-przetwarzane w Sztokholmie w Szwecji.
+Niemczech, a wiadomości wysyłamy wyłącznie za pośrednictwem usługi
+Amazon SES, którą świadczy Amazon Web Services EMEA SARL (Luksemburg),
+w regionie eu-north-1 – dane są przetwarzane w Sztokholmie (Szwecja).
 Spółka dominująca Amazon Web Services ma siedzibę w USA; ewentualne
 przekazanie danych do USA zabezpieczają standardowe klauzule umowne
 zatwierdzone przez Komisję Europejską (art. 46 ust. 2 lit. c RODO) oraz
 udział Amazon w programie EU-U.S. Data Privacy Framework (art. 45 RODO).
-Dostawcy tych usług
-przetwarzają dane wyłącznie na nasze zlecenie. Strony newslettera (potwierdzenie zapisu,
-wypisanie) zapisują w dziennikach serwera adres IP i adres odwiedzanej
-strony; dzienniki są usuwane po 14 dniach.
+Dostawcy tych usług przetwarzają dane wyłącznie na nasze zlecenie.
+Strony newslettera (potwierdzenie zapisu, wypisanie) zapisują
+w dziennikach serwera adres IP i adres odwiedzanej strony; dzienniki są
+usuwane po 14 dniach.
 
 Samodzielnie możesz w każdej chwili pobrać swoje dane albo je usunąć –
 link „zarządzaj subskrypcją” jest w każdej wiadomości.
