@@ -62,7 +62,7 @@ collections:
         required: false
         hint: "np.: /manifest/."
         # Reserved prefix list duplicated in tests/reference-integrity/url_collisions_test.go — keep in sync.
-        pattern: ["^/(?!(artykuly|autorzy|pages|tags|wydania|admin|css|images|subskrybuj)/)[a-z0-9][a-z0-9-]*/$", "Zły format. Wymagane: /slowo/ (ukośnik na końcu i początku; małe litery, cyfry, minus). Zakazane prefiksy: /artykuly/, /autorzy/, /pages/, /tags/, /wydania/, /admin/, /css/, /images/, /subskrybuj/"]
+        pattern: ["^/(?!(artykuly|autorzy|pages|tags|wydania|admin|css|images|subskrybuj|newsletter|polityka-prywatnosci)/)[a-z0-9][a-z0-9-]*/$", "Zły format. Wymagane: /slowo/ (ukośnik na końcu i początku; małe litery, cyfry, minus). Zakazane prefiksy: /artykuly/, /autorzy/, /pages/, /tags/, /wydania/, /admin/, /css/, /images/, /subskrybuj/, /newsletter/, /polityka-prywatnosci/"]
       - {label: "Data publikacji", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss"}
       - {label: "Wersja robocza", name: "draft", widget: "boolean", default: false}
       - {label: "Tagi", name: "tags", widget: "list", required: false, hint: "rozdzielone przecinkiem, np.: 'historia, polityka'"}
