@@ -13,7 +13,7 @@ import (
 // Keep in sync with the `pattern` regex on the `url` field in static/config.yml.
 var reservedTopLevelPaths = []string{
 	"artykuly", "autorzy", "pages", "tags", "wydania",
-	"admin", "css", "images",
+	"admin", "css", "images", "subskrybuj",
 }
 
 var frontMatterURLPattern = regexp.MustCompile(`(?m)^url:\s*["']?(\S+?)["']?\s*$`)
@@ -49,6 +49,16 @@ func articleSourceFiles(t *testing.T) []string {
 	return matches
 }
 
+func pageSourceFiles(t *testing.T) []string {
+	t.Helper()
+	pattern := filepath.Join(projectRoot, "content/pages/*.md")
+	matches, err := filepath.Glob(pattern)
+	if err != nil || len(matches) == 0 {
+		t.Fatal("no page sources found in content/pages/")
+	}
+	return matches
+}
+
 // TestNoDuplicateArticleURLs fails if two articles declare the same `url:`.
 // Hugo would silently overwrite the first build with the second.
 func TestNoDuplicateArticleURLs(t *testing.T) {
@@ -80,6 +90,29 @@ func TestNoArticleURLCollidesWithReservedSection(t *testing.T) {
 			if firstSegment == reserved {
 				t.Errorf("%s: url %q collides with reserved section /%s/", filepath.Base(file), customURL, reserved)
 			}
+		}
+	}
+}
+
+// TestNoArticleURLCollidesWithPage fails if an article's `url:` equals the
+// `url:` of a page in content/pages/ (e.g. /subskrybuj/). Hugo would silently
+// overwrite the page. Covers pages not yet in reservedTopLevelPaths.
+func TestNoArticleURLCollidesWithPage(t *testing.T) {
+	pageOwners := map[string]string{}
+	for _, file := range pageSourceFiles(t) {
+		pageURL := extractFrontMatterURL(t, file)
+		if pageURL == "" {
+			continue
+		}
+		pageOwners[strings.Trim(pageURL, "/")] = filepath.Base(file)
+	}
+	for _, file := range articleSourceFiles(t) {
+		customURL := extractFrontMatterURL(t, file)
+		if customURL == "" {
+			continue
+		}
+		if page, ok := pageOwners[strings.Trim(customURL, "/")]; ok {
+			t.Errorf("%s: url %q collides with page %s", filepath.Base(file), customURL, page)
 		}
 	}
 }
