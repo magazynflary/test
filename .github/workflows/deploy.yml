@@ -88,22 +88,48 @@ jobs:
 
       # The test site must never point at the production newsletter server
       # (sign-ups from staging would go to the real list). prod builds with
-      # this same file (ported from test), hence the repository condition:
-      # the step is skipped there.
+      # this same file (ported from test), hence the repository condition -
+      # fail closed: the step runs everywhere except magazynflary/prod (a
+      # fork or a renamed test repository is checked too).
+      # The host is compared the way a browser would read the form's action:
+      # any case, backslashes as slashes, scheme-relative "//host", a
+      # trailing dot, %-escapes, userinfo and port ignored. hugo.toml keys
+      # are read case-insensitively, as Hugo does ([params.Newsletter] URL).
       - name: Newsletter points at the testing server only
-        if: github.repository == 'magazynflary/test'
+        if: github.repository != 'magazynflary/prod'
         env:
           NEWSLETTER_URL: ${{ vars.NEWSLETTER_URL }}
         run: |
-          toml_url=$(python3 -c 'import tomllib; print(tomllib.load(open("hugo.toml", "rb")).get("params", {}).get("newsletter", {}).get("url", ""))')
-          for url in "$NEWSLETTER_URL" "$toml_url"; do
-            host=${url#*://}; host=${host%%[/?#]*}; host=${host##*@}; host=${host%%:*}; host=${host%.}
-            if [ "${host,,}" = "newsletter.magazynflary.pl" ]; then
-              echo "::error::The newsletter URL '$url' (repository variable NEWSLETTER_URL or hugo.toml [params.newsletter] url) is the PRODUCTION server. The test site may point only at the testing server."
-              exit 1
-            fi
-          done
-          echo "Newsletter URL: ${NEWSLETTER_URL:-${toml_url:-(none - coming soon)}}"
+          python3 - <<'EOF'
+          import os, re, sys, tomllib, unicodedata, urllib.parse
+
+          PRODUCTION = "newsletter.magazynflary.pl"
+
+          def values(tables, key):
+              """Hugo's config keys are case-insensitive: every match counts."""
+              return [v for t in tables if isinstance(t, dict)
+                      for k, v in t.items() if k.lower() == key]
+
+          def hosts(url):
+              u = re.sub(r"[\t\n\r]", "", url).strip().replace("\\", "/")
+              for v in (u, re.sub(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", "", u)):  # with and without a scheme
+                  v = v.lstrip("/")
+                  v = re.split(r"[/?#]", v, maxsplit=1)[0]
+                  v = v.rsplit("@", 1)[-1]  # userinfo
+                  v = re.sub(r":[0-9]*$", "", v)  # port
+                  v = unicodedata.normalize("NFKC", urllib.parse.unquote(v))
+                  yield v.strip().lower().rstrip(".")
+
+          with open("hugo.toml", "rb") as f:
+              config = tomllib.load(f)
+          toml_urls = [str(v) for v in values(values(values([config], "params"), "newsletter"), "url")]
+          env_url = os.environ.get("NEWSLETTER_URL", "")
+          for url in [env_url, *toml_urls]:
+              if PRODUCTION in hosts(url):
+                  print(f"::error::The newsletter URL '{url}' (repository variable NEWSLETTER_URL or hugo.toml [params.newsletter] url) is the PRODUCTION server. The test site may point only at the testing server.")
+                  sys.exit(1)
+          print("Newsletter URL:", env_url or next(filter(None, toml_urls), "") or "(none - coming soon)")
+          EOF
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
