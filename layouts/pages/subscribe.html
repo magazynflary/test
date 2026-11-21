@@ -32,9 +32,9 @@
     <section class="subscribe-feed" id="podcast">
         <h2 class="subscribe-feed__title">Podcast</h2>
         {{- with site.Params.podcast.platforms }}
-        <p>Artykuły do słuchania, czytane głosem syntetycznym. Słuchaj w aplikacji:</p>
-        <ul class="subscribe-social">
-            {{ range . }}<li><a href="{{ .url }}" rel="noopener">{{ .name }}</a></li>
+        <p>Artykuły do słuchania, czytane głosem syntetycznym.</p>
+        <ul class="subscribe-feed__platforms">
+            {{ range . }}<li><a class="subscribe-cta__link" href="{{ .url }}" rel="noopener">Słuchaj na {{ .name }}</a></li>
             {{ end }}
         </ul>
         <p>Albo wklej ten adres w innej aplikacji podcastowej:</p>
