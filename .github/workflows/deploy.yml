@@ -147,10 +147,14 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_PARAMS_PODCAST_EPISODESURL: ${{ env.PODCAST_EPISODES_URL }}
           HUGO_PARAMS_PODCAST_FEEDURL: ${{ env.PODCAST_FEED_URL }}
-          # Newsletter form target (hugo.toml [params.newsletter], empty
-          # there): the TESTING server's URL and list UUID, never
-          # production's. Exported only when set - an empty HUGO_PARAMS_*
-          # would blank the hugo.toml value. Unset = "coming soon", no form.
+          # Newsletter form target (hugo.toml [params.newsletter]). Exported
+          # only when set - an empty HUGO_PARAMS_* would blank the hugo.toml
+          # value. No URL or list UUID = "coming soon", no form.
+          # test: hugo.toml is empty; both variables hold the TESTING
+          # server's URL and list UUID only (the guard step above enforces
+          # it). prod: hugo.toml holds the production URL and only
+          # NEWSLETTER_LIST_UUID is set. NEWSLETTER_URL is never set on prod:
+          # it would override hugo.toml, and the guard does not run there.
           NEWSLETTER_URL: ${{ vars.NEWSLETTER_URL }}
           NEWSLETTER_LIST_UUID: ${{ vars.NEWSLETTER_LIST_UUID }}
         run: |
