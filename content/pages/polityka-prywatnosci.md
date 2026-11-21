@@ -12,9 +12,10 @@ nas piszesz – po co, jak długo i jakie masz prawa.
 
 ## Kto odpowiada za Twoje dane
 
-Administratorem danych jest **Dominik Kacprowski** w imieniu redakcji
-Magazynu Flary. Kontakt we wszystkich sprawach dotyczących danych
-osobowych: **[redakcja@magazynflary.pl](mailto:redakcja@magazynflary.pl)**.
+Administratorem danych osobowych przetwarzanych w związku z Magazynem
+Flary jest **Dominik Kacprowski**. Kontakt we wszystkich sprawach
+dotyczących danych osobowych:
+**[redakcja@magazynflary.pl](mailto:redakcja@magazynflary.pl)**.
 
 Magazyn Flary przygotowuje się do rejestracji stowarzyszenia. Gdy
 stowarzyszenie powstanie, przejmie rolę administratora. Poinformujemy
@@ -40,11 +41,13 @@ przy tym Twój adres IP (ustala z niego kraj) i informację o przeglądarce.
 Według jego polityki prywatności przechowuje wyłącznie dane zbiorcze, a
 nie pojedyncze wizyty – na serwerach Linode we Frankfurcie (Niemcy).
 Skrypt i dane statystyk przechodzą przez sieć Cloudflare, Inc. (USA),
-która widzi przy tym adres IP. Statystyki nie używają plików cookies;
-skrypt zapisuje w Twojej przeglądarce jedynie znacznik, że wizyta została
-już policzona (sessionStorage, znika po zamknięciu karty). Robimy to w
-naszym prawnie uzasadnionym interesie, jakim jest wiedza, czy i jak
-strona jest czytana (art. 6 ust. 1 lit. f RODO).
+która widzi przy tym adres IP. Cloudflare przekazuje dane do USA na
+podstawie mechanizmów przewidzianych w RODO (EU-US Data Privacy
+Framework i standardowe klauzule umowne). Statystyki nie używają plików
+cookies; skrypt zapisuje w Twojej przeglądarce jedynie znacznik, że
+wizyta została już policzona (sessionStorage, znika po zamknięciu
+karty). Robimy to w naszym prawnie uzasadnionym interesie, jakim jest
+wiedza, czy i jak strona jest czytana (art. 6 ust. 1 lit. f RODO).
 
 **Ustawienia w przeglądarce.** Jeśli przełączysz motyw jasny/ciemny,
 zapamiętujemy Twój wybór w pamięci Twojej przeglądarki (localStorage).
@@ -83,12 +86,12 @@ z bazy po **30 dniach**; tak samo zapisy, których nikt nie potwierdził –
 po 30 dniach od zapisu. Kopie zapasowe bazy, przechowywane w Hetzner
 Online GmbH, są szyfrowane i znikają najpóźniej po około **6 miesiącach**.
 Jeśli będziemy musieli odtworzyć bazę z kopii zapasowej, usuniemy z niej
-osoby wypisane przed wykonaniem tej kopii; jeśli wypisałeś się tuż przed
-awarią, możesz dostać od nas jeszcze jedną wiadomość – wtedy wypisz się
-ponownie albo napisz do nas. Jeśli wiadomość na Twój adres zostanie
-trwale odrzucona albo oznaczysz ją jako spam, Amazon SES zapisze adres na
-liście blokowanych, żebyśmy więcej na niego nie wysyłali; na Twoją prośbę
-usuniemy go z tej listy.
+osoby wypisane przed wykonaniem tej kopii; jeśli wypisanie nastąpiło tuż
+przed awarią, możesz dostać od nas jeszcze jedną wiadomość – wtedy
+wypisz się ponownie albo napisz do nas. Jeśli wiadomość na Twój adres
+zostanie trwale odrzucona albo oznaczysz ją jako spam, Amazon SES
+zapisze adres na liście blokowanych, żebyśmy więcej na niego nie
+wysyłali; na Twoją prośbę usuniemy go z tej listy.
 
 **Kto jeszcze ma dostęp.** Newsletter działa na naszym serwerze
 w Niemczech, wynajmowanym od Contabo GmbH, kopie zapasowe są
@@ -102,25 +105,29 @@ zatwierdzone przez Komisję Europejską (art. 46 ust. 2 lit. c RODO) oraz
 udział Amazon w programie EU-U.S. Data Privacy Framework (art. 45 RODO).
 Dostawcy tych usług przetwarzają dane wyłącznie na nasze zlecenie.
 Dzienniki serwera zapisują odwiedziny stron newslettera (potwierdzenie
-zapisu, wypisanie). Strona zapisu na newsletter pobiera z naszego serwera
-zabezpieczenie przed automatami (ALTCHA), dlatego już samo jej otwarcie
-zapisuje w dziennikach serwera adres IP, nazwę przeglądarki, adres strony
+zapisu, wypisanie, podgląd wiadomości w przeglądarce) oraz pobranie logo
+wyświetlanego w naszych wiadomościach – logo jest takie samo dla
+wszystkich, a wpisów w dziennikach nie przypisujemy do adresów e-mail.
+Strona zapisu na newsletter pobiera z naszego serwera zabezpieczenie
+przed automatami (ALTCHA), dlatego już samo jej otwarcie zapisuje
+w dziennikach serwera adres IP, nazwę przeglądarki, adres strony
 i stronę, z której przychodzisz; dzienniki usuwamy po 14 dniach.
 Podstawą dla tych dzienników nie jest zgoda, tylko nasz prawnie
 uzasadniony interes – bezpieczeństwo i działanie usługi (art. 6 ust. 1
 lit. f RODO).
 
 Samodzielnie możesz w każdej chwili pobrać swoje dane albo je usunąć –
-link „zarządzaj subskrypcją” jest w każdej wiadomości.
+na stronie, na którą prowadzi link do wypisania się w stopce każdej
+wiadomości.
 
 ## Gdy do nas piszesz
 
 Jeśli napiszesz do nas e-mail, przetwarzamy Twój adres i treść
 wiadomości, żeby odpowiedzieć i prowadzić korespondencję (art. 6 ust. 1
-lit. f RODO). Pocztę redakcji obsługuje dostawca poczty e-mail z Unii
-Europejskiej. Korespondencję przechowujemy tak długo, jak jest
-potrzebna do prowadzenia sprawy i zachowania jej historii; na Twoją
-prośbę ją usuniemy.
+lit. f RODO). Pocztę redakcji obsługuje OVH SAS (Francja).
+Korespondencję zachowujemy w archiwum redakcji bez z góry określonego
+terminu – jej historia bywa potrzebna przy dalszej współpracy
+i ponownym kontakcie. Na Twoją prośbę ją usuniemy.
 
 ## Twoje prawa
 
