@@ -15,3 +15,8 @@ Twojego adresu bez Twojej wiedzy.
 Nie widzisz wiadomości po kilku minutach? Zajrzyj do folderu spam lub
 „Oferty”. Jeśli tam też jej nie ma, napisz do nas:
 [redakcja@magazynflary.pl](mailto:redakcja@magazynflary.pl).
+
+Masz Gmaila? Jeśli wiadomość trafiła do spamu, kliknij „To nie jest
+spam”. Jeśli do „Ofert” – przenieś ją do „Głównych” i potwierdź, że tak
+ma być z kolejnymi wiadomościami od nas. Następne numery newslettera
+trafią wtedy prosto do Twojej skrzynki głównej.
