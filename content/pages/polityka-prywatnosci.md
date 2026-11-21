@@ -1,6 +1,6 @@
 ---
 title: "Polityka prywatności"
-date: 2026-11-20T12:00:00
+date: 2026-11-21T12:00:00
 draft: false
 layout: page
 url: /polityka-prywatnosci/
