@@ -101,7 +101,7 @@ Amazon SES, którą świadczy Amazon Web Services EMEA SARL (Luksemburg),
 w regionie eu-north-1 – dane są przetwarzane w Sztokholmie (Szwecja).
 Spółka dominująca Amazon Web Services ma siedzibę w USA; ewentualne
 przekazanie danych do USA zabezpieczają standardowe klauzule umowne
-zatwierdzone przez Komisję Europejską (art. 46 ust. 2 lit. c RODO) oraz
+przyjęte przez Komisję Europejską (art. 46 ust. 2 lit. c RODO) oraz
 udział Amazon w programie EU-U.S. Data Privacy Framework (art. 45 RODO).
 Dostawcy tych usług przetwarzają dane wyłącznie na nasze zlecenie.
 Dzienniki serwera zapisują odwiedziny stron newslettera (potwierdzenie
