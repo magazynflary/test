@@ -12,6 +12,9 @@
     {{- with site.Params.podcast.feedURL }}
     <link rel="alternate" type="application/rss+xml" title="{{ site.Title }} – podcast" href="{{ . }}">
     {{- end }}
+    {{- if .Params.noindex }}
+    <meta name="robots" content="noindex">
+    {{- end }}
 
     <meta property="og:title" content="{{ $displayTitle }}">
     <meta property="og:description" content="{{ $pageDescription }}">
@@ -206,6 +209,9 @@
             <span class="footer-text">&copy; {{ now.Year }} {{ .Site.Title }}</span>
             <span class="footer-quote">{{ .Site.Params.description }}</span>
             <span class="footer-quote">Dołącz do nas: <a href="mailto:redakcja@magazynflary.pl" class="footer-email">redakcja@magazynflary.pl</a></span>
+            {{- with site.GetPage "/pages/polityka-prywatnosci" }}
+            <a href="{{ .RelPermalink }}" class="footer-quote footer-email">Polityka prywatności</a>
+            {{- end }}
         </div>
     </footer>
     <script>

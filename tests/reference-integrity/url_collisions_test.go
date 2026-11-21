@@ -13,7 +13,7 @@ import (
 // Keep in sync with the `pattern` regex on the `url` field in static/config.yml.
 var reservedTopLevelPaths = []string{
 	"artykuly", "autorzy", "pages", "tags", "wydania",
-	"admin", "css", "images", "subskrybuj",
+	"admin", "css", "images", "subskrybuj", "newsletter", "polityka-prywatnosci",
 }
 
 var frontMatterURLPattern = regexp.MustCompile(`(?m)^url:\s*["']?(\S+?)["']?\s*$`)

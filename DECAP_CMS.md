@@ -79,6 +79,16 @@ Nagrania nie leżą w tym repo, tylko na serwerze `audio.magazynflary.pl`. Feed 
 
 **Dla programistów:** `/podcast-index.json` (`layouts/index.podcastindex.json`) to kontrakt z serwerem. Odtwarzacz: `layouts/partials/podcast-player.html`, lista nagrań: `layouts/partials/podcast-episodes.html` (z serwera audio, a gdy nie odpowiada, z kopii `/podcast-episodes.json` opublikowanej przez poprzedni build), build co godzinę: `.github/workflows/deploy.yml`. Adres listy na stronie testowej ustawia zmienna repozytorium `PODCAST_EPISODES_URL` (Settings → Secrets and variables → Actions → Variables); bez niej używany jest serwer produkcyjny. Nie zmieniaj nazw ani znaczenia pól i nie ograniczaj liczby artykułów: artykuł, którego brak w pliku, traci odcinek w podcaście. Szczegóły po stronie serwera: `docs/audio-hosting.md` w repo infrastruktury.
 
+## Newsletter
+
+Strona **Newsletter** (`/newsletter/`) ma formularz zapisu, który wysyła adres prosto do serwera newslettera (listmonk). Po zapisie serwer przekierowuje na stronę **Sprawdź skrzynkę** (`/newsletter/sprawdz-skrzynke/`). Tekst obu stron można zmieniać w CMS (kolekcja „Strony”), ale **nie zmieniaj ich adresów, nie przenoś ich i nie usuwaj**: serwer newslettera przekierowuje tylko na adres wpisany dokładnie w jego ustawieniach (Trusted URLs), a do `/newsletter/` prowadzi strona Subskrybuj.
+
+**Dla programistów:** serwer i listę ustawiają zmienne repozytorium `NEWSLETTER_URL` i `NEWSLETTER_LIST_UUID` (Settings → Secrets and variables → Actions → Variables); w `hugo.toml` (`[params.newsletter]`) obie wartości są puste. Na stronie testowej `NEWSLETTER_URL` wskazuje **wyłącznie serwer testowy**, nigdy produkcyjny, a adres jej strony „Sprawdź skrzynkę” wpisuje się tylko w Trusted URLs serwera testowego. Gdy któraś z tych wartości jest pusta, zamiast formularza strona pokazuje „Zapisy do newslettera ruszą wkrótce”, a zaproszenie pod artykułami i strona Subskrybuj nie wspominają o newsletterze. Szczegóły po stronie serwera: `docs/newsletter.md` w repo infrastruktury.
+
+## Polityka prywatności
+
+Strona **Polityka prywatności** (`/polityka-prywatnosci/`, kolekcja „Strony”) jest podlinkowana w stopce i pod formularzem newslettera. **Nie zmieniaj jej adresu.** Gdy zmieniasz jej tekst, ustaw w polu „Data” dzień zmiany – strona pokazuje tę datę jako „Ostatnia zmiana”. Tekst musi zgadzać się z tym, co naprawdę dzieje się z danymi (serwery, dostawcy, okresy przechowywania): przed zmianą tekstu i gdy zmienia się praktyka, zapytaj Dominika.
+
 ## Dostęp dla redaktorów
 
 ### Lokalnie (test):
