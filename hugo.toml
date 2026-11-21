@@ -55,6 +55,13 @@ episodesURL = 'https://audio.magazynflary.pl/episodes.json'
 # overrides it with the repository variable PODCAST_FEED_URL when set.
 feedURL = 'https://audio.magazynflary.pl/podcast.xml'
 
+# Direct links to the show on platforms that do not take an RSS address,
+# shown on the subscribe page before the feed address, in this order; add
+# YouTube, Apple Podcasts etc. here.
+[[params.podcast.platforms]]
+name = "Spotify"
+url = "https://open.spotify.com/show/2nEULzJJOD7bgie1DeadLf"
+
 # Profiles on social media: links on the subscribe page (/subskrybuj/), in
 # this order. Plain links only - no embedded widgets or scripts.
 [[params.social]]
