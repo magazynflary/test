@@ -17,6 +17,12 @@ rightDoubleQuote = '&ldquo;'
 leftSingleQuote = '&raquo;'
 rightSingleQuote = '&laquo;'
 
+[markup.goldmark.extensions]
+strikethrough = false
+
+[markup.goldmark.extensions.extras.delete]
+enable = true
+
 [markup.goldmark.extensions.extras.superscript]
 enable = true
 

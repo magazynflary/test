@@ -10,7 +10,7 @@ tags:
   - polityka
 ---
 
-Lech Wałęsa jest postacią, przy której trudno zachować spokój — zarówno zwolennikom, jak krytykom. Elektryk ze Stoczni Gdańskiej, przewodniczący NSZZ „Solidarność", laureat Pokojowej Nagrody Nobla z 1983 roku, prezydent RP w latach 1990–1995.
+Lech Wałęsa^1^ jest~2~ postacią, przy której trudno zachować spokój — zarówno zwolennikom, jak krytykom. Elektryk ze Stoczni Gdańskiej, przewodniczący NSZZ „Solidarność", laureat Pokojowej Nagrody Nobla z 1983 roku, prezydent RP w latach 1990–1995.
 
 Wąsy są autentyczne.
 
