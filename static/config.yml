@@ -40,6 +40,11 @@ publish_mode: editorial_workflow
 media_folder: "assets/images/uploads"
 public_folder: "images/uploads"
 
+# We are not ąę peple, because of NFC vs NFD unicode encoding incompatibilities.
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
 collections:
   # Blog Posts
   - name: "posts"
