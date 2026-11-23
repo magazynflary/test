@@ -11,9 +11,11 @@ tag = 'tags'
   artykuly = '/:year/:month/:day/:slug/'
   wydania = '/wydania/:contentbasename/'
 
+# Polish quotes: straight "..." becomes „...” (U+201E, U+201D),
+# straight '...' the nested »...«.
 [markup.goldmark.extensions.typographer]
 leftDoubleQuote = '&bdquo;'
-rightDoubleQuote = '&ldquo;'
+rightDoubleQuote = '&rdquo;'
 leftSingleQuote = '&raquo;'
 rightSingleQuote = '&laquo;'
 
