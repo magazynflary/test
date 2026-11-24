@@ -8,3 +8,4 @@ image_focus_banner: 50% 50%
 image_focus_card: 50% 50%
 noindex: false
 ---
+Czy pójdzie zmiana z nowym RSS-em?
