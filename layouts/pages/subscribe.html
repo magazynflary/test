@@ -1,15 +1,14 @@
 {{ define "main" }}
 {{- /* The subscribe page (content/pages/subskrybuj.md, layout: subscribe): the
        text from the CMS, then the ways of following Flary - own channels first:
-       the articles' RSS (index.xml), the podcast feed built on the audio server
+       the newsletter while its sign-ups are open (params.newsletter url and
+       listUUID, and the /newsletter/ page exists; a link to /newsletter/,
+       where the form is - its captcha script loads on that page only), the
+       articles' RSS (index.xml), the podcast feed built on the audio server
        (params.podcast.feedURL; before it, links to the show on platforms that
-       do not take an RSS address, params.podcast.platforms), the newsletter
-       (a link to /newsletter/, where the form is - its captcha script loads
-       on that page only), then the profiles on social media
-       (params.social). Empty settings leave their
-       section out; the newsletter - its sentence after the introduction and
-       its section - shows only while its sign-ups are open (params.newsletter
-       url and listUUID, and the /newsletter/ page exists). */ -}}
+       do not take an RSS address, params.podcast.platforms), then the
+       profiles on social media (params.social). Empty settings leave their
+       section out. */ -}}
 {{- $nl := site.Params.newsletter | default dict }}
 {{- $nlPage := site.GetPage "/pages/newsletter" }}
 {{- $nlOpen := and $nl.url $nl.listuuid $nlPage }}
@@ -17,10 +16,17 @@
     <h1 class="subscribe-page__title">{{ .Title }}</h1>
     <div class="article-content">
         {{ partial "polish-orphans.html" .Content }}
-        {{- if $nlOpen }}
-        {{ partial "polish-orphans.html" "<p>Raz na kwartał, w dniu premiery nowego numeru, wysyłamy newsletter.</p>" }}
-        {{- end }}
     </div>
+
+    {{ if $nlOpen }}
+    {{ with $nlPage }}
+    <section class="subscribe-feed" id="newsletter">
+        <h2 class="subscribe-feed__title">Newsletter</h2>
+        <p>Raz na kwartał, w dniu premiery nowego numeru, spis treści z linkami do tekstów i nagrań – prosto do Twojej skrzynki.</p>
+        <a class="subscribe-cta__link subscribe-feed__link" href="{{ .RelPermalink }}">Zapisz się</a>
+    </section>
+    {{ end }}
+    {{ end }}
 
     <section class="subscribe-feed" id="artykuly">
         <h2 class="subscribe-feed__title">Artykuły</h2>
@@ -49,16 +55,6 @@
             <li><strong>Overcast</strong> – „+”, „Add URL”.</li>
         </ul>
     </section>
-    {{ end }}
-
-    {{ if $nlOpen }}
-    {{ with $nlPage }}
-    <section class="subscribe-feed" id="newsletter">
-        <h2 class="subscribe-feed__title">Newsletter</h2>
-        <p>Raz na kwartał, w dniu premiery nowego numeru, spis treści z linkami do tekstów i nagrań – prosto do Twojej skrzynki.</p>
-        <a class="subscribe-cta__link subscribe-feed__link" href="{{ .RelPermalink }}">Zapisz się</a>
-    </section>
-    {{ end }}
     {{ end }}
 
     {{ with site.Params.social }}
