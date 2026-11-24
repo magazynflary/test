@@ -6,6 +6,6 @@ layout: subscribe
 url: /subskrybuj/
 ---
 
-Flary możesz śledzić na kilka sposobów. Jest RSS tekstowy i podcast
-z artykułami czytanymi przez lektora. Jesteśmy też w mediach
+Flary możesz śledzić na kilka sposobów: przez newsletter, RSS tekstowy
+i podcast z artykułami czytanymi przez lektora. Jesteśmy też w mediach
 społecznościowych.
