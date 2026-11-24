@@ -6,9 +6,8 @@ layout: newsletter
 url: /newsletter/
 ---
 
-Raz na kwartał, w dniu premiery nowego numeru, wyślemy Ci spis treści
-z krótkim wstępem redakcji i linkami do tekstów oraz nagrań. Czasem –
-rzadko – napiszemy też o czymś ważnym: naborze tekstów, spotkaniu,
+Damy Ci znać o premierze każdego nowego numeru. Od czasu do czasu
+napiszemy też o czymś innym ważnym: naborze tekstów, spotkaniu,
 zmianie w piśmie.
 
 Bez reklam i bez śledzenia: nie sprawdzamy, czy i kiedy otwierasz
