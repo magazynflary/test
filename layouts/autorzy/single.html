@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ $authorSlug := .File.ContentBaseName }}
-{{ $textArticles := where site.RegularPages ".Params.author" $authorSlug }}
-{{ $graphicsOnly := where (where site.RegularPages ".Params.image_credit_author" $authorSlug) ".Params.author" "ne" $authorSlug }}
+{{ $textArticles := where site.RegularPages ".Params.author" "intersect" (slice $authorSlug) }}
+{{ $graphicsOnly := where site.RegularPages ".Params.image_credit_author" $authorSlug | complement $textArticles }}
 
 <header class="author-header">
     {{ with .Params.photo }}{{ partial "image.html" (dict "src" . "alt" ($.Params.name | default $.Title) "class" "author-photo") }}{{ end }}

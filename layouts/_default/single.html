@@ -1,8 +1,5 @@
 {{ define "main" }}
-{{- $authorPage := false -}}
-{{- with .Params.author -}}{{- $authorPage = site.GetPage (printf "/autorzy/%s" .) -}}{{- end -}}
-{{- $authorName := "" -}}
-{{- with $authorPage }}{{- $authorName = .Params.name | default .Title -}}{{- else -}}{{- $authorName = $.Params.author -}}{{- end -}}
+{{- $authors := partial "article-authors.html" . -}}
 <article class="article">
     <header class="article-header">
         <div class="article-byline">
@@ -11,27 +8,19 @@
                 <a href="{{ .Permalink }}" class="article-edition-link">{{ partial "issue-label.html" .Params.issue }} — {{ .Title }}</a>
                 {{ end }}
             {{ end }}
-            {{ with $authorName }}
-                {{ if $authorPage }}
-                <a href="{{ $authorPage.Permalink }}" class="article-author-link article-byline__author">{{ . }}</a>
-                {{ else }}
-                <span class="article-byline__author">{{ . }}</span>
-                {{ end }}
-            {{ end }}
-            {{ with $authorPage }}
-                {{ with .Params.bio }}
+            {{ range $authors }}
+                <span class="article-byline__author">{{ partial "author-names.html" (dict "authors" (slice .) "linkClass" "article-author-link") }}</span>
+                {{ with .page }}{{ with .Params.bio }}
                 <p class="article-byline__bio">{{ . }}</p>
-                {{ end }}
+                {{ end }}{{ end }}
             {{ end }}
         </div>
 
         <div class="article-headline">
             <time class="article-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
             <h1 class="article-title">{{ .Title }}</h1>
-            {{ with $authorName }}
-            <p class="article-author">
-                {{ if $authorPage }}<a href="{{ $authorPage.Permalink }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}
-            </p>
+            {{ with $authors }}
+            <p class="article-author">{{ partial "author-names.html" (dict "authors" .) }}</p>
             {{ end }}
             {{ if eq .Section "artykuly" }}{{ partial "podcast-player.html" . }}{{ end }}
         </div>

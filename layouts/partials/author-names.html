@@ -1,0 +1,6 @@
+{{- /* Params: authors (from article-authors.html), linkClass (optional). */ -}}
+{{- $lastIndex := sub (len .authors) 1 -}}
+{{- range $index, $author := .authors -}}
+  {{- if $index }}{{ if eq $index $lastIndex }} i {{ else }}, {{ end }}{{ end -}}
+  {{- with $author.page }}<a href="{{ .Permalink }}"{{ with $.linkClass }} class="{{ . }}"{{ end }}>{{ $author.name }}</a>{{ else }}{{ $author.name }}{{ end -}}
+{{- end -}}

@@ -80,15 +80,7 @@
     {{ end -}}
 
     {{ if .IsPage }}
-    {{- $authorName := "Redakcja Flary" -}}
-    {{- with .Params.author -}}
-      {{- $authorPage := site.GetPage (printf "/autorzy/%s" .) -}}
-      {{- if $authorPage -}}
-        {{- $authorName = $authorPage.Params.name | default $authorPage.Title -}}
-      {{- else -}}
-        {{- $authorName = . -}}
-      {{- end -}}
-    {{- end -}}
+    {{- $authorNames := apply (partial "article-authors.html" .) "index" "." "name" | default (slice "Redakcja Flary") -}}
     {{- $jsonImageURL := "" -}}
     {{- if $socialImageSrc -}}
       {{- $jsonSrc := strings.TrimLeft "/" $socialImageSrc -}}
@@ -116,10 +108,11 @@
       {{- end }}
       "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
       "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
-      "author": [{
+      "author": [
+        {{- range $index, $authorName := $authorNames }}{{ if $index }},{{ end }}{
         "@type": "Person",
         "name": "{{ $authorName }}"
-      }],
+      }{{ end }}],
       "publisher": {
         "@type": "Organization",
         "name": "{{ .Site.Title }}",

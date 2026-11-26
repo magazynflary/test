@@ -20,15 +20,8 @@
 */ -}}
 {{- $articles := slice -}}
 {{- range sort (where site.RegularPages "Section" "artykuly") "File.ContentBaseName" -}}
-  {{- $authorName := "Redakcja Flary" -}}
-  {{- with .Params.author -}}
-    {{- $authorPage := site.GetPage (printf "/autorzy/%s" .) -}}
-    {{- if $authorPage -}}
-      {{- $authorName = $authorPage.Params.name | default $authorPage.Title -}}
-    {{- else -}}
-      {{- $authorName = . -}}
-    {{- end -}}
-  {{- end -}}
+  {{- /* author stays one string (contract v1): "A, B i C" */ -}}
+  {{- $authorName := delimit (apply (partial "article-authors.html" .) "index" "." "name") ", " " i " | default "Redakcja Flary" -}}
   {{- $description := .Description -}}
   {{- $source := "description" -}}
   {{- if not $description -}}

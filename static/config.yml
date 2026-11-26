@@ -59,7 +59,7 @@ collections:
       preview: true
     fields:
       - {label: "Wydanie", name: "edition", widget: "relation", collection: "editions", value_field: "{{slug}}", search_fields: ["issue", "title"], display_fields: ["issue", "title"], required: false}
-      - {label: "Autor", name: "author", widget: "relation", collection: "authors", search_fields: ["name"], value_field: "{{slug}}", display_fields: ["name"], required: false}
+      - {label: "Autorzy", name: "author", widget: "relation", collection: "authors", search_fields: ["name"], value_field: "{{slug}}", display_fields: ["name"], multiple: true, required: false}
       - {label: "Tytuł", name: "title", widget: "string"}
       - label: "Stały adres (nadpisuje zwykły URL)"
         name: "url"

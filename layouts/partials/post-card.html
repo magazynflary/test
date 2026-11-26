@@ -16,10 +16,9 @@
     </a>
     <p class="post-card__meta">
         <time class="post-card__date" datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "2006-01-02" }}</time>
-        {{ with $page.Params.author }}
-            {{ $authorPage := site.GetPage (printf "/autorzy/%s" .) }}
+        {{ with partial "article-authors.html" $page }}
             <span class="post-card__byline-sep" aria-hidden="true"> · </span>
-            {{ with $authorPage }}<a href="{{ .Permalink }}" class="post-card__author-link">{{ .Params.name | default .Title }}</a>{{ else }}{{ . }}{{ end }}
+            {{ partial "author-names.html" (dict "authors" . "linkClass" "post-card__author-link") }}
         {{ end }}
     </p>
     {{ with $page.GetTerms "tags" }}

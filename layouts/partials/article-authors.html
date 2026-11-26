@@ -1,0 +1,9 @@
+{{- /* Article authors as a list of {page, name}. Front matter: author = list of /autorzy/ slugs; page is nil for a slug without an author page. */ -}}
+{{- $authors := slice -}}
+{{- range .Params.author -}}
+  {{- $authorPage := site.GetPage (printf "/autorzy/%s" .) -}}
+  {{- $authorName := . -}}
+  {{- with $authorPage }}{{ $authorName = .Params.name | default .Title }}{{ end -}}
+  {{- $authors = $authors | append (dict "page" $authorPage "name" $authorName) -}}
+{{- end -}}
+{{- return $authors -}}
