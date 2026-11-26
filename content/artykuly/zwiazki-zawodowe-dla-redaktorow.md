@@ -1,6 +1,6 @@
 ---
 edition: 2026-2
-author: anna-mrozek
+author: [anna-mrozek]
 title: "Związki zawodowe dla redaktorów: praktyczny poradnik"
 date: 2026-03-07
 draft: false

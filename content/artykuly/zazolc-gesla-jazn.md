@@ -1,6 +1,6 @@
 ---
 edition: 2026-1
-author: anna-mrozek
+author: [anna-mrozek]
 title: Zażółć gęślą jaźń
 date: 2026-11-23T16:28:00
 draft: false

@@ -1,5 +1,5 @@
 ---
-author: anna-mrozek
+author: [anna-mrozek]
 title: Bartolomé de las Casas i jego nieznośna słuszność
 date: 2026-01-28
 draft: false

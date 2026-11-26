@@ -1,6 +1,6 @@
 ---
 edition: 2026-1
-author: karol-marks
+author: [karol-marks]
 title: Czy poganin może mieć prawa? Pytamy redakcję
 date: 2026-02-10
 draft: false

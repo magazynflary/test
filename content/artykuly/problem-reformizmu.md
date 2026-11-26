@@ -1,6 +1,6 @@
 ---
 edition: 2026-3
-author: anna-mrozek
+author: [anna-mrozek]
 title: Problem reformizmu, wyjaśniony na przykładzie edycji artykułów
 date: 2026-03-25
 draft: false

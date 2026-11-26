@@ -1,6 +1,6 @@
 ---
 edition: 2026-1
-author: zaneta-zulawska
+author: [zaneta-zulawska]
 title: Opowieści o stałej URL-owej treści
 url: /tresc/
 date: 2026-06-02T15:17:00

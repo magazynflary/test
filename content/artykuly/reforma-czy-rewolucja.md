@@ -1,6 +1,6 @@
 ---
 edition: 2026-3
-author: rosa-luksemburg
+author: [rosa-luksemburg]
 title: Reforma czy rewolucja? (z przypisami redakcji)
 date: 2026-03-20
 draft: false

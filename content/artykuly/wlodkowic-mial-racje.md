@@ -1,5 +1,5 @@
 ---
-author: anna-mrozek
+author: [anna-mrozek]
 title: Włodkowic miał rację, ale nikt go nie słuchał przez sześćset lat
 date: 2026-01-20
 draft: false

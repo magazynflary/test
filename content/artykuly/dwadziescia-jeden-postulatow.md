@@ -1,6 +1,6 @@
 ---
 edition: 2026-2
-author: piotr-zukowski
+author: [piotr-zukowski]
 title: Dwadzieścia jeden postulatów i jeden formularz kontaktowy
 date: 2026-03-02
 draft: false

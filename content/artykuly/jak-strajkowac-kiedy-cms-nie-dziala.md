@@ -1,5 +1,5 @@
 ---
-author: piotr-zukowski
+author: [piotr-zukowski]
 title: "Jak strajkować, kiedy CMS nie działa: lekcje z Gdańska 1980"
 date: 2026-02-20
 draft: false

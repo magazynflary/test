@@ -1,6 +1,6 @@
 ---
 edition: 2026-1
-author: piotr-zukowski
+author: [piotr-zukowski]
 title: "Krótka historia wypowiadania się: od pergaminu do CMS-a"
 date: 2026-02-03
 draft: false

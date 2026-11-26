@@ -1,6 +1,6 @@
 ---
 edition: 2026-3
-author: piotr-zukowski
+author: [piotr-zukowski]
 title: Klasa robotnicza ma problem z formularzami
 date: 2026-04-02
 draft: false
